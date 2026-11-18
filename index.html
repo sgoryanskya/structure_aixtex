@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>АИТЕХ — прототип сайта</title>
+<style>
+:root{
+  --bg:#e7e6e3; --site:#fff; --ink:#141414; --muted:#77746e; --line:#e3e1dc;
+  --ph:#f2f1ee; --ph-line:#cfccc6; --accent:#ff5a1f; --accent-soft:#fff1ea;
+  --note:#fff5ef; --warn:#fff8d6;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.site{max-width:1200px;margin:0 auto;background:var(--site);box-shadow:0 2px 24px rgba(0,0,0,.07);min-height:100vh}
+
+/* ---------- шапка ---------- */
+.hdr{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line)}
+.hdr-in{display:flex;align-items:center;gap:28px;padding:16px 48px}
+.logo{font-size:22px;letter-spacing:.02em;line-height:1.1;white-space:nowrap}
+.logo b{font-weight:900}
+.logo span{display:block;font-size:11px;color:var(--muted);letter-spacing:0;margin-top:2px}
+.nav{display:flex;gap:6px;font-size:16px;margin-left:16px}
+.nav>a,.nav>button{padding:10px 14px;border-radius:30px;border:0;background:none;font-size:16px;font-weight:600;cursor:pointer;color:var(--ink);position:relative}
+#solBtn{background:#f2f1ee}
+#solBtn[aria-expanded="true"]{background:var(--ink);color:#fff}
+.nav>a:hover,.nav>button:hover{background:#f4f3f0}
+.nav .on::after{content:"";position:absolute;left:14px;right:14px;bottom:3px;height:2px;background:var(--accent)}
+.nav .caret{display:inline-block;margin-left:4px;transition:transform .2s;font-size:11px}
+.nav button[aria-expanded="true"] .caret{transform:rotate(180deg)}
+.hcontacts{margin-left:auto;font-size:13px;text-align:right;line-height:1.5}
+.hcontacts a:hover{color:var(--accent)}
+.burger{display:none;margin-left:auto;align-items:center;gap:8px;border:0;background:var(--ink);color:#fff;border-radius:30px;padding:11px 18px;font-size:16px;font-weight:600;cursor:pointer}
+
+/* мега-меню */
+.mega{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(0,0,0,.08);padding:26px 48px 22px}
+.mega.open{display:block}
+.mega-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.mega-card{display:block;border:1px solid var(--line);border-radius:12px;padding:18px;transition:border-color .15s,background .15s}
+.mega-card:hover{border-color:var(--accent);background:var(--accent-soft)}
+.mega-card .t{font-weight:700;font-size:17px;margin:12px 0 4px}
+.mega-card .d{font-size:14px;color:#4a4843}
+.mega-card .seg{font-size:12px;color:var(--muted);margin-top:10px}
+.mega-foot{display:flex;gap:24px;margin-top:16px;font-size:14px;font-weight:600}
+.mega-foot a{border-bottom:1.5px solid var(--ink)}
+.mega-foot a:hover{color:var(--accent);border-color:var(--accent)}
+
+/* мобильное меню */
+.mnav{display:none;position:fixed;inset:0;z-index:50;background:#fff;padding:18px 22px;overflow:auto}
+.mnav.open{display:block}
+.mnav-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.mnav a,.mnav summary{display:block;font-size:22px;font-weight:700;padding:12px 0;border-bottom:1px solid var(--line)}
+.mnav details a{font-size:17px;font-weight:500;padding:10px 0 10px 16px}
+.mnav summary{list-style:none;cursor:pointer}
+.mnav summary::-webkit-details-marker{display:none}
+.mnav .mc{margin-top:24px;font-size:15px;line-height:1.8}
+
+@media(max-width:760px){.nav{display:none!important}.burger{display:flex}}
+/* ---------- общая типографика и сетки ---------- */
+.sec{position:relative;padding:72px 64px;border-bottom:1px solid var(--line)}
+.sec.tight{padding:52px 64px}
+.sec.gray{background:#faf9f7}
+.lbl{position:absolute;top:16px;left:20px;font:600 11px/1 ui-monospace,Menlo,monospace;color:var(--accent);letter-spacing:.04em}
+.crumbs{font-size:13px;color:var(--muted);margin-bottom:22px}
+.crumbs a{border-bottom:1px solid var(--ph-line)}
+.crumbs a:hover{color:var(--accent)}
+.eyebrow{font-size:14px;color:var(--muted);margin-bottom:12px}
+.badge{display:inline-block;font-size:12px;font-weight:600;border:1px solid var(--accent);color:#b23c0f;border-radius:30px;padding:4px 11px;margin-bottom:14px;background:var(--accent-soft)}
+.h1{font-size:46px;font-weight:800;line-height:1.1;margin:0 0 18px;letter-spacing:-.01em}
+.h1.s{font-size:40px}
+.h2{font-size:34px;font-weight:800;line-height:1.15;margin:0 0 14px;letter-spacing:-.01em}
+.h3{font-size:20px;font-weight:700;line-height:1.3;margin:0 0 8px}
+.lead{font-size:18px;color:#3d3b37;max-width:740px;margin:0 0 8px}
+.muted{color:var(--muted)}
+.small{font-size:13px;color:var(--muted)}
+.sub{margin-top:44px}
+.row{display:grid;gap:16px}
+.c2{grid-template-columns:1fr 1fr}
+.c3{grid-template-columns:repeat(3,1fr)}
+.c4{grid-template-columns:repeat(4,1fr)}
+.c5{grid-template-columns:repeat(5,1fr)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start}
+.card{border:1px solid var(--line);border-radius:12px;padding:22px;background:#fff;display:block}
+.card.soft{background:#faf9f7}
+.card.accent{border-color:var(--accent)}
+a.card{transition:border-color .15s,transform .15s}
+a.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card .h3{margin-top:14px}
+.btn{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:11px 18px;border:1.5px solid var(--ink);border-radius:30px;font-size:15px;font-weight:600;background:#fff;color:var(--ink);transition:background .15s,color .15s,border-color .15s}
+.btn.dark{background:var(--ink);color:#fff}
+.btn:hover,a.card:hover .btn{background:var(--accent);border-color:var(--accent);color:#fff}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btns .btn{margin-top:14px}
+.link{display:inline-block;margin-top:12px;font-size:14px;font-weight:600;border-bottom:1.5px solid var(--ink)}
+.link:hover,a.card:hover .link{color:var(--accent);border-color:var(--accent)}
+.chip{display:inline-block;border:1px solid var(--line);border-radius:30px;padding:5px 12px;font-size:13px;margin:4px 4px 0 0;background:#fff}
+.chip.p{border-color:var(--accent);color:#b23c0f}
+.big{font-size:52px;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-.02em;white-space:nowrap}
+.c4 .big{font-size:42px}
+
+/* плейсхолдеры */
+.ph{position:relative;background:var(--ph);border:1.5px solid var(--ph-line);border-radius:12px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);font-size:13px;overflow:hidden}
+.ph.img{background-image:linear-gradient(to top right,transparent calc(50% - .8px),var(--ph-line) 50%,transparent calc(50% + .8px)),linear-gradient(to bottom right,transparent calc(50% - .8px),var(--ph-line) 50%,transparent calc(50% + .8px))}
+.ph.anim{border:1.5px dashed var(--accent);background:var(--accent-soft)}
+.ph.video{background:#1c1c1c;border-color:#1c1c1c;color:#bbb}
+.ph .kind{position:relative;z-index:2;background:#fff;border:1px solid var(--ph-line);border-radius:30px;padding:5px 12px;max-width:85%;line-height:1.4}
+.ph.anim .kind{border-color:var(--accent);color:#9a3a12}
+.ph.video .kind{background:#2a2a2a;border-color:#444;color:#ddd}
+.ph .kind.bottom{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);white-space:nowrap}
+.ph svg.dots{position:absolute;inset:0;width:100%;height:100%}
+.ic{width:44px;height:44px;border-radius:10px;border:1.5px solid var(--ph-line);background:var(--ph);display:flex;align-items:center;justify-content:center;font:600 10px ui-monospace,Menlo,monospace;color:var(--muted);flex:0 0 auto}
+.ic.sm{width:32px;height:32px;border-radius:8px;font-size:9px}
+
+/* схемы */
+.flow{display:flex;align-items:stretch}
+.flow .node{flex:1;border:1px solid var(--line);border-radius:12px;padding:16px;background:#fff}
+.flow .arr{flex:0 0 28px;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800}
+.flow.old .node{background:#f6f6f6;color:#666}
+.flow.new .node{border-color:var(--accent)}
+.flowlabel{font:600 12px ui-monospace,Menlo,monospace;color:var(--muted);margin:18px 0 8px}
+.bubble{display:inline-block;background:#f0f0f0;border-radius:14px 14px 14px 4px;padding:8px 13px;font-size:15px}
+.bubble.out{background:var(--accent-soft);border-radius:14px 14px 4px 14px}
+.bar{display:flex;height:56px;border-radius:8px;overflow:hidden;border:1px solid var(--line);margin:16px 0 10px}
+.bar .a{flex:0 0 5%;background:var(--accent)}
+.bar .b{flex:1;background:repeating-linear-gradient(45deg,#f1f0ec,#f1f0ec 8px,#e6e4df 8px,#e6e4df 16px)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative}
+.steps::before{content:"";position:absolute;top:22px;left:6%;right:6%;border-top:1.5px dashed var(--ph-line)}
+.step{position:relative}
+.num{width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:14px;position:relative}
+.report{border:1.5px solid var(--ph-line);border-radius:12px;background:#fbfaf8;padding:18px}
+.report .top{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:12px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px}
+.kpi .v{font-size:24px;font-weight:800}
+.up{color:#1a8a4a;font-size:12px;font-weight:700}
+.down{color:#c0392b;font-size:12px;font-weight:700}
+.callout{border-left:3px solid var(--accent);background:#fff;padding:10px 12px;border-radius:0 8px 8px 0;font-size:14px;margin-top:10px}
+.callout.ok{border-color:#1a8a4a}
+.numlist>div{display:flex;gap:14px;margin-bottom:16px}
+.numlist .big{font-size:22px}
+
+/* таблица сравнения */
+.tbl{width:100%;border-collapse:collapse;font-size:15px;margin-top:24px}
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:14px 12px;text-align:left;vertical-align:top}
+.tbl th{font-size:13px;color:var(--muted);font-weight:600}
+.tbl td:first-child{color:var(--muted);font-size:13px;width:16%}
+.tbl thead th{font-size:18px;color:var(--ink);font-weight:800}
+
+/* сценарии */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 18px}
+.tabs button{border:1.5px solid var(--ink);background:#fff;padding:9px 16px;font-weight:600;font-size:14px;cursor:pointer;border-radius:30px}
+.tabs button.on{background:var(--ink);color:#fff}
+.uc{display:grid;grid-template-columns:280px 1fr;gap:20px}
+.uc-list button{display:flex;gap:10px;align-items:center;width:100%;text-align:left;border:1px solid var(--line);background:#fff;padding:10px 12px;margin-bottom:8px;cursor:pointer;border-radius:10px;font-size:15px;color:var(--ink)}
+.uc-list button.on{border-color:var(--accent);background:var(--accent-soft);font-weight:600}
+.scene{border:1px solid var(--line);border-radius:12px;padding:8px 24px;background:#fff}
+.scene .st{font-size:22px;font-weight:800;margin:14px 0 6px}
+.sline{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:13px 0;border-bottom:1px dashed var(--line)}
+.sline:last-child{border-bottom:0}
+.sline .k{font:600 12px/1.8 ui-monospace,Menlo,monospace;color:var(--accent)}
+.res{font-weight:700;font-size:17px}
+.uccard .sig{margin:12px 0 10px}
+.uccard .act{font-size:14px;color:#4a4843}
+.uccard .res{font-size:15px;margin-top:10px}
+
+/* кейсы */
+.case-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+.case-tabs button{border:1.5px solid var(--ink);background:#fff;padding:9px 16px;font-weight:600;font-size:14px;cursor:pointer;border-radius:30px}
+.case-tabs button.on{background:var(--ink);color:#fff}
+.case{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.case .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.case .kpis div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px}
+.case .kpis b{display:block;font-size:24px;font-weight:800}
+.case .kpis span{font-size:13px;color:var(--muted)}
+.frow{display:grid;grid-template-columns:130px 1fr 52px;gap:10px;align-items:center;margin:10px 0}
+.fbar{background:var(--accent);color:#fff;font-weight:700;font-size:13px;border-radius:6px;padding:9px 10px;white-space:nowrap}
+.fconv{font-size:13px;font-weight:700;color:var(--accent)}
+.pill{display:inline-block;background:var(--accent-soft);border:1px solid var(--accent);color:#b23c0f;border-radius:30px;padding:5px 12px;font-size:13px;font-weight:600}
+@media(max-width:980px){.case{grid-template-columns:1fr}.frow{grid-template-columns:96px 1fr 44px}.case .kpis b{font-size:19px;white-space:nowrap}}
+
+/* faq */
+details.q{border-bottom:1px solid var(--line);padding:18px 0}
+details.q summary{cursor:pointer;font-size:18px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:20px}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:"+";font-size:24px;line-height:1;color:var(--accent)}
+details.q[open] summary::after{content:"–"}
+details.q p{margin:10px 0 0;color:#3d3b37;max-width:820px}
+.faqnav{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 10px}
+.faqnav button{border:1px solid var(--line);background:#fff;border-radius:30px;padding:7px 14px;font-size:14px;cursor:pointer}
+.faqnav button:hover{border-color:var(--accent)}
+
+/* подвал */
+.ftr{background:#141414;color:#cfcfcf;padding:52px 64px 28px;font-size:14px}
+.ftr .h{color:#fff;font-weight:700;margin-bottom:12px}
+.ftr .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:28px}
+.ftr a{display:block;margin-bottom:7px;color:#cfcfcf}
+.ftr a:hover{color:#fff}
+.ftr .bottom{border-top:1px solid #333;margin-top:32px;padding-top:16px;font-size:12px;color:#999;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+/* служебное: пометки, карта */
+.note,.warn{font-size:13px;padding:10px 14px;margin-top:22px;border-radius:0 6px 6px 0}
+.note{background:var(--note);border-left:3px solid var(--accent);color:#5a3a2a}
+.warn{background:var(--warn);border-left:3px solid #d4b200;color:#5a4a00}
+.seo{font:12px/1.6 ui-monospace,Menlo,monospace;background:#f7f7f5;border:1px solid var(--line);padding:10px 14px;border-radius:6px;margin-bottom:26px;color:#555}
+body.clean .note,body.clean .warn,body.clean .lbl,body.clean .seo{display:none}
+.dev{position:fixed;right:16px;bottom:16px;z-index:60;background:#141414;color:#fff;border-radius:40px;padding:8px 8px 8px 16px;display:flex;gap:8px;align-items:center;font-size:13px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.dev a,.dev button{background:#2c2c2c;color:#fff;border:0;border-radius:30px;padding:6px 12px;font-size:13px;cursor:pointer}
+.dev a:hover,.dev button:hover{background:var(--accent)}
+.tree{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px}
+.tree .col{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff}
+.tree .col b{display:block;margin-bottom:8px}
+.tree a{display:block;font-size:14px;padding:4px 0;border-bottom:1px dashed var(--line)}
+.tree a:hover{color:var(--accent)}
+.maptbl{width:100%;border-collapse:collapse;font-size:14px;margin-top:16px}
+.maptbl td,.maptbl th{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+.maptbl th{background:#f7f7f5;font-weight:600}
+.maptbl code{font:12px ui-monospace,Menlo,monospace;background:#f2f1ee;padding:1px 5px;border-radius:4px}
+
+.view{display:none}
+.view.on{display:block}
+
+@media(max-width:980px){
+  .hcontacts{display:none}.logo span{display:none}.nav{margin-left:auto}
+  .hdr-in{padding:14px 22px}
+  .sec,.sec.tight{padding:56px 22px}
+  .hero,.split,.c2,.c3,.c4,.c5,.uc,.ftr .cols,.tree,.mega-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}.steps::before{display:none}
+  .flow{flex-direction:column}.flow .arr{transform:rotate(90deg);height:28px}
+  .h1,.h1.s{font-size:32px}.h2{font-size:26px}
+  .ftr{padding:40px 22px 24px}
+  .tbl{font-size:13px}.tbl td:first-child{width:auto}
+  .sline{grid-template-columns:1fr;gap:2px}
+  .uc-list{display:flex;gap:6px;overflow-x:auto}.uc-list button{flex:0 0 auto;width:auto;margin:0}
+  .dev{left:16px;right:16px;justify-content:center}
+}
+</style>
+</head>
+<body>
+<div class="site">
+
+<!-- ============================== ШАПКА ============================== -->
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a class="logo" href="#/"><b>АИ</b>ТЕХ<span>Агентство интеллектуальных технологий</span></a>
+    <nav class="nav" id="nav">
+      <button id="solBtn" aria-expanded="false" data-sec="solutions">Решения<span class="caret">▾</span></button>
+      <a href="#/use-cases" data-sec="use-cases">Сценарии</a>
+      <a href="#/about" data-sec="about">О компании</a>
+      <a href="#/technologies" data-sec="technologies">Технологии</a>
+      <a href="#/contacts" data-sec="contacts">Контакты</a>
+    </nav>
+    <div class="hcontacts"><a href="tel:+79154267807">+7 (915) 426-78-07</a><br><a class="muted" href="mailto:contact@aixtex.ru">contact@aixtex.ru</a></div>
+    <button class="burger" id="burger" aria-label="Меню"><span style="font-size:18px;line-height:1">☰</span>Меню</button>
+  </div>
+  <div class="mega" id="mega">
+    <div class="mega-grid">
+      <a class="mega-card" href="#/solutions/scout"><div class="ic sm">icon</div><div class="t">Скаут</div><div class="d">Поиск клиентов в тематических чатах и сообществах</div><div class="seg">Малый и средний бизнес</div></a>
+      <a class="mega-card" href="#/solutions/virtual-sales"><div class="ic sm">icon</div><div class="t">Виртуальный отдел продаж</div><div class="d">Персональные диалоги с потенциальной и действующей базой</div><div class="seg">Крупный бизнес · в реестре российского ПО</div></a>
+      <a class="mega-card" href="#/solutions/zhdun"><div class="ic sm">icon</div><div class="t">Ждун</div><div class="d">Ответ на каждое входящее обращение 24/7</div><div class="seg">Малый и средний бизнес</div></a>
+    </div>
+    <div class="mega-foot"><a href="#/solutions">Все решения и сравнение →</a><a href="#/use-cases">Сценарии использования →</a></div>
+  </div>
+</header>
+
+<!-- мобильное меню -->
+<div class="mnav" id="mnav">
+  <div class="mnav-top"><a class="logo" href="#/" style="border:0;padding:0;font-size:22px"><b>АИ</b>ТЕХ</a><button class="burger" style="display:flex" id="mclose">✕ Закрыть</button></div>
+  <details open><summary>Решения ▾</summary>
+    <a href="#/solutions/scout">Скаут</a>
+    <a href="#/solutions/virtual-sales">Виртуальный отдел продаж</a>
+    <a href="#/solutions/zhdun">Ждун</a>
+    <a href="#/solutions">Все решения</a>
+  </details>
+  <a href="#/use-cases">Сценарии</a>
+  <a href="#/about">О компании</a>
+  <a href="#/technologies">Технологии</a>
+  <a href="#/faq">Вопросы</a>
+  <a href="#/contacts">Контакты</a>
+  <div class="mc"><a href="tel:+79154267807" style="font-size:15px;border:0;padding:0">+7 (915) 426-78-07</a><a href="mailto:contact@aixtex.ru" style="font-size:15px;border:0;padding:0;font-weight:500">contact@aixtex.ru</a></div>
+</div>
+
+<main id="views">
+
+<!-- ============================== ГЛАВНАЯ ============================== -->
+<div class="view" data-route="/" data-title="АИТЕХ — виртуальные сотрудники для бизнеса">
+  <section class="sec">
+    <span class="lbl">[01] Первый экран · что мы делаем</span>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">ИИ-решения для продаж и работы с клиентами</div>
+        <h1 class="h1">Виртуальные сотрудники, которые доводят клиента до сделки</h1>
+        <p class="lead">ИИ-агенты находят клиентов в момент запроса, отвечают на каждое обращение и работают с вашей базой. Продавец подключается, когда интерес клиента уже подтверждён, а руководитель получает отчёт с выводами и рекомендациями.</p>
+      </div>
+      <div class="ph anim" style="height:400px"><svg class="dots"></svg><span class="kind bottom">▶ Анимация: точки-сигналы собираются в структуру</span></div>
+    </div>
+    <div class="small" style="margin-top:44px">Три задачи — три продукта</div>
+    <div class="row c3" style="margin-top:12px">
+      <a class="card" href="#/solutions/scout"><div class="ic">icon</div><div class="h3">Привлечение клиентов</div><div>Находим тех, кто прямо сейчас ищет ваш продукт.</div><span class="btn">Скаут →</span></a>
+      <a class="card" href="#/solutions/virtual-sales"><div class="ic">icon</div><div class="h3">Продажи и удержание по базе</div><div>Персональные диалоги с потенциальной и действующей базой: интерес, повторные продажи, сохранение клиентов.</div><span class="btn">Виртуальный отдел продаж →</span></a>
+      <a class="card" href="#/solutions/zhdun"><div class="ic">icon</div><div class="h3">Обработка обращений</div><div>Отвечаем на каждый запрос за секунды, 24/7.</div><span class="btn">Ждун →</span></a>
+    </div>
+    <div class="note"><b>Заголовок.</b> Запасные варианты: «ИИ-агенты, которые находят клиентов и ведут их до сделки» · «Продавец подключается, когда клиент уже готов». <b>Переход 1:</b> посетитель сразу узнаёт свою задачу и уходит на страницу продукта — карточки целиком кликабельны. Анимация лёгкая (SVG или Canvas), без 3D и стекла.</div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[02] Актуальность</span>
+    <h2 class="h2">Как изменился рынок привлечения клиентов</h2>
+    <p class="lead">Реклама дорожает, звонки блокируют, рассылки остаются непрочитанными. При этом люди всё чаще сами пишут в чатах и сообществах, что им нужно, — и выбирают того, кто ответил первым и по делу.</p>
+    <div class="sub">
+      <div class="h3">Привычные каналы теряют эффективность</div>
+      <div class="row c4" style="margin-top:16px">
+        <div class="card soft"><div class="ic sm">icon</div><div class="big" style="margin-top:14px">+35–45%</div><div style="margin-top:8px">в год растёт стоимость клика в конкурентных нишах</div></div>
+        <div class="card soft"><div class="ic sm">icon</div><div class="big" style="margin-top:14px">&lt;1%</div><div style="margin-top:8px">реакции на массовые коммерческие рассылки</div></div>
+        <div class="card soft"><div class="ic sm">icon</div><div class="big" style="margin-top:14px">40%+</div><div style="margin-top:8px">нежелательных вызовов в мобильном трафике</div></div>
+        <div class="card soft"><div class="ic sm">icon</div><div class="big" style="margin-top:14px">71%</div><div style="margin-top:8px">горожан защищаются от спама и неизвестных номеров</div></div>
+      </div>
+    </div>
+    <div class="sub">
+      <div class="h3">Как меняется логика продаж</div>
+      <p class="muted" style="max-width:740px;margin:4px 0 0">Раньше компания сама искала, кому продать. Сегодня клиент всё чаще сам сообщает о потребности — в чатах, сообществах, обращениях. Выигрывает тот, кто замечает этот сигнал и отвечает первым.</p>
+      <div class="flowlabel">Раньше: компания ищет клиента</div>
+      <div class="flow old"><div class="node">Есть продукт</div><div class="arr">→</div><div class="node">Вкладываем бюджет в рекламу и звонки</div><div class="arr">→</div><div class="node">Ищем, кому продать</div></div>
+      <div class="flowlabel">Сейчас: клиент сам заявляет о потребности</div>
+      <div class="flow new"><div class="node"><span class="bubble">«Кого посоветуете?»</span><div class="small" style="margin-top:8px">у клиента появилась потребность</div></div><div class="arr">→</div><div class="node">Виртуальный сотрудник видит сигнал</div><div class="arr">→</div><div class="node">Начинает точный диалог и передаёт клиента продавцу</div></div>
+      <p style="margin-top:14px"><b>Самый ценный момент в продажах — когда потребность только появилась.</b></p>
+    </div>
+    <div class="sub">
+      <div class="h3">Готовность аудитории к покупке</div>
+      <div class="bar"><div class="a"></div><div class="b"></div></div>
+      <div class="row c2">
+        <div><span class="big" style="font-size:36px">≈5%</span><div>готовы купить сейчас. За них конкурирует весь рынок.</div></div>
+        <div><span class="big" style="font-size:36px;color:var(--ink)">95%</span><div>купят позже. Виртуальные сотрудники сопровождают их до момента, когда появится потребность.</div></div>
+      </div>
+    </div>
+    <p class="small" style="margin-top:28px">Источники: АРИР, Kokoc Group, MoEngage, ВТБ, Коммерсантъ, TelecomDaily; модель 5/95 — John Dawes, Ehrenberg-Bass Institute / LinkedIn B2B Institute.</p>
+    <div class="btns"><a class="btn dark" href="#/solutions">Как это решают продукты АИТЕХ →</a></div>
+    <div class="note"><b>Откуда данные.</b> Все цифры и схема «раньше / сейчас» — из презентации Бронислава «Искусство не звонить» (слайды 3, 5, 7, 11). На созвоне Бронислав сам предложил взять для этого блока цифры оттуда. <b>Переход 2:</b> посетитель понял проблему и хочет увидеть решение — кнопка ведёт на страницу «Решения».</div>
+    <div class="warn"><b>Уточнить.</b> В самой презентации под цифрами стоит «источники для финальной верификации». Перед публикацией попросить у Бронислава ссылки на исследования.</div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[03] Для кого</span>
+    <h2 class="h2">Решения под масштаб вашего бизнеса</h2>
+    <div class="row c2" style="margin-top:28px">
+      <a class="card" href="#/solutions/virtual-sales">
+        <div class="ph img" style="height:200px"><span class="kind">Схема: компания и тысячи клиентов в базе, с каждым — свой диалог</span></div>
+        <div class="small" style="margin-top:18px">Крупный бизнес и корпорации</div>
+        <div class="h3" style="margin-top:4px">Виртуальный отдел продаж</div>
+        <div>ИИ-агенты сами начинают персональные диалоги с потенциальной и действующей базой в мессенджерах, выявляют потребность и передают клиента продавцу. Удержание, повторные продажи и возвращение клиентов — в масштабе всей базы.</div>
+        <span class="btn dark">Виртуальный отдел продаж →</span>
+      </a>
+      <div class="card">
+        <div class="ph img" style="height:200px"><span class="kind">Схема: чаты → Скаут → Ждун → заявка</span></div>
+        <div class="small" style="margin-top:18px">Малый и средний бизнес</div>
+        <div class="h3" style="margin-top:4px">Скаут и Ждун</div>
+        <div>Скаут находит клиентов, которые прямо сейчас ищут ваши услуги. Ждун мгновенно отвечает на каждое обращение и доводит его до сделки.</div>
+        <div style="margin-top:10px"><span class="chip">Сервисы и салоны</span><span class="chip">Ремонт и строительство</span><span class="chip">Селлеры маркетплейсов</span><span class="chip">Частные специалисты</span><span class="chip">Бренды и блогеры</span><span class="chip">B2B-услуги</span></div>
+        <div class="btns"><a class="btn dark" href="#/solutions/scout">Скаут →</a><a class="btn dark" href="#/solutions/zhdun">Ждун →</a></div>
+      </div>
+    </div>
+    <div class="note"><b>Переход 3 — главный.</b> Посетитель узнаёт свой масштаб бизнеса и переходит к своему продукту, поэтому здесь самые заметные кнопки на странице. Названия мессенджеров не указываем. Иллюстрации контурные, схематичные (в сторону Palantir).</div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[04] Сценарии · интерактив</span>
+    <h2 class="h2">Как это выглядит в работе</h2>
+    <p class="lead">Выберите продукт и сценарий: что произошло, что сделал виртуальный сотрудник и что получил бизнес.</p>
+    <div class="tabs" id="ucTabs"></div>
+    <div class="uc"><div class="uc-list" id="ucList"></div><div class="scene" id="ucScene"></div></div>
+    <a class="link" href="#/use-cases" style="margin-top:24px">Все сценарии использования →</a>
+    <div class="note"><b>Переход 4.</b> Посетитель увидел свою ситуацию в сценарии и хочет подробностей — кнопка в карточке ведёт на страницу этого продукта. Вкладки и сценарии переключаются без перезагрузки.</div>
+  </section>
+
+  <section class="sec gray">
+    <span class="lbl">[05] Результаты реальных кейсов</span>
+    <h2 class="h2">Результаты реальных кейсов</h2>
+    <p class="lead">Виртуальный отдел продаж в телеком-компании (B2B): три сценария, фактические результаты.</p>
+    <div class="row c3" style="margin-top:24px">
+      <a class="card" href="#/solutions/virtual-sales~cases"><div class="small">Действующая база · кросс- и апсейл</div><div class="big" style="font-size:40px;margin-top:12px">≈800</div><div>продаж и <b>26 млн+ ₽</b> накопительной выручки за ~12 месяцев</div><span class="link">Подробнее →</span></a>
+      <a class="card" href="#/solutions/virtual-sales~cases"><div class="small">Потенциальная база · микробизнес</div><div class="big" style="font-size:40px;margin-top:12px">≈2 200</div><div>согласий и <b>≈215</b> продаж из 94,5 тыс. коммуникаций</div><span class="link">Подробнее →</span></a>
+      <a class="card" href="#/solutions/virtual-sales~cases"><div class="small">Предиктивное сохранение</div><div class="big" style="font-size:40px;margin-top:12px">65%</div><div>клиентов с подтверждённым риском оттока <b>сохранены</b></div><span class="link">Подробнее →</span></a>
+    </div>
+    <div class="btns"><a class="btn dark" href="#/solutions/virtual-sales~cases">Смотреть воронки кейсов →</a></div>
+    <div class="note"><b>Переход 5.</b> Посетителю нужны доказательства — карточки и кнопка ведут на страницу виртуального отдела продаж, сразу к блоку кейсов с воронками.</div>
+    <div class="warn"><b>Уточнить.</b> Цифры из коммерческого предложения (кейсы Telecom B2B). Подтвердить у заказчика, что их можно публиковать на сайте.</div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[06] Как устроена работа</span>
+    <h2 class="h2">Как устроена работа виртуальных сотрудников</h2>
+    <p class="lead">Вопросы в чатах, входящие обращения, клиенты, которые давно не покупали, — всё это сигналы. Виртуальные сотрудники собирают их в один понятный процесс: от первого сигнала до сделки.</p>
+    <div class="ph anim" style="height:150px;margin:32px 0 16px"><svg class="dots"></svg><span class="kind bottom">▶ Анимация: точки проходят по шагам и собираются в блок</span></div>
+    <div class="row c5" id="pipeline"></div>
+    <div class="sub">
+      <div class="h3">Продавец подключается, когда интерес клиента уже подтверждён</div>
+      <div class="row c2" style="margin-top:14px">
+        <div class="card soft"><div class="small">Берёт на себя система</div><div style="margin-top:6px">Поиск контактов · первый контакт · рутинная переписка · отказы</div></div>
+        <div class="card accent"><div class="small">Остаётся вашей команде</div><div style="margin-top:6px">Переговоры · доверие · нестандартные задачи · закрытие сделки</div></div>
+      </div>
+      <p class="small" style="margin-top:14px">Работа с открытыми источниками ведётся строго в рамках законодательства РФ.</p>
+      <a class="link" href="#/technologies">Как устроены технологии →</a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[07] Результат · ключевой блок</span>
+    <div class="split">
+      <div>
+        <h2 class="h2">Результат: отчёт с выводами и рекомендациями</h2>
+        <p class="lead">Руководителю важно не то, как обработан каждый контакт, а что происходит и что делать дальше. Вся работа виртуальных сотрудников сводится в регулярный отчёт — в личном кабинете или в мессенджере.</p>
+        <div class="numlist" style="margin-top:26px">
+          <div><div class="big">01</div><div><b>Что сделано</b><div class="small">фактическая воронка: коммуникации, ответы, согласия, продажи</div></div></div>
+          <div><div class="big">02</div><div><b>Что изменилось</b><div class="small">динамика по сравнению с прошлой неделей</div></div></div>
+          <div><div class="big">03</div><div><b>Где теряется результат</b><div class="small">на каком этапе процесс тормозит и почему</div></div></div>
+          <div><div class="big">04</div><div><b>Что сделать</b><div class="small">конкретная рекомендация, как это исправить</div></div></div>
+        </div>
+      </div>
+      <div class="report-slot"></div>
+    </div>
+    <p class="h3" style="margin-top:40px">Центр управления продажами, построенный на реальных диалогах с клиентами</p>
+    <div class="warn"><b>Уточнить.</b> Нужен реальный пример отчёта (можно обезличенный). Тексты в макете условные.</div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[08] Как начать</span>
+    <h2 class="h2">Как начать работу</h2>
+    <div class="steps" style="margin-top:32px">
+      <div class="step"><div class="num">1</div><div class="h3">Вы пишете нам</div><div class="small"><a class="link" style="margin:0;font-weight:500" href="tel:+79154267807">по телефону</a>, <a class="link" style="margin:0;font-weight:500" href="mailto:contact@aixtex.ru">на почту</a> или в мессенджер</div></div>
+      <div class="step"><div class="num">2</div><div class="h3">Отвечает виртуальный сотрудник</div><div class="small">сразу и в любое время: уточняет задачу и аудиторию</div></div>
+      <div class="step"><div class="num">3</div><div class="h3">Определяем продукт и гипотезы</div><div class="small">сценарии, аудиторию и материалы для обучения ИИ-агентов</div></div>
+      <div class="step"><div class="num">4</div><div class="h3">Пилот</div><div class="small">≈2 недели подготовки и ≈4 недели работы, затем фактическая воронка и аналитика</div></div>
+    </div>
+    <div class="row c2" style="margin-top:32px">
+      <div class="card soft"><div class="h3" style="margin-top:0">Первый разговор с нами — уже демонстрация продукта</div><div>На ваше обращение ответит виртуальный сотрудник: так вы сразу видите, как он общается с клиентами.</div></div>
+      <div class="card accent"><div class="small">Реальный запущенный сценарий · Telecom B2B</div><div class="h3" style="margin-top:6px">Попробуйте ИИ-агента прямо сейчас</div><div>Напишите агенту в свободной форме по продукту «Облачная телефония» и оцените, как он ведёт диалог.</div><a class="link" href="https://consultant.aixtex.ru/web-chat/cf37ae3d-51f4-43f2-aa81-f4ee4f84fe1f" target="_blank" rel="noopener">Открыть ИИ-агента ↗</a></div>
+    </div>
+    <div class="warn"><b>Уточнить.</b> Можно ли разместить ссылку на демо-агента на сайте. Сроки пилота взяты из коммерческого предложения.</div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[09] Вопросы · аккордеон</span>
+    <div class="split">
+      <div><h2 class="h2">Ответы на частые вопросы</h2><p class="muted">О продуктах, технологии и начале работы.</p><a class="link" href="#/faq">Все вопросы →</a></div>
+      <div class="faq" data-ids="g1,g2,g5,w4,w2"></div>
+    </div>
+  </section>
+
+  <div class="contact-strip"></div>
+</div>
+
+<!-- ============================== РЕШЕНИЯ ============================== -->
+<div class="view" data-route="/solutions" data-sec="solutions" data-title="Решения — АИТЕХ">
+  <section class="sec">
+    <span class="lbl">[R1] Первый экран</span>
+    <div class="seo">URL: /solutions · Title: ИИ-решения для продаж и работы с клиентами | АИТЕХ<br>Ключи: виртуальные сотрудники, ИИ для продаж, автоматизация работы с клиентами</div>
+    <div class="crumbs"><a href="#/">Главная</a> / Решения</div>
+    <div class="hero">
+      <div>
+        <h1 class="h1 s">Решения АИТЕХ для привлечения, удержания и обслуживания клиентов</h1>
+        <p class="lead">Три продукта закрывают весь путь клиента: от первого сигнала интереса до повторной покупки. Их можно подключать по отдельности или вместе.</p>
+      </div>
+      <div class="ph img" style="height:300px"><span class="kind">Схема: путь клиента и место каждого продукта на нём</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[R2] Путь клиента</span>
+    <h2 class="h2">Где работает каждый продукт</h2>
+    <div class="flow new" style="margin-top:24px">
+      <a class="node" href="#/solutions/scout"><div class="small">Клиент ищет решение</div><div class="h3" style="margin-top:6px">Скаут</div><div class="small">находит запрос в чате и отвечает первым</div></a><div class="arr">→</div>
+      <a class="node" href="#/solutions/zhdun"><div class="small">Клиент обращается к вам</div><div class="h3" style="margin-top:6px">Ждун</div><div class="small">отвечает сразу и доводит до нужного этапа</div></a><div class="arr">→</div>
+      <a class="node" href="#/solutions/virtual-sales"><div class="small">Клиент в вашей базе — потенциальной или действующей</div><div class="h3" style="margin-top:6px">Виртуальный отдел продаж</div><div class="small">начинает диалог, выявляет потребность, удерживает</div></a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[R3] Сравнение</span>
+    <h2 class="h2">Сравнение решений</h2>
+    <div style="overflow-x:auto">
+    <table class="tbl">
+      <thead><tr><th></th><th>Скаут</th><th>Виртуальный отдел продаж</th><th>Ждун</th></tr></thead>
+      <tbody>
+        <tr><td>Задача</td><td>Привлечение новых клиентов</td><td>Продажи и удержание по потенциальной и действующей базе</td><td>Обработка входящих обращений</td></tr>
+        <tr><td>Для кого</td><td>Малый и средний бизнес</td><td>Крупный бизнес и корпорации</td><td>Малый и средний бизнес</td></tr>
+        <tr><td>Где работает</td><td>Открытые тематические чаты и сообщества</td><td>Мессенджеры: персональные исходящие диалоги</td><td>Входящие каналы компании</td></tr>
+        <tr><td>Что делает</td><td>Находит запросы, отвечает в чате, пишет человеку или приглашает в вашу группу</td><td>Сам начинает диалог, выявляет потребность и передаёт клиента продавцу; отрабатывает сохранение при риске оттока</td><td>Отвечает 24/7, уточняет задачу, называет условия, передаёт менеджеру</td></tr>
+        <tr><td>Что получает бизнес</td><td>Тёплых клиентов, которые сами обозначили запрос</td><td>Продавцы работают только с подтверждённым интересом; повторные продажи и снижение оттока</td><td>Ни одного потерянного обращения и готовые заявки</td></tr>
+        <tr><td></td><td><a class="link" href="#/solutions/scout">О Скауте →</a></td><td><a class="link" href="#/solutions/virtual-sales">О виртуальном отделе продаж →</a></td><td><a class="link" href="#/solutions/zhdun">О Ждуне →</a></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="note"><b>Мобильная версия.</b> Таблица превращается в три карточки с теми же строками.</div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[R4] Как решения работают вместе</span>
+    <h2 class="h2">Как решения работают вместе</h2>
+    <div class="row c2" style="margin-top:24px">
+      <div class="card">
+        <div class="h3">Скаут + Ждун</div>
+        <div class="flow new" style="margin:14px 0"><div class="node">Скаут находит клиента в чате</div><div class="arr">→</div><div class="node">Ждун ведёт диалог с каждым откликнувшимся</div><div class="arr">→</div><div class="node">Менеджер получает готовую заявку</div></div>
+      </div>
+      <div class="card">
+        <div class="h3">Скаут + Виртуальный отдел продаж</div>
+        <div class="flow new" style="margin:14px 0"><div class="node">Скаут находит запрос в группе</div><div class="arr">→</div><div class="node">Виртуальный отдел продаж пишет человеку в личные сообщения</div><div class="arr">→</div><div class="node">Сделка передаётся на пике интереса</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[R5] Выбор решения</span>
+    <h2 class="h2">Какое решение подходит вашему бизнесу</h2>
+    <div class="row c2" style="margin-top:24px">
+      <a class="card" href="#/solutions/virtual-sales"><div class="small">У вас большая база — действующих или потенциальных клиентов</div><div class="h3" style="margin-top:6px">Виртуальный отдел продаж</div><div>ИИ-агенты проверяют потребность каждого клиента в базе и передают продавцам тех, кто готов к разговору.</div><span class="link">Подробнее →</span></a>
+      <a class="card" href="#/solutions/scout"><div class="small">Вам нужны новые клиенты и быстрые ответы</div><div class="h3" style="margin-top:6px">Скаут и Ждун</div><div>Скаут находит людей с готовым запросом, Ждун мгновенно отвечает каждому и доводит до сделки.</div><span class="link">Подробнее о Скауте →</span></a>
+    </div>
+  </section>
+  <div class="contact-strip"></div>
+</div>
+
+<!-- ============================== СКАУТ ============================== -->
+<div class="view" data-route="/solutions/scout" data-sec="solutions" data-title="Скаут — поиск клиентов в чатах и сообществах | АИТЕХ">
+  <section class="sec">
+    <span class="lbl">[S1] Первый экран</span>
+    <div class="seo">URL: /solutions/scout · Title: Скаут — поиск клиентов в чатах и сообществах | АИТЕХ<br>Ключи: поиск клиентов в чатах, лидогенерация в мессенджерах, перехват лидов, мониторинг чатов, горячие запросы</div>
+    <div class="crumbs"><a href="#/">Главная</a> / <a href="#/solutions">Решения</a> / Скаут</div>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Перехватчик лидов · малый и средний бизнес</div>
+        <h1 class="h1 s">Скаут — поиск клиентов в тематических чатах и сообществах</h1>
+        <p class="lead"><b>Ловите клиентов в тот момент, когда они сами пишут «мне нужно».</b></p>
+        <p class="lead">Каждый день в тематических чатах пишут: «посоветуйте поставщика», «ищу, кто сделает SEO», «нужен бухгалтер». У человека уже есть запрос. Но пока вы листаете чаты вручную, он получает несколько ответов и выбирает того, кто ответил первым. Скаут следит за чатами вместо вас.</p>
+      </div>
+      <div class="ph anim" style="height:380px;flex-direction:column;gap:10px;padding:24px;align-items:flex-start;justify-content:flex-start">
+        <span class="bubble">«Посоветуйте поставщика упаковки»</span>
+        <span class="bubble">«Ищу, кто сделает SEO»</span>
+        <span class="bubble out" style="align-self:flex-end">Ответ Скаута · 4 сек</span>
+        <span class="bubble">«Нужен бухгалтер для ИП»</span>
+        <span class="bubble out" style="align-self:flex-end">Ответ Скаута · 3 сек</span>
+        <span class="kind bottom">▶ Анимация: лента чата, Скаут подсвечивает запросы и отвечает</span>
+      </div>
+    </div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[S2] Как работает</span>
+    <h2 class="h2">Как работает Скаут</h2>
+    <div class="row c2" style="margin-top:24px">
+      <div class="card"><div class="ic">icon</div><div class="h3">Вы задаёте чаты</div><div>Указываете чаты и что в них ловить: ключевые слова в сообщениях, новых участников или и то и другое.</div></div>
+      <div class="card"><div class="ic">icon</div><div class="h3">Скаут находит чаты сам</div><div>Ищет сообщества, где общается ваша целевая аудитория, и вступает в них.</div></div>
+    </div>
+    <div class="row c3" style="margin-top:16px">
+      <div class="card soft"><b>Реагирует.</b> Отвечает человеку в чате, пишет ему или приглашает в вашу группу.</div>
+      <div class="card soft"><b>Пишет сам.</b> Текст ответа Скаут создаёт под контекст конкретного сообщения.</div>
+      <div class="card soft"><b>Держит темп.</b> Задержки и лимиты на аккаунт сохраняют естественный ритм общения.</div>
+    </div>
+    <a class="card accent" href="#/solutions/virtual-sales" style="margin-top:16px">Хотите вести клиента в личных сообщениях — подключите <b>Виртуальный отдел продаж</b>: он напишет человеку вместо вашего менеджера. <span class="link">Подробнее →</span></a>
+  </section>
+  <section class="sec">
+    <span class="lbl">[S3] Ценность</span>
+    <h2 class="h2">Что Скаут даёт бизнесу</h2>
+    <div class="row c3" style="margin-top:24px">
+      <div class="card"><div class="ic">icon</div><div class="h3">Вы отвечаете первыми</div>Ответ уходит за секунды, пока конкуренты ещё не увидели вопрос.</div>
+      <div class="card"><div class="ic">icon</div><div class="h3">Приветствие новичкам</div>Человек только зашёл в чат — и сразу получает ваше сообщение.</div>
+      <div class="card"><div class="ic">icon</div><div class="h3">Тёплые клиенты</div>Вы пишете тем, кто сам сказал, что ищет, а не холодной базе.</div>
+    </div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[S4] Сценарии</span>
+    <h2 class="h2">Сценарии использования Скаута</h2>
+    <div class="row c3 ucgrid" data-product="Скаут" style="margin-top:24px"></div>
+    <div class="sub">
+      <div class="h3">Кому подходит Скаут</div>
+      <div style="margin-top:8px"><span class="chip">Авто и запчасти</span><span class="chip">Шиномонтаж</span><span class="chip">Ремонт, окна, ландшафтный дизайн</span><span class="chip">Интернет и ТВ</span><span class="chip">Салоны красоты и барберы</span><span class="chip">Селлеры маркетплейсов</span><span class="chip">Психологи и частные специалисты</span><span class="chip">Бренды и блогеры</span><span class="chip">Программное обеспечение</span></div>
+    </div>
+    <div class="warn"><b>Уточнить.</b> Можно ли публично упоминать кейс Авито (информирование селлеров о конференции)?</div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[S5] Медиа и отчёт</span>
+    <h2 class="h2">Скаут в работе</h2>
+    <div class="row c2" style="margin-top:24px">
+      <div class="ph video" style="height:280px"><span class="kind">▶ Видеоролик о Скауте · загружается по клику, превью — картинка</span></div>
+      <div class="ph img" style="height:280px"><span class="kind">Пример отчёта Скаута: найденные запросы по чатам и темам (обезличенно)</span></div>
+    </div>
+    <p class="small" style="margin-top:16px">Работа с открытыми источниками ведётся строго в рамках законодательства РФ.</p>
+  </section>
+  <section class="sec">
+    <span class="lbl">[S6] Вопросы</span>
+    <div class="split"><div><h2 class="h2">Вопросы о Скауте</h2><a class="link" href="#/faq">Все вопросы →</a></div><div class="faq" data-group="scout"></div></div>
+  </section>
+  <div class="other" data-exclude="scout"></div>
+  <div class="contact-strip"></div>
+</div>
+
+<!-- ============================== ВОП ============================== -->
+<div class="view" data-route="/solutions/virtual-sales" data-sec="solutions" data-title="Виртуальный отдел продаж на базе ИИ | АИТЕХ">
+  <section class="sec">
+    <span class="lbl">[V1] Первый экран</span>
+    <div class="seo">URL: /solutions/virtual-sales · Title: Виртуальный отдел продаж на базе ИИ | АИТЕХ<br>Ключи: виртуальный отдел продаж, ИИ-агенты для продаж, B2B-продажи, удержание клиентов, снижение оттока, кросс-продажи, работа с базой клиентов</div>
+    <div class="crumbs"><a href="#/">Главная</a> / <a href="#/solutions">Решения</a> / Виртуальный отдел продаж</div>
+    <div class="hero">
+      <div>
+        <span class="badge">Включён в Реестр российского ПО</span>
+        <h1 class="h1 s">Виртуальный отдел продаж для работы с клиентской базой</h1>
+        <p class="lead">ИИ-агенты самостоятельно начинают персональные исходящие диалоги с потенциальной и действующей базой в мессенджерах, выявляют потребность и передают клиента продавцу.</p>
+        <p class="lead"><b>Продавец подключается, когда интерес клиента уже подтверждён.</b></p>
+      </div>
+      <div class="ph img" style="height:340px"><span class="kind">Схема: клиентская база → тысячи параллельных диалогов → продавец</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[V2] Проблема</span>
+    <h2 class="h2">С какими ограничениями сталкиваются продажи</h2>
+    <div class="row c3" style="margin-top:24px">
+      <div class="card soft"><div class="ic sm">icon</div><div class="big" style="font-size:44px;margin-top:14px">50–60%</div><div class="h3" style="margin-top:8px">Недозвоны</div><div class="small">Клиенты не отвечают на первый звонок — контакт и возможная продажа откладываются.</div></div>
+      <div class="card soft"><div class="ic sm">icon</div><div class="big" style="font-size:44px;margin-top:14px">Сотни тысяч</div><div class="h3" style="margin-top:8px">клиентов в базе</div><div class="small">Потенциальных клиентов много. Проверить потребность каждого вручную трудно.</div></div>
+      <div class="card soft"><div class="ic sm">icon</div><div class="big" style="font-size:44px;margin-top:14px">Не хватает</div><div class="h3" style="margin-top:8px">времени продавцов</div><div class="small">Менеджерам нужно продавать, но часть рабочего дня уходит на недозвоны и первичную проверку базы.</div></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[V3] Как работает</span>
+    <h2 class="h2">Как работает виртуальный отдел продаж</h2>
+    <div class="flow new" style="margin-top:24px">
+      <div class="node"><div class="ic sm">icon</div><div class="h3" style="margin-top:10px">Источник</div><div class="small">внешняя база, собственные данные, событие или ML-скоринг</div></div><div class="arr">→</div>
+      <div class="node"><div class="ic sm">icon</div><div class="h3" style="margin-top:10px">ИИ-агенты</div><div class="small">начинают персональный диалог и выясняют текущую потребность клиента</div></div><div class="arr">→</div>
+      <div class="node"><div class="ic sm">icon</div><div class="h3" style="margin-top:10px">Продавец</div><div class="small">получает клиента с подтверждённым интересом и контекст разговора</div></div>
+    </div>
+    <div class="row c4" style="margin-top:20px">
+      <div class="card soft"><div class="big" style="font-size:26px">01</div><div class="h3">Действует первым</div><div class="small">не ждёт входящего обращения</div></div>
+      <div class="card soft"><div class="big" style="font-size:26px">02</div><div class="h3">Общается персонально</div><div class="small">без раздражающих скриптов</div></div>
+      <div class="card soft"><div class="big" style="font-size:26px">03</div><div class="h3">Выявляет потребность</div><div class="small">понимает контекст клиента</div></div>
+      <div class="card soft"><div class="big" style="font-size:26px">04</div><div class="h3">Передаёт сделку</div><div class="small">продавцу на пике интереса</div></div>
+    </div>
+    <div class="note"><b>Пометка.</b> Анимация схемы: точки из «источника» проходят через ИИ-агентов, к продавцу доходят только подсвеченные.</div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[V4] Применение</span>
+    <h2 class="h2">Как используется продукт</h2>
+    <div class="row c3" style="margin-top:24px">
+      <div class="card"><div class="big" style="font-size:26px">01</div><div class="h3">Потенциальная база</div><div>Холодная, внешняя или другие типы баз потенциальных клиентов.</div><div class="callout" style="margin-top:14px"><b>Задача:</b> выявить интерес к продукту и передать контакт продавцу.</div></div>
+      <div class="card"><div class="big" style="font-size:26px">02</div><div class="h3">Действующая база</div><div>Ваши клиенты, с которыми давно не было контакта или у которых высокий балл склонности к покупке.</div><div class="callout" style="margin-top:14px"><b>Задача:</b> найти новую потребность и предложить дополнительный продукт.</div></div>
+      <div class="card"><div class="big" style="font-size:26px">03</div><div class="h3">Предиктивное сохранение</div><div>Клиенты, у которых ML-модель определила риск оттока.</div><div class="callout" style="margin-top:14px"><b>Задача:</b> подтвердить реальный риск в диалоге и отработать сохранение клиента.</div></div>
+    </div>
+    <div class="sub" style="margin-top:28px">
+      <div class="small">Также виртуальный отдел продаж решает задачи:</div>
+      <div style="margin-top:6px"><span class="chip">Онбординг новых клиентов</span><span class="chip">Кросс- и апсейл</span><span class="chip">Возвращение спящих клиентов</span><span class="chip">Приглашения на мероприятия</span><span class="chip">Снижение оттока</span></div>
+    </div>
+  </section>
+
+  <section class="sec gray" id="cases">
+    <span class="lbl">[V5] Реальные кейсы · интерактив</span>
+    <h2 class="h2">Результаты реальных кейсов</h2>
+    <div class="cases"></div>
+    <div class="warn"><b>Уточнить.</b> Подтвердить у заказчика, что цифры кейсов можно публиковать.</div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[V6] Демо</span>
+    <div class="hero">
+      <div>
+        <div class="small">Реальный запущенный сценарий · Telecom B2B</div>
+        <h2 class="h2" style="margin-top:8px">Попробуйте ИИ-агента прямо сейчас</h2>
+        <p class="lead">Продажа продукта «Облачная телефония». Напишите агенту в свободной форме и проверьте, как он общается с клиентом по уже запущенному продукту.</p>
+        <a class="link" href="https://consultant.aixtex.ru/web-chat/cf37ae3d-51f4-43f2-aa81-f4ee4f84fe1f" target="_blank" rel="noopener">Открыть ИИ-агента ↗</a>
+      </div>
+      <div class="ph" style="height:260px;flex-direction:column;gap:10px;padding:24px;align-items:flex-start;justify-content:center">
+        <span class="bubble">«Сколько стоит облачная телефония для офиса на 20 человек?»</span>
+        <span class="bubble out" style="align-self:flex-end">ИИ-агент уточняет задачу и предлагает подходящий тариф</span>
+        <span class="kind" style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);white-space:nowrap">Превью чата · ссылка открывается в новой вкладке</span>
+      </div>
+    </div>
+    <div class="warn"><b>Уточнить.</b> Можно ли разместить ссылку на демо-агента на сайте.</div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[V7] Пример диалога</span>
+    <h2 class="h2">Пример диалога: ИИ-агент и звонок по скрипту</h2>
+    <div class="row c2" style="margin-top:24px">
+      <div class="card accent"><div class="small">ИИ-агент</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+          <span class="bubble out" style="align-self:flex-end">Вижу, задача по логистике встала именно сейчас.</span>
+          <span class="bubble">Да, ищем решение, но бюджет ограничен.</span>
+          <span class="bubble out" style="align-self:flex-end">Покажу старт с одного маршрута без длинного внедрения.</span>
+          <span class="bubble">Так уже интересно. Можно пример?</span>
+        </div></div>
+      <div class="card soft"><div class="small">Звонок по скрипту</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;opacity:.75">
+          <span class="bubble out" style="align-self:flex-end">Добрый день! Предлагаем выгодное решение для бизнеса.</span>
+          <span class="bubble">Что именно?</span>
+          <span class="bubble out" style="align-self:flex-end">У нас индивидуальный подход и лучшие цены на рынке.</span>
+          <span class="bubble">Не актуально.</span>
+        </div></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[V8] Данные из диалогов</span>
+    <h2 class="h2">Что показывают диалоги с клиентами</h2>
+    <p class="lead">Диалог становится источником данных: видно, что на самом деле важно клиенту при выборе. Это позволяет перейти от бесконечного демпинга к управлению ценностью продукта.</p>
+    <div class="ph img" style="height:200px;margin-top:24px"><span class="kind">Горизонтальная диаграмма: скорость 31% · функционал 27% · удобство 24% · цена 18%</span></div>
+    <div class="warn"><b>Уточнить.</b> Цифры из презентации Бронислава — подтвердить, можно ли их публиковать.</div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[V9] Запуск</span>
+    <h2 class="h2">Как проходит запуск</h2>
+    <div class="flow new" style="margin-top:24px">
+      <div class="node"><div class="big" style="font-size:30px">≈2 недели</div><div class="h3" style="margin-top:8px">Подготовка к запуску</div><div class="small">сценарии, инфраструктура, обучение ИИ-агентов</div></div><div class="arr">→</div>
+      <div class="node"><div class="big" style="font-size:30px">≈4 недели</div><div class="h3" style="margin-top:8px">Пилот</div><div class="small">работа с базой, контроль качества диалогов</div></div><div class="arr">→</div>
+      <div class="node"><div class="big" style="font-size:30px">Итог</div><div class="h3" style="margin-top:8px">Фактическая воронка</div><div class="small">и аналитика результатов пилота</div></div>
+    </div>
+    <div class="row c2" style="margin-top:20px">
+      <div class="card">
+        <div class="h3" style="margin-top:0">Что делает АИТЕХ — подготовка и запуск под ключ</div>
+        <ul style="margin:8px 0 0;padding-left:18px">
+          <li>Согласование сценариев и гипотез</li>
+          <li>Настройка ИИ-агентов и инфраструктуры</li>
+          <li>Запуск и контроль качества диалогов</li>
+          <li>Фактическая воронка и аналитика пилота</li>
+        </ul>
+      </div>
+      <div class="card soft">
+        <div class="h3" style="margin-top:0">Что нужно от вас</div>
+        <ol style="margin:8px 0 0;padding-left:20px">
+          <li>Определиться с продуктом и гипотезами для продвижения.</li>
+          <li>Подготовить клиентскую базу для коммуникаций.</li>
+          <li>Предоставить материалы по продукту для обучения ИИ-агентов.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="note"><b>Пометка.</b> Стоимость пилота и лицензии из коммерческого предложения на сайт не выносим: по текущей политике стоимость рассчитывается индивидуально.</div>
+  </section>
+
+  <section class="sec">
+    <span class="lbl">[V10] Сценарии</span>
+    <h2 class="h2">Сценарии использования</h2>
+    <div class="row c3 ucgrid" data-product="Виртуальный отдел продаж" style="margin-top:24px"></div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[V11] Медиа</span>
+    <div class="row c2">
+      <div class="ph video" style="height:260px"><span class="kind">▶ Видеоролик о виртуальном отделе продаж</span></div>
+      <div class="ph img" style="height:260px"><span class="kind">Пример отчёта: фактическая воронка и аналитика</span></div>
+    </div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[V12] Вопросы</span>
+    <div class="split"><div><h2 class="h2">Вопросы о виртуальном отделе продаж</h2><a class="link" href="#/faq">Все вопросы →</a></div><div class="faq" data-group="vop"></div></div>
+  </section>
+  <div class="other" data-exclude="virtual-sales"></div>
+  <div class="contact-strip"></div>
+</div>
+
+<!-- ============================== ЖДУН ============================== -->
+<div class="view" data-route="/solutions/zhdun" data-sec="solutions" data-title="Ждун — обработка входящих обращений 24/7 | АИТЕХ">
+  <section class="sec">
+    <span class="lbl">[Z1] Первый экран</span>
+    <div class="seo">URL: /solutions/zhdun · Title: Ждун — ИИ-сотрудник для обработки входящих заявок 24/7 | АИТЕХ<br>Ключи: обработка входящих заявок, ИИ-консультант, ответ клиентам 24/7, квалификация заявок</div>
+    <div class="crumbs"><a href="#/">Главная</a> / <a href="#/solutions">Решения</a> / Ждун</div>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Виртуальный сотрудник · малый и средний бизнес</div>
+        <h1 class="h1 s">Ждун — обработка входящих обращений 24/7</h1>
+        <p class="lead">Ждун всегда на связи. Он отвечает на каждый входящий запрос по заложенному сценарию, уточняет задачу и доводит клиента до нужного вам этапа — даже ночью и в выходные.</p>
+      </div>
+      <div class="ph anim" style="height:320px"><span class="kind">▶ Анимация: шкала 00–24, обращения приходят в любое время и сразу получают ответ</span></div>
+    </div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[Z2] Функции</span>
+    <h2 class="h2">Что делает Ждун</h2>
+    <div class="row c5" style="margin-top:24px">
+      <div class="card"><div class="ic sm">icon</div><div class="h3">Отвечает за секунды</div><div class="small">в любое время суток</div></div>
+      <div class="card"><div class="ic sm">icon</div><div class="h3">Уточняет задачу</div><div class="small">объём, сроки, бюджет</div></div>
+      <div class="card"><div class="ic sm">icon</div><div class="h3">Онбордит клиента</div><div class="small">объясняет, как всё устроено</div></div>
+      <div class="card"><div class="ic sm">icon</div><div class="h3">Называет условия</div><div class="small">по вашим правилам</div></div>
+      <div class="card"><div class="ic sm">icon</div><div class="h3">Передаёт менеджеру</div><div class="small">со всей историей диалога</div></div>
+    </div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[Z3] Связка продуктов</span>
+    <h2 class="h2">Ждун в связке со Скаутом</h2>
+    <div class="flow new" style="margin-top:24px">
+      <a class="node" href="#/solutions/scout"><b>Скаут</b><div class="small">находит клиентов в чатах</div></a><div class="arr">→</div>
+      <div class="node"><b>Ждун</b><div class="small">отвечает каждому, кто откликнулся</div></div><div class="arr">→</div>
+      <div class="node"><b>Ваш менеджер</b><div class="small">получает готового к сделке клиента</div></div>
+    </div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[Z4] Сценарии</span>
+    <h2 class="h2">Сценарии использования</h2>
+    <div class="row c4 ucgrid" data-product="Ждун" style="margin-top:24px"></div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[Z5] Проверка в работе</span>
+    <div class="card accent">
+      <div class="h3" style="margin-top:0">Проверьте Ждуна в работе</div>
+      <div>Напишите нам — первым ответит именно он.</div>
+      <div style="margin-top:10px"><a class="link" href="tel:+79154267807">+7 (915) 426-78-07</a>&nbsp;&nbsp;&nbsp;<a class="link" href="mailto:contact@aixtex.ru">contact@aixtex.ru</a></div>
+    </div>
+    <div class="warn"><b>Уточнить.</b> Название «Ждун» рабочее, пока оставляем.</div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[Z6] Вопросы</span>
+    <div class="split"><div><h2 class="h2">Вопросы о Ждуне</h2><a class="link" href="#/faq">Все вопросы →</a></div><div class="faq" data-group="zhdun"></div></div>
+  </section>
+  <div class="other" data-exclude="zhdun"></div>
+  <div class="contact-strip"></div>
+</div>
+
+<!-- ============================== СЦЕНАРИИ ============================== -->
+<div class="view" data-route="/use-cases" data-sec="use-cases" data-title="Сценарии использования — АИТЕХ">
+  <section class="sec">
+    <span class="lbl">[U1] Первый экран и фильтр</span>
+    <div class="seo">URL: /use-cases · Title: Сценарии использования ИИ-сотрудников в продажах | АИТЕХ<br>Ключи: ИИ в продажах примеры, кейсы виртуальных сотрудников, автоматизация работы с клиентами</div>
+    <div class="crumbs"><a href="#/">Главная</a> / Сценарии</div>
+    <h1 class="h1 s">Сценарии использования виртуальных сотрудников</h1>
+    <p class="lead">Как Скаут, Виртуальный отдел продаж и Ждун решают задачи бизнеса: что происходит, что делает виртуальный сотрудник и какой результат получает компания.</p>
+    <div class="tabs" id="ucFilter"></div>
+    <div class="row c3" id="ucAll" style="margin-top:8px"></div>
+    <div class="note"><b>Переходы.</b> Фильтр переключает карточки без перезагрузки. Ссылка в карточке ведёт на страницу продукта.</div>
+  </section>
+  <section class="sec gray">
+    <span class="lbl">[U2] Реальные кейсы</span>
+    <h2 class="h2">Результаты реальных кейсов</h2>
+    <p class="lead">Виртуальный отдел продаж в телеком-компании (B2B): фактические воронки по трём сценариям.</p>
+    <div class="cases"></div>
+    <a class="link" href="#/solutions/virtual-sales">О виртуальном отделе продаж →</a>
+  </section>
+  <div class="contact-strip"></div>
+</div>
+
+<!-- ============================== О КОМПАНИИ ============================== -->
+<div class="view" data-route="/about" data-sec="about" data-title="О компании — АИТЕХ">
+  <section class="sec">
+    <span class="lbl">[A1] Первый экран</span>
+    <div class="seo">URL: /about · Title: О компании АИТЕХ — агентство интеллектуальных технологий</div>
+    <div class="crumbs"><a href="#/">Главная</a> / О компании</div>
+    <div class="hero">
+      <div>
+        <h1 class="h1 s">О компании АИТЕХ</h1>
+        <p class="lead">Агентство интеллектуальных технологий разрабатывает и внедряет виртуальных сотрудников на базе ИИ для продаж и работы с клиентами. Наша задача — забрать у команды рутину и оставить людям ту работу, где их участие ценнее всего.</p>
+      </div>
+      <div class="ph img" style="height:300px"><span class="kind">Иллюстрация: человек и виртуальный сотрудник в одной системе</span></div>
+    </div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[A2] Подход</span>
+    <h2 class="h2">Наш подход: рутина — системе, мастерство — человеку</h2>
+    <p class="lead">Виртуальный сотрудник работает как подмастерье: ищет, отвечает, ведёт переписку. Человек остаётся мастером: ведёт переговоры, выстраивает доверие и закрывает сделки.</p>
+    <div class="row c2" style="margin-top:20px">
+      <div class="card soft"><div class="small">Забирает ИИ</div><div style="margin-top:6px">Поиск контактов · автодозвоны · чтение скрипта · сотни отказов</div></div>
+      <div class="card accent"><div class="small">Остаётся человеку</div><div style="margin-top:6px">Сложные переговоры · выстраивание доверия · нестандартные случаи · финальное закрытие сделки</div></div>
+    </div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[A3] Принципы внедрения</span>
+    <h2 class="h2">Принципы внедрения</h2>
+    <div class="row c3" style="margin-top:24px">
+      <div class="card"><div class="ic">icon</div><div class="h3">Под ваш процесс</div><div>Сценарии работы строятся вокруг ваших задач, продукта и аудитории.</div></div>
+      <div class="card"><div class="ic">icon</div><div class="h3">В ваших системах</div><div>Решение встраивается в уже используемые инструменты и не требует их замены.</div></div>
+      <div class="card"><div class="ic">icon</div><div class="h3">Поддержка после запуска</div><div>Сопровождаем и оптимизируем работу по итогам отчётов.</div></div>
+    </div>
+    <div class="warn"><b>Уточнить.</b> Принципы взяты из концепции v3 — подтвердить формулировки с заказчиком.</div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[A4] Видение</span>
+    <h2 class="h2">Как меняются коммерческие коммуникации</h2>
+    <div class="flow new" style="margin-top:24px">
+      <div class="node"><div class="small">Вчера</div><div class="h3" style="margin-top:4px">Человек ↔ человек</div></div><div class="arr">→</div>
+      <div class="node"><div class="small">Сегодня</div><div class="h3" style="margin-top:4px">Человек ↔ ИИ-агент</div></div><div class="arr">→</div>
+      <div class="node"><div class="small">Завтра</div><div class="h3" style="margin-top:4px">ИИ-агент ↔ ИИ-агент</div></div>
+    </div>
+    <p class="lead" style="margin-top:18px">Вопрос уже не в том, появятся ли ИИ-агенты, а в том, чей агент будет представлять ваш бизнес.</p>
+  </section>
+  <section class="sec">
+    <span class="lbl">[A5] Основатель</span>
+    <h2 class="h2">Основатель компании</h2>
+    <div class="row" style="grid-template-columns:260px 1fr;gap:32px;margin-top:20px">
+      <div class="ph img" style="height:300px"><span class="kind">Фото основателя</span></div>
+      <div>
+        <div class="h3">Бронислав Горбачев</div>
+        <p>Предприниматель, основатель Агентства интеллектуальных технологий. Executive MBA Stockholm School of Economics. 20 лет опыта в стратегическом управлении.</p>
+        <p>Спикер ПИР 2026: выступление «Искусство не звонить» о том, как ИИ-агенты меняют коммерческие диалоги и возвращают человеку роль мастера.</p>
+      </div>
+    </div>
+    <div class="warn"><b>Уточнить.</b> Согласовать публикацию блока об основателе и фото.</div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[A6] Компания</span>
+    <h2 class="h2">Компания и документы</h2>
+    <div class="row c3" style="margin-top:24px">
+      <div class="card soft"><div class="small">Юридическое лицо</div><b>ООО «Агентство интеллектуальных технологий»</b><div class="small" style="margin-top:6px">ИНН 9707049984 · ОГРН 1257700352667 · ОКВЭД 62.01</div></div>
+      <a class="card" href="#/technologies"><div class="small">Реестр российского ПО</div><b>Виртуальный отдел продаж, запись № 32900</b><span class="link">Технологии →</span></a>
+      <a class="card" href="#/documents"><div class="small">Документы</div><b>Политики, лицензия, патенты</b><span class="link">Документы →</span></a>
+    </div>
+  </section>
+  <div class="contact-strip"></div>
+</div>
+
+<!-- ============================== ТЕХНОЛОГИИ ============================== -->
+<div class="view" data-route="/technologies" data-sec="technologies" data-title="Технологии и стек разработки — АИТЕХ">
+  <section class="sec">
+    <span class="lbl">[T1] Паспорт продукта</span>
+    <div class="seo">URL: /technologies · Title: Технологии и стек разработки | АИТЕХ · страница обязательна для регулятора</div>
+    <div class="crumbs"><a href="#/">Главная</a> / Технологии</div>
+    <h1 class="h1 s">Технологии и стек разработки</h1>
+    <p class="lead">Из чего состоят виртуальные сотрудники АИТЕХ, как они поставляются и на чём построены.</p>
+    <div class="row c4" style="margin-top:24px">
+      <div class="card"><div class="small">Реестр</div><b>Виртуальный отдел продаж включён в Реестр российского ПО</b><div class="small" style="margin-top:6px">Запись № 32900 от 31.03.2026</div></div>
+      <div class="card"><div class="small">Поставка</div><b>Интернет-сервис или размещение в вашей инфраструктуре</b></div>
+      <div class="card"><div class="small">Стек</div><b>Python, JavaScript, TypeScript, PostgreSQL 15</b></div>
+      <div class="card"><div class="small">Права</div><b>Исключительные права у ООО «АИТЕХ»</b></div>
+    </div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[T2] Устройство</span>
+    <h2 class="h2">Как устроен виртуальный сотрудник</h2>
+    <div class="row c3" style="margin-top:24px">
+      <div class="card"><div class="big" style="font-size:28px">01</div><div class="h3">Коммуникации</div><div class="small">ведёт переписку в каналах, где находится клиент</div></div>
+      <div class="card"><div class="big" style="font-size:28px">02</div><div class="h3">База знаний</div><div class="small">знает продукт, условия и правила компании</div></div>
+      <div class="card"><div class="big" style="font-size:28px">03</div><div class="h3">Инструменты</div><div class="small">выполняет действия: передаёт заявки, формирует отчёты</div></div>
+    </div>
+    <div class="row c3" style="margin-top:16px">
+      <div class="card soft"><b>Проактивность.</b> Сам начинает диалог, а не ждёт запроса.</div>
+      <div class="card soft"><b>Интеллект.</b> Адаптируется к собеседнику и учится на реальных диалогах.</div>
+      <div class="card soft"><b>Контекст и безопасность.</b> Учитывает историю общения и работает в рамках законодательства.</div>
+    </div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[T3] Стек</span>
+    <h2 class="h2">Стек разработки</h2>
+    <div class="row c3" style="margin-top:24px">
+      <div class="card soft"><b>Языки программирования</b><div class="small">Python, JavaScript, TypeScript</div></div>
+      <div class="card soft"><b>Бэкенд</b><div class="small">уточнить</div></div>
+      <div class="card soft"><b>Фронтенд</b><div class="small">уточнить</div></div>
+      <div class="card soft"><b>Базы данных</b><div class="small">PostgreSQL 15</div></div>
+      <div class="card soft"><b>Инфраструктура</b><div class="small">уточнить</div></div>
+      <div class="card soft"><b>Интеграции</b><div class="small">уточнить</div></div>
+    </div>
+    <div class="warn"><b>Уточнить.</b> Данные из концепции v3. Запись в реестре подтвердить выпиской. Полный текст разделов стека запросить у заказчика.</div>
+  </section>
+  <section class="sec tight">
+    <span class="lbl">[T4] Правовая база</span>
+    <h2 class="h2">Работа с данными</h2>
+    <p class="lead">Работа с открытыми источниками ведётся строго в рамках законодательства РФ. Обработка персональных данных — в соответствии с политикой компании.</p>
+    <a class="link" href="#/documents/privacy">Политика обработки персональных данных →</a>&nbsp;&nbsp;&nbsp;<a class="link" href="#/documents">Все документы →</a>
+  </section>
+  <div class="contact-strip"></div>
+</div>
+
+<!-- ============================== ВОПРОСЫ ============================== -->
+<div class="view" data-route="/faq" data-sec="faq" data-title="Вопросы и ответы — АИТЕХ">
+  <section class="sec">
+    <span class="lbl">[F1] Вопросы по группам</span>
+    <div class="seo">URL: /faq · Title: Вопросы о виртуальных сотрудниках и ИИ-агентах | АИТЕХ</div>
+    <div class="crumbs"><a href="#/">Главная</a> / Вопросы</div>
+    <h1 class="h1 s">Вопросы и ответы</h1>
+    <p class="lead">О виртуальных сотрудниках, продуктах АИТЕХ и начале работы.</p>
+    <div class="faqnav" id="faqNav"></div>
+    <div id="faqAll"></div>
+    <div class="note"><b>Переходы.</b> Кнопки групп прокручивают к нужному разделу. Первый вопрос в каждой группе раскрыт.</div>
+  </section>
+  <div class="contact-strip"></div>
+</div>
+
+<!-- ============================== КОНТАКТЫ ============================== -->
+<div class="view" data-route="/contacts" data-sec="contacts" data-title="Контакты — АИТЕХ">
+  <section class="sec">
+    <span class="lbl">[K1] Контакты · без формы</span>
+    <div class="seo">URL: /contacts · Title: Контакты | АИТЕХ</div>
+    <div class="crumbs"><a href="#/">Главная</a> / Контакты</div>
+    <div class="split">
+      <div>
+        <h1 class="h1 s">Контакты</h1>
+        <p class="lead">Позвоните или напишите нам — первым ответит виртуальный сотрудник. Он уточнит задачу, подберёт решение и назовёт стоимость.</p>
+      </div>
+      <div>
+        <div class="row c3">
+          <a class="card" href="tel:+79154267807"><div class="ic sm">icon</div><div class="small" style="margin-top:12px">Телефон</div><b>+7 (915) 426-78-07</b></a>
+          <a class="card" href="mailto:contact@aixtex.ru"><div class="ic sm">icon</div><div class="small" style="margin-top:12px">Почта</div><b>contact@aixtex.ru</b></a>
+          <div class="card"><div style="display:flex;gap:6px"><div class="ic sm">icon</div><div class="ic sm">icon</div></div><div class="small" style="margin-top:12px">Мессенджеры</div><b>иконки-ссылки</b></div>
+        </div>
+        <div class="card soft" style="margin-top:16px">
+          <div class="small">Реквизиты</div>
+          ООО «Агентство интеллектуальных технологий»<br>ИНН 9707049984 · ОГРН 1257700352667<br>127051, г. Москва, вн.тер.г. муниципальный округ Тверской, пер. 2-й Колобовский, д. 12, кв. 12а
+        </div>
+        <p class="small" style="margin-top:16px">ООО «АИТЕХ» не проводит набор сотрудников и не рассылает предложения о работе, в том числе через мессенджеры.</p>
+      </div>
+    </div>
+    <div class="warn"><b>Уточнить.</b> На aixtex.ru мессенджеры не указаны — нужны ссылки, либо оставляем телефон и почту.</div>
+  </section>
+</div>
+
+<!-- ============================== ДОКУМЕНТЫ ============================== -->
+<div class="view" data-route="/documents" data-sec="documents" data-title="Документы — АИТЕХ">
+  <section class="sec">
+    <span class="lbl">[D1] Список документов</span>
+    <div class="seo">URL: /documents · Title: Документы | АИТЕХ</div>
+    <div class="crumbs"><a href="#/">Главная</a> / Документы</div>
+    <h1 class="h1 s">Документы</h1>
+    <p class="lead">Правовая информация об ООО «Агентство интеллектуальных технологий».</p>
+    <div class="row c2" id="docList" style="margin-top:20px"></div>
+  </section>
+</div>
+
+<!-- шаблон страницы документа -->
+<div class="view" data-route="/documents/:id" data-sec="documents">
+  <section class="sec">
+    <span class="lbl">[D2] Страница документа · общий шаблон</span>
+    <div class="crumbs"><a href="#/">Главная</a> / <a href="#/documents">Документы</a> / <span id="docCrumb"></span></div>
+    <h1 class="h1 s" id="docTitle"></h1>
+    <p class="small" id="docMeta"></p>
+    <div class="ph" style="height:420px;margin-top:20px"><span class="kind" id="docBody"></span></div>
+    <a class="link" href="#/documents" style="margin-top:20px">← Все документы</a>
+  </section>
+</div>
+
+<!-- ============================== 404 ============================== -->
+<div class="view" data-route="/404" data-title="Страница не найдена — АИТЕХ">
+  <section class="sec" style="padding:120px 64px;text-align:center">
+    <div class="big" style="font-size:96px">404</div>
+    <h1 class="h1 s" style="margin-top:20px">Страница не найдена</h1>
+    <p class="lead" style="margin:0 auto">Возможно, она была перемещена или ещё в разработке.</p>
+    <div style="margin-top:24px"><a class="link" href="#/">На главную</a>&nbsp;&nbsp;&nbsp;<a class="link" href="#/solutions">Решения</a>&nbsp;&nbsp;&nbsp;<a class="link" href="#/contacts">Контакты</a></div>
+  </section>
+</div>
+
+<!-- ============================== КАРТА САЙТА (для команды) ============================== -->
+<div class="view" data-route="/_map" data-title="Карта сайта и логика переходов — АИТЕХ">
+  <section class="sec">
+    <span class="lbl">Служебная страница · только для команды</span>
+    <h1 class="h1 s">Карта сайта и логика переходов</h1>
+    <p class="lead">Все страницы прототипа кликабельны. Здесь — структура, адреса и поведение меню.</p>
+    <div class="tree">
+      <div class="col"><b>Главная</b><a href="#/">/</a></div>
+      <div class="col"><b>Решения</b><a href="#/solutions">/solutions</a><a href="#/solutions/scout">/solutions/scout</a><a href="#/solutions/virtual-sales">/solutions/virtual-sales</a><a href="#/solutions/zhdun">/solutions/zhdun</a></div>
+      <div class="col"><b>Информация</b><a href="#/use-cases">/use-cases</a><a href="#/about">/about</a><a href="#/technologies">/technologies</a><a href="#/faq">/faq</a></div>
+      <div class="col"><b>Связь</b><a href="#/contacts">/contacts</a></div>
+      <div class="col"><b>Документы</b><a href="#/documents">/documents</a><a href="#/documents/privacy">/documents/privacy</a><a href="#/documents/pricing">/documents/pricing</a><a href="#/documents/spam">/documents/spam</a><a href="#/documents/license">/documents/license</a><a href="#/documents/patents">/documents/patents</a><a href="#/404">/404</a></div>
+    </div>
+
+    <div class="sub">
+      <div class="h3">Меню</div>
+      <table class="maptbl">
+        <tr><th style="width:24%">Элемент</th><th>Поведение</th></tr>
+        <tr><td>Логотип</td><td>Ведёт на главную. Отдельного пункта «Главная» в меню нет — так принято и экономит место.</td></tr>
+        <tr><td>Решения ▾</td><td>Не страница, а раскрывающаяся панель на всю ширину: три карточки продуктов с описанием и сегментом, ниже ссылки «Все решения и сравнение» и «Сценарии использования». Открывается по наведению и по клику, закрывается по клику вне панели, по Esc и при переходе.</td></tr>
+        <tr><td>Сценарии · О компании · Технологии · Контакты</td><td>Прямые ссылки на страницы. Активный раздел подчёркнут оранжевой линией, на страницах продуктов подсвечиваются «Решения».</td></tr>
+        <tr><td>Телефон и почта справа</td><td>Кликабельны: звонок и письмо. Кнопок «Связаться» и «Оставить заявку» нет — сайт информационный.</td></tr>
+        <tr><td>Узкие экраны</td><td>До 760 px меню остаётся в строку (без подписи под логотипом и контактов). Уже 760 px — тёмная кнопка «☰ Меню» с подписью; она открывает полноэкранное меню: «Решения» раскрыты списком продуктов, ниже остальные разделы, «Вопросы» и контакты.</td></tr>
+        <tr><td>Шапка</td><td>Закреплена при прокрутке на всех страницах.</td></tr>
+      </table>
+    </div>
+
+    <div class="sub">
+      <div class="h3">Когда посетитель переходит на страницу продукта</div>
+      <table class="maptbl">
+        <tr><th style="width:6%">№</th><th style="width:26%">Где на главной</th><th style="width:38%">Что посетитель думает</th><th>Куда ведём</th></tr>
+        <tr><td>1</td><td>[01] Первый экран, три карточки</td><td>«Я уже знаю свою задачу: нужны новые клиенты / работа с базой / ответы на заявки»</td><td>Скаут, ВОП, Ждун</td></tr>
+        <tr><td>2</td><td>[02] Актуальность, кнопка в конце</td><td>«Проблема понятна. Как вы её решаете?»</td><td>Решения: путь клиента и сравнение</td></tr>
+        <tr><td>3</td><td>[03] Для кого — главный переход</td><td>«Это про мой масштаб бизнеса»</td><td>ВОП или Скаут / Ждун</td></tr>
+        <tr><td>4</td><td>[04] Сценарии, кнопка в карточке</td><td>«Это моя ситуация. Как именно это работает?»</td><td>Страница продукта из выбранной вкладки</td></tr>
+        <tr><td>5</td><td>[05] Реальные кейсы</td><td>«Покажите доказательства»</td><td>ВОП, сразу к блоку кейсов</td></tr>
+        <tr><td>—</td><td>Меню «Решения» в любой момент</td><td>«Хочу сразу к продукту»</td><td>Любой продукт или сравнение</td></tr>
+      </table>
+    </div>
+
+    <div class="sub">
+      <div class="h3">Ключевые переходы</div>
+      <table class="maptbl">
+        <tr><th style="width:24%">Где</th><th style="width:36%">Элемент</th><th>Куда</th></tr>
+        <tr><td>Главная [01], [03]</td><td>Карточки направлений и сегментов, кнопки продуктов</td><td>Страницы Скаута, ВОП, Ждуна</td></tr>
+        <tr><td>Главная [02]</td><td>«Как это решают продукты АИТЕХ»</td><td><code>/solutions</code></td></tr>
+        <tr><td>Главная [04]</td><td>Вкладки и сценарии; «Подробнее о продукте»; «Все сценарии»</td><td>Переключение на месте; страница продукта; <code>/use-cases</code></td></tr>
+        <tr><td>Главная [05]</td><td>Карточки реальных кейсов</td><td>Страница ВОП, сразу к блоку кейсов (<code>/solutions/virtual-sales#cases</code>)</td></tr>
+        <tr><td>Главная [06]</td><td>«Как устроены технологии»</td><td><code>/technologies</code></td></tr>
+        <tr><td>Главная [08], контакты</td><td>Телефон, почта; «Открыть ИИ-агента»</td><td><code>tel:</code> и <code>mailto:</code>; демо-чат в новой вкладке</td></tr>
+        <tr><td>Главная [09]</td><td>Вопросы; «Все вопросы»</td><td>Аккордеон на месте; <code>/faq</code></td></tr>
+        <tr><td>Решения</td><td>Путь клиента, таблица, карточки выбора</td><td>Страницы продуктов</td></tr>
+        <tr><td>Страницы продуктов</td><td>Хлебные крошки; связки продуктов; «Другие решения»; «Все вопросы»</td><td>Главная / Решения; соседние продукты; <code>/faq</code></td></tr>
+        <tr><td>Сценарии</td><td>Фильтр по продукту; ссылка в карточке; вкладки кейсов</td><td>Переключение на месте; страница продукта</td></tr>
+        <tr><td>ВОП</td><td>Вкладки кейсов; «Открыть ИИ-агента»</td><td>Переключение воронки на месте; демо-чат в новой вкладке</td></tr>
+        <tr><td>О компании</td><td>Карточки «Реестр» и «Документы»</td><td><code>/technologies</code>, <code>/documents</code></td></tr>
+        <tr><td>Технологии</td><td>Политика ПД, все документы</td><td><code>/documents/privacy</code>, <code>/documents</code></td></tr>
+        <tr><td>Подвал</td><td>Все разделы и документы</td><td>Соответствующие страницы</td></tr>
+        <tr><td>Внизу почти каждой страницы</td><td>Блок «Как связаться с нами»</td><td>Телефон, почта, мессенджеры</td></tr>
+      </table>
+    </div>
+    <div class="note"><b>Для разработки.</b> В прототипе адреса через «#/», на сайте — обычные ЧПУ: <code>/solutions/scout</code> и т. д. Для SEO у каждой страницы свои Title и H1 (серые плашки на страницах).</div>
+  </section>
+</div>
+
+</main>
+
+<!-- ============================== ПОДВАЛ ============================== -->
+<footer class="ftr">
+  <div class="cols">
+    <div>
+      <a href="#/" class="h" style="font-size:22px"><b>АИ</b>ТЕХ</a>
+      <div>ООО «Агентство интеллектуальных технологий»</div>
+      <div style="margin-top:6px">ИНН 9707049984 · ОГРН 1257700352667<br>ОКВЭД 62.01</div>
+      <div style="margin-top:6px">127051, г. Москва, пер. 2-й Колобовский, д. 12, кв. 12а</div>
+    </div>
+    <div><div class="h">Решения</div><a href="#/solutions/scout">Скаут</a><a href="#/solutions/virtual-sales">Виртуальный отдел продаж</a><a href="#/solutions/zhdun">Ждун</a><a href="#/solutions">Все решения</a></div>
+    <div><div class="h">Компания</div><a href="#/use-cases">Сценарии</a><a href="#/about">О компании</a><a href="#/technologies">Технологии</a><a href="#/faq">Вопросы</a><a href="#/contacts">Контакты</a></div>
+    <div><div class="h">Документы</div><a href="#/documents/privacy">Политика обработки персональных данных</a><a href="#/documents/pricing">Политика ценообразования</a><a href="#/documents/spam">Политика в отношении спама</a><a href="#/documents/license">Лицензия</a><a href="#/documents/patents">Патенты и свидетельства</a></div>
+  </div>
+  <div class="bottom">
+    <span>ООО «АИТЕХ» не проводит набор сотрудников и не рассылает предложения о работе, в том числе через мессенджеры. Официальная информация публикуется только на этом сайте.</span>
+    <span><a href="tel:+79154267807" style="display:inline">+7 (915) 426-78-07</a> · <a href="mailto:contact@aixtex.ru" style="display:inline">contact@aixtex.ru</a></span>
+  </div>
+</footer>
+</div>
+
+<!-- служебная панель -->
+<div class="dev"><span>Прототип</span><a href="#/_map">Карта сайта</a><button id="cleanBtn">Скрыть пометки</button></div>
+
+<script>
+/* ================= ДАННЫЕ ================= */
+const PRODUCTS={
+  "scout":{name:"Скаут",route:"#/solutions/scout",d:"Поиск клиентов в тематических чатах и сообществах",seg:"Малый и средний бизнес"},
+  "virtual-sales":{name:"Виртуальный отдел продаж",route:"#/solutions/virtual-sales",d:"Персональные диалоги с потенциальной и действующей базой: выявление интереса, повторные продажи, удержание",seg:"Крупный бизнес"},
+  "zhdun":{name:"Ждун",route:"#/solutions/zhdun",d:"Ответ на каждое входящее обращение 24/7",seg:"Малый и средний бизнес"}
+};
+const P_BY_NAME={"Скаут":"scout","Виртуальный отдел продаж":"virtual-sales","Ждун":"zhdun"};
+
+const UC={
+ "Скаут":[
+  {t:"Горячий запрос",sig:"«Соседи, кто какой интернет подключал? Наш провайдер опять пропал»",msg:true,act:"Скаут замечает сообщение в домовом чате за секунды и отвечает от имени вашей компании: коротко, по делу, с предложением проверить подключение по адресу.",res:"Тёплый клиент в работе раньше, чем конкуренты увидели вопрос.",rep:"найдено запросов · отвечено первыми · передано в работу"},
+  {t:"Новый участник чата",sig:"В профильный чат селлеров вступил новый участник",act:"Скаут приветствует его и коротко рассказывает о вашем сервисе.",res:"Вы знакомитесь с клиентом до того, как он увидел предложения конкурентов.",rep:"новых участников · приветствий · откликов"},
+  {t:"Перехват у конкурентов",sig:"«Третий раз переносят запись в салоне N. Посоветуйте другой рядом»",msg:true,act:"Скаут отслеживает упоминания конкурентов и предлагает альтернативу тем, кто недоволен.",res:"Клиент с негативным опытом приходит к вам.",rep:"упоминаний конкурентов · из них негативных · перехвачено"},
+  {t:"Информирование аудитории",sig:"Компания проводит конференцию для селлеров и ищет участников",act:"Скаут находит сообщества с нужной аудиторией, вступает в них и рассказывает о событии.",res:"Регистрации от целевой аудитории без закупки рекламы.",rep:"сообществ · охват · регистраций"},
+  {t:"Управление репутацией",sig:"В нескольких чатах обсуждают проблему с вашим продуктом",act:"Скаут фиксирует негативный тренд, сообщает вам и отвечает в обсуждениях по согласованной позиции.",res:"Риск замечен в момент появления, а не через месяц.",rep:"упоминаний бренда · доля негатива · динамика"},
+  {t:"Поиск партнёров",sig:"«Ищу бренд спортивного питания для совместной интеграции»",msg:true,act:"Скаут находит такие запросы блогеров и брендов и связывает вас с потенциальным партнёром.",res:"Коллаборации без ручного поиска.",rep:"найдено запросов · контактов · договорённостей"}
+ ],
+ "Виртуальный отдел продаж":[
+  {t:"Спящие клиенты",sig:"Клиент не покупал больше полугода",act:"Пишет клиенту персонально, с понятным поводом вернуться, и отвечает на его вопросы.",res:"Клиент возвращается, а причина паузы попадает в отчёт.",rep:"спящих в базе · ответили · вернулись"},
+  {t:"Предиктивное сохранение",sig:"ML-модель определила у клиента риск оттока",act:"ИИ-агент начинает персональный диалог, подтверждает реальный риск и отрабатывает сценарий сохранения.",res:"Клиент остаётся, а реальные причины риска попадают в отчёт.",rep:"коммуникаций · подтвердили риск · сохранены"},
+  {t:"Онбординг",sig:"Клиент только подключился",act:"Проводит по первым шагам, отвечает на вопросы, напоминает о важном.",res:"Клиент быстрее начинает пользоваться продуктом и получать пользу.",rep:"новых клиентов · прошли онбординг · частые вопросы"},
+  {t:"Кросс- и апсейл",sig:"С клиентом давно не было контакта или у него высокий балл склонности к покупке",act:"Выясняет новую потребность и предлагает дополнительный продукт.",res:"Рост выручки с действующей базы.",rep:"коммуникаций · ответов · согласий · продаж"},
+  {t:"Мероприятия",sig:"Компания проводит вебинар или конференцию",act:"Приглашает клиентов персонально, отвечает на вопросы, напоминает перед началом.",res:"Больше регистраций и выше явка.",rep:"приглашено · зарегистрировались · пришли"},
+  {t:"Потенциальная база",sig:"Холодная или внешняя база потенциальных клиентов",act:"ИИ-агенты начинают персональные диалоги, выявляют интерес к продукту и передают контакт продавцу.",res:"Продавец тратит время только на тех, кто подтвердил интерес.",rep:"коммуникаций · ответов · согласий · продаж"}
+ ],
+ "Ждун":[
+  {t:"Обращение ночью",sig:"23:40 — «Здравствуйте, сколько стоит подключение для офиса?»",msg:true,act:"Ждун отвечает сразу, уточняет задачу, объём и сроки.",res:"Утром менеджер получает готовую квалифицированную заявку.",rep:"обращений · время ответа · квалифицировано"},
+  {t:"Отклики от Скаута",sig:"Десятки людей ответили на сообщения Скаута",act:"Ждун подхватывает каждый отклик и ведёт диалог по вашему сценарию.",res:"Ни один найденный клиент не теряется.",rep:"откликов · в работе · доведено до цели"},
+  {t:"Типовые вопросы",sig:"Клиенты спрашивают о ценах, сроках и условиях",act:"Ждун отвечает по базе знаний компании.",res:"Менеджеры заняты сделками, а не повторяющимися ответами.",rep:"вопросов · закрыто без менеджера · новые темы"},
+  {t:"До нужного этапа",sig:"Клиент готов двигаться дальше",act:"Записывает на встречу, называет условия или передаёт менеджеру со всей историей диалога.",res:"Клиент доходит до того этапа, который нужен вам.",rep:"встреч · передано менеджерам · конверсия"}
+ ]};
+
+const FAQ=[
+ {g:"general",name:"Общие вопросы",items:[
+  {id:"g1",q:"Что такое «виртуальные сотрудники»?",a:"Это рабочий персонал на базе искусственного интеллекта. ИИ-агенты работают вместе в мультиагентной системе и самостоятельно решают сложные задачи."},
+  {id:"g2",q:"Чем ИИ-агент отличается от чат-бота и обычной автоматизации?",a:"Чат-боты и RPA действуют по жёстким сценариям и ждут запроса. ИИ-агент сам начинает диалог, адаптируется к собеседнику, ведёт нелинейные переговоры и учится на реальных разговорах."},
+  {id:"g3",q:"Зачем агент, если клиент не готов купить сейчас?",a:"В моменте готовы купить около 5% рынка, остальные 95% купят позже. Агент может долго и без давления сопровождать эту аудиторию до момента, когда появится потребность."},
+  {id:"g4",q:"Чем ИИ-агенты полезны моему бизнесу?",a:"Берут на себя рутину, доступны клиентам 24/7, быстро обрабатывают большие объёмы данных, освобождают команду для стратегических задач и позволяют расти без пропорционального роста штата."},
+  {id:"g5",q:"Какой продукт подходит моему бизнесу?",a:"Крупным компаниям — Виртуальный отдел продаж для работы с клиентской базой. Малому и среднему бизнесу — Скаут для поиска клиентов и Ждун для обработки обращений. Сравнение — на странице «Решения»."}
+ ]},
+ {g:"scout",name:"Скаут",items:[
+  {id:"s1",q:"Где Скаут ищет клиентов?",a:"В открытых тематических чатах и сообществах: находит сообщения с запросом на ваши товары или услуги и сразу отвечает человеку."},
+  {id:"s2",q:"Можно ли выбрать чаты самостоятельно?",a:"Да. Вы указываете чаты и что в них отслеживать: ключевые слова, новых участников или и то и другое. Или Скаут сам находит сообщества с вашей аудиторией."},
+  {id:"s3",q:"Это законно?",a:"Да. Работа с открытыми источниками ведётся строго в рамках законодательства РФ."},
+  {id:"s4",q:"Не будет ли это выглядеть как спам?",a:"Нет. Скаут отвечает только тем, кто сам обозначил запрос, пишет персональный текст под контекст и соблюдает естественный темп: задержки и лимиты на аккаунт."},
+  {id:"s5",q:"Что происходит после того, как Скаут нашёл клиента?",a:"Скаут отвечает в чате, пишет человеку или приглашает его в вашу группу. Дальше диалог может продолжить Ждун или Виртуальный отдел продаж."}
+ ]},
+ {g:"vop",name:"Виртуальный отдел продаж",items:[
+  {id:"v1",q:"Чем виртуальный отдел продаж отличается от рассылки?",a:"Рассылка отправляет всем одно сообщение. Виртуальный отдел продаж ведёт персональный диалог: учитывает контекст клиента, отвечает на вопросы и передаёт сделку менеджеру на пике интереса."},
+  {id:"v2",q:"Заменит ли он моих менеджеров?",a:"Нет. Он забирает рутину: недозвоны, первые касания, первичную проверку базы, типовые вопросы и отказы. Продавец подключается, когда интерес клиента уже подтверждён."},
+  {id:"v3",q:"Как поставляется решение?",a:"Как интернет-сервис или с размещением в вашей инфраструктуре."},
+  {id:"v4",q:"Включено ли решение в реестр российского ПО?",a:"Да, Виртуальный отдел продаж включён в Реестр российского ПО: запись № 32900 от 31.03.2026."},
+  {id:"v5",q:"С какими базами работает виртуальный отдел продаж?",a:"С потенциальной базой (холодной, внешней и другими), с действующими клиентами, с которыми давно не было контакта или у которых высокий балл склонности к покупке, и с клиентами, у которых ML-модель определила риск оттока."},
+  {id:"v6",q:"Можно ли проверить, как общается ИИ-агент?",a:"Да. Напишите агенту по реальному запущенному сценарию — продаже продукта «Облачная телефония» — и оцените диалог сами. Ссылка — на странице виртуального отдела продаж."}
+ ]},
+ {g:"zhdun",name:"Ждун",items:[
+  {id:"z1",q:"Что такое Ждун?",a:"Виртуальный сотрудник, который находится на связи 24/7 и отвечает на любой входящий запрос по заложенному сценарию."},
+  {id:"z2",q:"До какого этапа Ждун ведёт клиента?",a:"До того, который нужен вам: записи на встречу, расчёта стоимости или передачи менеджеру со всей историей диалога."},
+  {id:"z3",q:"Можно ли использовать Ждуна вместе со Скаутом?",a:"Да. Скаут находит клиентов в чатах, а Ждун обрабатывает каждого, кто откликнулся, — так ни один найденный клиент не теряется."}
+ ]},
+ {g:"work",name:"Работа с нами",items:[
+  {id:"w1",q:"Как начать работу?",a:"Позвоните или напишите нам. Первым ответит виртуальный сотрудник: уточнит задачу и аудиторию, подберёт решение и назовёт стоимость."},
+  {id:"w2",q:"Сколько это стоит?",a:"Стоимость рассчитывается индивидуально под задачу. Напишите нам — виртуальный сотрудник уточнит детали и назовёт условия."},
+  {id:"w3",q:"Как я увижу результат?",a:"В регулярном отчёте — в личном кабинете или в мессенджере: что сделано, что изменилось, где теряется результат и что с этим сделать."},
+  {id:"w4",q:"Как быстро можно запустить работу?",a:"Подготовка к запуску занимает около 2 недель, пилот — около 4 недель. По итогам вы получаете фактическую воронку и аналитику результатов."},
+  {id:"w5",q:"Что нужно от нас для запуска?",a:"Определиться с продуктом и гипотезами для продвижения, подготовить клиентскую базу для коммуникаций и передать материалы по продукту для обучения ИИ-агентов. Всё остальное АИТЕХ берёт на себя: сценарии, настройку агентов и инфраструктуры, запуск и контроль качества диалогов."}
+ ]}
+];
+
+const DOCS={
+ privacy:{t:"Политика обработки персональных данных",m:"Действующая редакция",b:"Текст переносится с aixtex.ru/privacy без изменений"},
+ pricing:{t:"Политика ценообразования",m:"Документ запрашивается у заказчика",b:"Текст документа — запросить у заказчика"},
+ spam:{t:"Политика в отношении спама",m:"Документ запрашивается у заказчика",b:"Текст документа — запросить у заказчика"},
+ license:{t:"Лицензия",m:"Документ запрашивается у заказчика",b:"Скан или текст лицензии — запросить у заказчика"},
+ patents:{t:"Патенты и свидетельства",m:"Документ запрашивается у заказчика",b:"Перечень и сканы — запросить у заказчика"}
+};
+
+const CASES={
+ current:{tab:"Действующая база",eyebrow:"Telecom B2B · действующая база",title:"Кросс- и апсейл действующим клиентам",desc:"Продажа корпоративной мобильной связи и облачных продуктов действующим B2B-клиентам.",kpi:[["150 тыс.+","коммуникаций"],["26 млн+ ₽","накопительная выручка ~12 мес."],["≈4 000","согласий / лидов"],["≈800","продаж"]],note:"Фактический накопленный результат на дистанции около 12 месяцев.",pill:"≈20% согласий → продажа",name:"От коммуникации до продажи",steps:[["Коммуникации","150 тыс.+","",100],["Ответы","18 тыс.+","12%",78],["Согласия / лиды","≈4 000","22%",56],["Продажи","≈800","20%",34]]},
+ potential:{tab:"Потенциальная база",eyebrow:"Telecom B2B · потенциальная база · микробизнес",title:"Лидогенерация по потенциальной базе",desc:"Корпоративная мобильная связь для потенциальных клиентов из микробизнеса.",kpi:[["94,5 тыс.","коммуникаций"],["≈10,9 тыс.","ответов"],["≈2,2 тыс.","согласий / лидов"],["≈215","продаж"]],note:"",pill:"≈10% согласий → продажа",name:"От холодной базы до продажи",steps:[["Коммуникации","94,5 тыс.","",100],["Ответы","≈10,9 тыс.","11,5%",78],["Согласия / лиды","≈2,2 тыс.","20%",56],["Продажи","≈215","10%",34]]},
+ retention:{tab:"Предиктивное сохранение",eyebrow:"Telecom B2B · предиктивное сохранение",title:"Сохранение клиентов по ML-модели риска",desc:"ML-модель выявляет клиентов с риском оттока, ИИ-агенты начинают персональный диалог, подтверждают реальный риск и отрабатывают сценарий сохранения.",kpi:[["23 тыс.","коммуникаций"],["3 450","ответов"],["1 380","подтвердили риск"],["897","сохранены"]],note:"",pill:"65% выявленных → сохранены",name:"От коммуникации до сохранения",steps:[["Коммуникации","23 тыс.","",100],["Ответы","3 450","15%",76],["Риск подтверждён","1 380","40%",54],["Сохранены","897","65%",38]]}
+};
+function renderCases(el,key){
+ const d=CASES[key];
+ el.innerHTML=`<div class="case-tabs">${Object.entries(CASES).map(([k,c])=>`<button class="${k===key?'on':''}" data-c="${k}">${c.tab}</button>`).join('')}</div>
+ <div class="case"><div class="card"><div class="small">${d.eyebrow}</div><div class="h3" style="margin-top:8px">${d.title}</div><div>${d.desc}</div>
+ <div class="kpis">${d.kpi.map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join('')}</div>${d.note?`<div class="small" style="margin-top:12px">${d.note}</div>`:''}</div>
+ <div class="card"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center"><div><div class="small">Воронка</div><div class="h3" style="margin:4px 0 0">${d.name}</div></div><span class="pill">${d.pill}</span></div>
+ <div style="margin-top:14px">${d.steps.map(([l,v,c,w])=>`<div class="frow"><div class="small" style="color:var(--ink)">${l}</div><div><div class="fbar" style="width:${w}%">${v}</div></div><div class="fconv">${c}</div></div>`).join('')}</div>
+ <div class="small" style="margin-top:8px">Процент — конверсия из предыдущего этапа.</div></div></div>`;
+ el.querySelector('.case-tabs').onclick=e=>{const b=e.target.closest('button');if(b)renderCases(el,b.dataset.c)};
+}
+
+const PIPE=[["1. Сигнал","запрос в чате, обращение или событие в клиентской базе"],["2. Фильтр","ИИ отсекает шум и оценивает релевантность"],["3. Контекст","понимает задачу и мотивы человека"],["4. Диалог","ведёт персональную переписку по вашему сценарию"],["5. Передача","клиент с подтверждённым интересом и контекст разговора — продавцу"]];
+
+/* ================= КОМПОНЕНТЫ ================= */
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+
+function faqItem(it,open){return `<details class="q"${open?' open':''}><summary>${it.q}</summary><p>${it.a}</p></details>`}
+const ALLQ=Object.fromEntries(FAQ.flatMap(g=>g.items).map(i=>[i.id,i]));
+$$('.faq').forEach(el=>{
+  let items=el.dataset.ids?el.dataset.ids.split(',').map(i=>ALLQ[i]):FAQ.find(g=>g.g===el.dataset.group).items;
+  el.innerHTML=items.map((it,i)=>faqItem(it,i===0)).join('');
+});
+$('#faqNav').innerHTML=FAQ.map(g=>`<button data-g="${g.g}">${g.name}</button>`).join('');
+$('#faqAll').innerHTML=FAQ.map(g=>`<div class="sub" id="faq-${g.g}" style="scroll-margin-top:110px"><div class="h3">${g.name}</div>${g.items.map((it,i)=>faqItem(it,i===0)).join('')}</div>`).join('');
+$('#faqNav').onclick=e=>{const b=e.target.closest('button');if(b)document.getElementById('faq-'+b.dataset.g).scrollIntoView({behavior:'smooth'})};
+
+const CONTACT=`<section class="sec tight gray"><span class="lbl">Блок контактов · повторяется внизу страниц</span><div class="split"><div><h2 class="h2">Как связаться с нами</h2><p class="lead">Позвоните или напишите — первым ответит виртуальный сотрудник.</p></div><div class="row c3">
+<a class="card" href="tel:+79154267807"><div class="ic sm">icon</div><div class="small" style="margin-top:12px">Телефон</div><b>+7 (915) 426-78-07</b></a>
+<a class="card" href="mailto:contact@aixtex.ru"><div class="ic sm">icon</div><div class="small" style="margin-top:12px">Почта</div><b>contact@aixtex.ru</b></a>
+<a class="card" href="#/contacts"><div style="display:flex;gap:6px"><div class="ic sm">icon</div><div class="ic sm">icon</div></div><div class="small" style="margin-top:12px">Мессенджеры</div><b>иконки-ссылки</b></a></div></div></section>`;
+$$('.contact-strip').forEach(el=>el.outerHTML=CONTACT);
+
+$$('.other').forEach(el=>{
+  const cards=Object.entries(PRODUCTS).filter(([k])=>k!==el.dataset.exclude).map(([k,p])=>`<a class="card" href="${p.route}"><div class="ic sm">icon</div><div class="h3">${p.name}</div><div>${p.d}</div><div class="small" style="margin-top:8px">${p.seg}</div><span class="link">Подробнее →</span></a>`).join('');
+  el.outerHTML=`<section class="sec"><span class="lbl">Другие решения · перекрёстные ссылки</span><h2 class="h2">Другие решения АИТЕХ</h2><div class="row c2" style="margin-top:24px">${cards}</div><a class="link" href="#/solutions" style="margin-top:20px">Сравнить все решения →</a></section>`;
+});
+
+$$('.cases').forEach(el=>renderCases(el,'current'));
+$('#pipeline').innerHTML=PIPE.map((p,i)=>`<div class="card${i===4?' accent':''}"><div class="ic sm">icon</div><div class="h3">${p[0]}</div><div class="small">${p[1]}</div></div>`).join('');
+
+$$('.report-slot').forEach(el=>el.innerHTML=`<div class="report">
+ <div class="top"><span><b style="color:var(--ink)">Отчёт за неделю</b></span><span>10–16 ноября</span></div>
+ <div class="row c3" style="gap:10px">
+  <div class="kpi"><div class="small">Коммуникации</div><div class="v">●●●</div><span class="up">↑ к прошлой неделе</span></div>
+  <div class="kpi"><div class="small">Ответы</div><div class="v">●●●</div><span class="up">↑ к прошлой неделе</span></div>
+  <div class="kpi"><div class="small">Согласия</div><div class="v">●●</div><span class="down">↓ к прошлой неделе</span></div>
+ </div>
+ <div class="ph" style="height:150px;margin-top:10px;background:#fff">
+  <svg viewBox="0 0 400 120" style="position:absolute;inset:16px;width:calc(100% - 32px);height:calc(100% - 32px)" preserveAspectRatio="none"><polyline points="0,90 50,80 100,84 150,60 200,64 250,45 300,52 350,30 400,36" fill="none" stroke="#ff5a1f" stroke-width="2.5"/><polyline points="0,100 50,96 100,98 150,88 200,90 250,82 300,86 350,76 400,80" fill="none" stroke="#c9c6c0" stroke-width="2" stroke-dasharray="5 4"/></svg>
+  <span class="kind" style="position:absolute;top:8px;left:8px;font-size:11px;padding:2px 8px">график динамики</span></div>
+ <div class="callout"><b>Где проблема:</b> клиенты отвечают, но реже доходят до встречи. Узкое место — этап согласования времени.</div>
+ <div class="callout ok"><b>Что сделать:</b> предлагать два готовых слота сразу в первом сообщении.</div>
+</div><div class="small" style="margin-top:8px">Макет отчёта схематичный, цифры скрыты.</div>`);
+
+/* сценарии: интерактив на главной */
+let cur="Скаут",idx=0;
+function renderUC(){
+ $('#ucTabs').innerHTML=Object.keys(UC).map(k=>`<button class="${k===cur?'on':''}" data-k="${k}">${k}</button>`).join('');
+ $('#ucList').innerHTML=UC[cur].map((u,i)=>`<button class="${i===idx?'on':''}" data-i="${i}"><span class="ic sm">ic</span>${u.t}</button>`).join('');
+ const u=UC[cur][idx];
+ $('#ucScene').innerHTML=`<div class="st">${u.t}</div>
+  <div class="sline"><div class="k">Сигнал</div><div>${u.msg?`<span class="bubble">${u.sig}</span>`:u.sig}</div></div>
+  <div class="sline"><div class="k">Действие</div><div>${u.act}</div></div>
+  <div class="sline"><div class="k">Результат</div><div class="res">${u.res}</div></div>
+  <div class="sline"><div class="k">В отчёте</div><div class="small">${u.rep}</div></div>
+  <div style="padding:4px 0 18px"><a class="btn" href="${PRODUCTS[P_BY_NAME[cur]].route}">Как работает «${cur}» →</a></div>`;
+}
+$('#ucTabs').onclick=e=>{const b=e.target.closest('button');if(b){cur=b.dataset.k;idx=0;renderUC()}};
+$('#ucList').onclick=e=>{const b=e.target.closest('button');if(b){idx=+b.dataset.i;renderUC()}};
+renderUC();
+
+/* сценарии: карточки */
+function ucCard(u,prod,showProd){
+ return `<div class="card uccard">${showProd?`<a class="chip p" href="${PRODUCTS[P_BY_NAME[prod]].route}" style="margin:0 0 10px">${prod}</a>`:''}<div class="h3" style="margin-top:${showProd?6:0}px">${u.t}</div>
+ <div class="sig">${u.msg?`<span class="bubble">${u.sig}</span>`:`<span class="small">${u.sig}</span>`}</div>
+ <div class="act">${u.act}</div><div class="res">${u.res}</div>${showProd?`<a class="link" href="${PRODUCTS[P_BY_NAME[prod]].route}">О продукте →</a>`:''}</div>`;
+}
+$$('.ucgrid').forEach(el=>{const p=el.dataset.product;el.innerHTML=UC[p].map(u=>ucCard(u,p,false)).join('')});
+let filt="Все";
+function renderAll(){
+ $('#ucFilter').innerHTML=["Все",...Object.keys(UC)].map(k=>`<button class="${k===filt?'on':''}" data-k="${k}">${k}</button>`).join('');
+ $('#ucAll').innerHTML=Object.entries(UC).filter(([p])=>filt==="Все"||p===filt).flatMap(([p,arr])=>arr.map(u=>ucCard(u,p,true))).join('');
+}
+$('#ucFilter').onclick=e=>{const b=e.target.closest('button');if(b){filt=b.dataset.k;renderAll()}};
+renderAll();
+
+$('#docList').innerHTML=Object.entries(DOCS).map(([k,d])=>`<a class="card" href="#/documents/${k}"><div class="ic sm">doc</div><div class="h3">${d.t}</div><div class="small">${d.m}</div><span class="link">Открыть →</span></a>`).join('');
+
+/* точки */
+function rnd(seed){return()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646}}
+$$('svg.dots').forEach((svg,n)=>{
+  const r=rnd(7+n*31);svg.setAttribute('viewBox','0 0 600 300');svg.setAttribute('preserveAspectRatio','xMidYMid meet');
+  let out='';const T=[];for(let i=0;i<5;i++)for(let j=0;j<4;j++)T.push([430+i*28,95+j*28]);
+  T.forEach(t=>out+=`<circle cx="${t[0]}" cy="${t[1]}" r="6" fill="#ff5a1f"/>`);
+  out+=`<rect x="414" y="79" width="144" height="116" rx="10" fill="none" stroke="#ff5a1f" stroke-width="1.5"/>`;
+  for(let i=0;i<70;i++){const x=20+r()*300,y=15+r()*270,hot=i%5===0;
+    if(hot){const t=T[i%T.length];out+=`<path d="M${x},${y} C${x+90},${y} ${t[0]-110},${t[1]} ${t[0]-8},${t[1]}" fill="none" stroke="#ff5a1f" stroke-opacity=".35"/>`}
+    out+=`<circle cx="${x}" cy="${y}" r="${hot?4.5:3}" fill="${hot?'#ff5a1f':'#bdb9b2'}"/>`}
+  out+=`<line x1="360" y1="20" x2="360" y2="280" stroke="#d9a58c" stroke-dasharray="4 5"/>`;svg.innerHTML=out;
+});
+
+/* ================= МЕНЮ ================= */
+const mega=$('#mega'),solBtn=$('#solBtn');
+let openedAt=0;
+function setMega(open){if(open&&!mega.classList.contains('open'))openedAt=Date.now();mega.classList.toggle('open',open);solBtn.setAttribute('aria-expanded',open)}
+solBtn.onclick=e=>{e.stopPropagation();const isOpen=mega.classList.contains('open');setMega(!(isOpen&&Date.now()-openedAt>400))};
+let hoverT;
+solBtn.onmouseenter=()=>{clearTimeout(hoverT);setMega(true)};
+$('#hdr').onmouseleave=()=>{hoverT=setTimeout(()=>setMega(false),200)};
+mega.onmouseenter=()=>clearTimeout(hoverT);
+document.addEventListener('click',e=>{if(!e.target.closest('#hdr'))setMega(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){setMega(false);$('#mnav').classList.remove('open')}});
+$('#burger').onclick=()=>$('#mnav').classList.add('open');
+$('#mclose').onclick=()=>$('#mnav').classList.remove('open');
+$('#cleanBtn').onclick=()=>{document.body.classList.toggle('clean');$('#cleanBtn').textContent=document.body.classList.contains('clean')?'Показать пометки':'Скрыть пометки'};
+
+/* ================= РОУТЕР ================= */
+function route(){
+  let [path,anchor]=((location.hash||'#/').slice(1)||'/').split('~');path=path||'/';
+  let view=$(`.view[data-route="${path}"]`);
+  if(!view && path.startsWith('/documents/')){
+    const id=path.split('/')[2],d=DOCS[id];
+    if(d){view=$('.view[data-route="/documents/:id"]');$('#docTitle').textContent=d.t;$('#docCrumb').textContent=d.t;$('#docMeta').textContent=d.m;$('#docBody').textContent=d.b;document.title=d.t+' — АИТЕХ'}
+  }
+  if(!view)view=$('.view[data-route="/404"]');
+  $$('.view').forEach(v=>v.classList.toggle('on',v===view));
+  if(view.dataset.title)document.title=view.dataset.title;
+  const sec=view.dataset.sec||'';
+  $$('#nav [data-sec]').forEach(a=>a.classList.toggle('on',a.dataset.sec===sec));
+  setMega(false);$('#mnav').classList.remove('open');
+  const t=anchor&&view.querySelector('#'+anchor);
+  if(t){setTimeout(()=>window.scrollTo(0,t.getBoundingClientRect().top+scrollY-80),0)}else window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',route);
+route();
+</script>
+</body>
+</html>
