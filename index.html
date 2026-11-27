@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>АИТЕХ — прототип сайта</title>
+<title>АИТЕХ — сайт: главная в дизайне, остальные страницы в формате прототипа</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@200..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <style>
 :root{
   --bg:#e7e6e3; --site:#fff; --ink:#141414; --muted:#77746e; --line:#e3e1dc;
@@ -745,6 +748,102 @@ body.clean .note,body.clean .warn,body.clean .lbl,body.clean .seo,body.clean .rb
   .dev{left:16px;right:16px;justify-content:center}
 }
 </style>
+<style>
+/* ===================================================================
+   ГЛАВНАЯ — ДИЗАЙН (визуальная концепция v1).
+   Остальные страницы ниже по-прежнему в формате прототипа.
+   Шрифты: Geologica + IBM Plex Mono. Цвета: графит #0F131A, фарфор #F3F4F6,
+   белый, сигнал #FF5B1F (только сигнал и результат).
+   =================================================================== */
+body.is-home{background:#0F131A}
+body.is-home .site{max-width:none;box-shadow:none;background:#FFFFFF}
+body.is-home .ftr{display:none}
+.ax-home{font-family:'Geologica','Segoe UI',Arial,sans-serif;font-weight:300;color:#0F131A;line-height:normal;-webkit-font-smoothing:antialiased;overflow-x:clip}
+.ax-home a:focus-visible,.ax-home button:focus-visible,.ax-home summary:focus-visible{outline:2px solid #FF5B1F;outline-offset:3px;border-radius:10px}
+.ax-home button{cursor:pointer;font-family:inherit}
+.ax-mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace}
+.ax-ln{border-bottom:1px solid currentColor;padding-bottom:3px}
+
+/* шапка и меню на главной */
+body.is-home .hdr{background:rgba(15,19,26,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid #1C222C;color:#F4F5F7;font-family:'Geologica','Segoe UI',Arial,sans-serif}
+body.is-home .hdr-in{max-width:1280px;margin:0 auto;padding:16px clamp(20px,5.5vw,80px)}
+body.is-home .logo{font-size:24px;letter-spacing:.06em;font-weight:300}
+body.is-home .logo b{font-weight:600}
+body.is-home .logo span{color:#8D96A6;letter-spacing:.01em}
+body.is-home .nav>a,body.is-home .nav>button{color:#AEB5C1;font-weight:400;font-size:15px;background:none}
+body.is-home .nav>a:hover,body.is-home .nav>button:hover{background:#1C222C;color:#FFFFFF}
+body.is-home #solBtn{background:#1C222C;color:#F4F5F7}
+body.is-home #solBtn[aria-expanded="true"]{background:#F4F5F7;color:#0F131A}
+body.is-home .hcontacts{font-size:14px;font-weight:400}
+body.is-home .hcontacts .muted{color:#8D96A6}
+body.is-home .burger{background:#F4F5F7;color:#0F131A;font-weight:500}
+body.is-home .mega{background:#0F131A;border-bottom:1px solid #262D39;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+body.is-home .mega-in{max-width:1120px;margin:0 auto}
+body.is-home .mega-card{border-color:#262D39;color:#F4F5F7;border-radius:20px}
+body.is-home .mega-card:hover{border-color:#FF5B1F;background:#151A23}
+body.is-home .mega-card .t{font-weight:400;font-size:20px;letter-spacing:-.01em}
+body.is-home .mega-card .d{color:#AEB5C1}
+body.is-home .mega-card .badge{background:transparent;border-color:#3A4250;color:#E6E9EE;font-weight:400}
+body.is-home .mega-foot a{border-color:#F4F5F7;color:#F4F5F7;font-weight:400}
+body.is-home .mnav{background:#0F131A;color:#F4F5F7;font-family:'Geologica','Segoe UI',Arial,sans-serif}
+body.is-home .mnav a,body.is-home .mnav summary{border-color:#262D39;font-weight:300}
+.mega-ic{width:36px;height:36px;display:block}
+
+/* 01 первый экран */
+.ax-tile{transition:border-color .2s ease}.ax-tile:hover{border-top-color:#F4F5F7}
+.ax-path{stroke-dasharray:1;stroke-dashoffset:1;animation:axDraw 1.6s cubic-bezier(.6,0,.2,1) forwards}
+.ax-sig{opacity:0;animation:axIn .5s ease-out forwards}
+.ax-late{opacity:0;animation:axIn .7s ease-out forwards;animation-delay:2.4s}
+.ax-ring{transform-box:fill-box;transform-origin:center;animation:axRing 3.2s ease-out 2.6s infinite}
+@keyframes axDraw{to{stroke-dashoffset:0}}
+@keyframes axIn{to{opacity:1}}
+@keyframes axRing{0%{opacity:.5;transform:scale(.6)}100%{opacity:0;transform:scale(1.9)}}
+
+/* 02 главная мысль 5% / 95% */
+.ax-dot{display:block;aspect-ratio:1;border-radius:50%;background:transparent;border:1.5px solid #AEB5C1;transition:background-color .55s ease,border-color .55s ease,box-shadow .55s ease}
+.ax-dot.warm{background:#FFD2BD;border-color:#FF9E73}
+.ax-dot.ready{background:#FF5B1F;border-color:#FF5B1F;box-shadow:0 0 0 4px rgba(255,91,31,.14)}
+.ax-big{display:flex;align-items:flex-end;min-height:clamp(80px,10vw,152px);font-size:clamp(88px,11vw,168px);line-height:.9;font-weight:200;letter-spacing:-.055em;white-space:nowrap}
+.ax-big.sm{font-size:clamp(56px,6.4vw,100px)}
+.ax-step{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;min-height:72px;padding:14px 16px;border-radius:14px;font-size:15px;font-weight:400;background:transparent;color:#0F131A;border:1px solid #C9CED6}
+.ax-step:hover{border-color:#0F131A}
+.ax-step.on{background:#0F131A;color:#F4F5F7;border-color:#0F131A}
+.ax-stn{font-size:12px;opacity:.7}
+.ax-prog{position:absolute;left:0;bottom:0;height:2px;width:100%;background:#FF5B1F;transform-origin:left;animation:axProg 4.8s linear forwards}
+@keyframes axProg{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* 06 сценарии */
+.ax-tab{height:48px;padding:0 22px;border-radius:999px;font-size:15px;font-weight:400;background:transparent;color:#0F131A;border:1px solid #C9CED6}
+.ax-tab.on{background:#0F131A;color:#F4F5F7;border-color:#0F131A}
+.ax-uc{width:100%;min-height:56px;text-align:left;padding:14px 18px;border-radius:16px;font-size:16px;font-weight:400;color:#0F131A;border:0;background:transparent}
+.ax-uc:hover{background:#E9EBEE}
+.ax-uc.on{background:#FFFFFF;font-weight:500}
+.ax-bubble{display:inline-block;background:#F3F4F6;border-radius:16px 16px 16px 4px;padding:10px 16px;font-size:17px;line-height:1.45;font-weight:400}
+.ax-sigtext{display:block;font-size:17px;line-height:1.5;font-weight:400;padding-top:8px}
+.ax-metric{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:12.5px;color:#2F3643;background:#F3F4F6;border-radius:8px;padding:7px 10px}
+
+/* 09 отчёт */
+.ax-zone{position:relative;border-radius:14px;transition:box-shadow .2s ease,background-color .2s ease}
+.ax-zone.hl{box-shadow:0 0 0 2px #FF5B1F;background:#FFF5F0}
+.ax-mk{position:absolute;top:-7px;left:-7px;z-index:2;width:20px;height:20px;border-radius:50%;background:#0F131A;color:#FFFFFF;font:500 10px/1 'IBM Plex Mono',ui-monospace,monospace;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px #FFFFFF}
+.ax-call{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;padding:14px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid #262D39;transition:background-color .2s ease,border-color .2s ease}
+.ax-call:hover,.ax-call.on{background:rgba(255,91,31,.12);border-color:#FF5B1F}
+.ax-cn{flex:0 0 28px;height:28px;border-radius:50%;background:#FF5B1F;color:#0F131A;font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center}
+.ax-ct{display:flex;flex-direction:column;gap:4px}
+.ax-ctt{font-size:16px;font-weight:500;color:#F4F5F7}
+.ax-ctd{font-size:13.5px;line-height:1.45;color:#AEB5C1}
+
+/* 11 вопросы и подвал */
+.ax-q summary{list-style:none;cursor:pointer}.ax-q summary::-webkit-details-marker{display:none}
+.ax-plus{transition:transform .2s ease}.ax-q[open] .ax-plus{transform:rotate(45deg)}
+.ax-foot a{color:#AEB5C1}.ax-foot a:hover{color:#FFFFFF}
+
+@media (prefers-reduced-motion:reduce){
+  .ax-path{animation:none;stroke-dashoffset:0}.ax-sig,.ax-late{animation:none;opacity:1}.ax-ring{animation:none;opacity:.2}
+  .ax-dot,.ax-zone,.ax-call{transition:none}.ax-prog{display:none}
+}
+@media (max-width:760px){body.is-home .hdr-in{padding:14px 20px}.ax-aside{display:none!important}}
+</style>
 </head>
 <body>
 <div class="site">
@@ -763,14 +862,14 @@ body.clean .note,body.clean .warn,body.clean .lbl,body.clean .seo,body.clean .rb
     <div class="hcontacts"><a href="tel:+79154267807">+7 (915) 426-78-07</a><br><a class="muted" href="mailto:contact@aixtex.ru">contact@aixtex.ru</a></div>
     <button class="burger" id="burger" aria-label="Меню"><span style="font-size:18px;line-height:1">☰</span>Меню</button>
   </div>
-  <div class="mega" id="mega">
+  <div class="mega" id="mega"><div class="mega-in">
     <div class="mega-grid">
-      <a class="mega-card" href="#/solutions/scout"><div class="ic sm">icon</div><div class="t">Скаут</div></a>
-      <a class="mega-card" href="#/solutions/virtual-sales"><div class="ic sm">icon</div><div class="t">Виртуальный отдел продаж</div><span class="badge" style="margin:4px 0 0">В реестре российского ПО</span></a>
-      <a class="mega-card" href="#/solutions/zhdun"><div class="ic sm">icon</div><div class="t">Ждун</div></a>
+      <a class="mega-card" href="#/solutions/scout"><svg class="mega-ic" aria-hidden="true" viewBox="0 0 32 32" style="fill:none;stroke:#FF5B1F;stroke-width:1.3"><circle cx="16" cy="16" r="4"></circle><circle cx="16" cy="16" r="9" stroke-opacity=".55"></circle><circle cx="16" cy="16" r="14" stroke-opacity=".25"></circle></svg><div class="t">Скаут</div></a>
+      <a class="mega-card" href="#/solutions/virtual-sales"><svg class="mega-ic" aria-hidden="true" viewBox="0 0 32 32" style="fill:#8D96A6"><circle cx="5" cy="6" r="1.6"></circle><circle cx="5" cy="16" r="1.6"></circle><circle cx="5" cy="26" r="1.6"></circle><circle cx="12" cy="6" r="1.6"></circle><circle cx="12" cy="16" r="1.6"></circle><circle cx="12" cy="26" r="1.6"></circle><circle cx="27" cy="16" r="3.2" fill="#FF5B1F"></circle><path d="M12 6 L27 16 M12 16 L27 16 M12 26 L27 16" style="fill:none;stroke:#FF5B1F;stroke-width:1.1;stroke-opacity:.7"></path></svg><div class="t">Виртуальный отдел продаж</div><span class="badge" style="margin:4px 0 0">В реестре российского ПО</span></a>
+      <a class="mega-card" href="#/solutions/zhdun"><svg class="mega-ic" aria-hidden="true" viewBox="0 0 32 32" style="fill:none;stroke:#8D96A6;stroke-width:1.3"><circle cx="16" cy="16" r="13"></circle><path d="M16 8 L16 16 L22 19" style="stroke:#FF5B1F"></path></svg><div class="t">Ждун</div></a>
     </div>
     <div class="mega-foot"><a href="#/solutions">Все решения и сравнение →</a><a href="#/use-cases">Сценарии использования →</a></div>
-  </div>
+  </div></div>
 </header>
 
 <!-- мобильное меню -->
@@ -793,333 +892,729 @@ body.clean .note,body.clean .warn,body.clean .lbl,body.clean .seo,body.clean .rb
 <main id="views">
 
 <!-- ============================== ГЛАВНАЯ ============================== -->
-<div class="view" data-route="/" data-title="АИТЕХ — виртуальные сотрудники для бизнеса">
+<div class="view ax-home" data-route="/" data-title="АИТЕХ — виртуальные сотрудники для бизнеса">
+<!-- Главная в дизайне: блоки [01]–[11] по структуре прототипа. Шапка общая для сайта, на главной в тёмном оформлении. -->
+<div style="background:#0F131A;color:#F4F5F7;font-family:'Geologica','Segoe UI',Arial,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow:hidden">
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5.5vw,80px);box-sizing:border-box">
 
-  <!-- [01] ПЕРВЫЙ ЭКРАН -->
-  <section class="sec d-hero">
-    <span class="lbl">[01] Первый экран · что мы делаем</span>
-    <div class="hero">
-      <div>
-        <span class="kicker">ИИ-решения для продаж и работы с клиентами</span>
-        <h1 class="d-h1">Виртуальные сотрудники, которые доводят клиента <span>до сделки</span></h1>
-        <p class="lead">ИИ-агенты находят клиентов в момент запроса, отвечают на каждое обращение и работают с вашей базой. Продавец подключается, когда интерес клиента уже подтверждён, а руководитель получает отчёт с выводами и рекомендациями.</p>
-        <div class="btns"><a class="btn dark" href="#/solutions">Смотреть решения →</a><a class="btn" href="#/~cases">Реальные кейсы</a></div>
+    <section style="display:flex;flex-wrap:wrap;gap:clamp(40px,5vw,72px);align-items:center;padding-top:clamp(56px,7vw,96px)">
+      <div style="flex:1 1 560px;min-width:0;display:flex;flex-direction:column;gap:32px">
+        <h1 style="margin:0;font-size:clamp(40px,4.5vw,64px);line-height:1.02;font-weight:300;letter-spacing:-.035em;text-wrap:balance">Виртуальные сотрудники, которые доводят клиента до сделки</h1>
+        <p style="margin:0;max-width:30em;font-size:clamp(17px,1.4vw,20px);line-height:1.5;color:#B9C0CB">ИИ-агенты находят клиента в момент запроса, ведут диалог и передают продавцу, когда интерес уже подтверждён.</p>
+        <div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap;padding-top:8px">
+          <a href="#/solutions" style="display:inline-flex;align-items:center;height:54px;padding:0 30px;border-radius:999px;background:#F4F5F7;color:#0F131A;font-size:16px;font-weight:500">Смотреть решения</a>
+          <a href="#/solutions/virtual-sales~cases" style="font-size:16px;font-weight:400;border-bottom:1px solid #4A5364;padding-bottom:3px">Реальные кейсы</a>
+        </div>
       </div>
-      <div class="d-viz">
-        <svg class="dots"></svg>
-        <div class="d-viz-cap">▶ Анимация: хаотичные сигналы собираются в структуру</div>
+
+      <div style="flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:20px">
+      <div style="position:relative;width:100%;aspect-ratio:600/560;background-image:radial-gradient(circle,#2C3442 1.15px,transparent 1.6px);background-size:14px 14px;background-position:7px 7px">
+        <div aria-hidden="true" style="position:absolute;left:0;top:0;width:18px;height:18px;border-left:1px solid #4A5364;border-top:1px solid #4A5364"></div>
+        <div aria-hidden="true" style="position:absolute;right:0;top:0;width:18px;height:18px;border-right:1px solid #4A5364;border-top:1px solid #4A5364"></div>
+        <div aria-hidden="true" style="position:absolute;left:0;bottom:0;width:18px;height:18px;border-left:1px solid #4A5364;border-bottom:1px solid #4A5364"></div>
+        <div aria-hidden="true" style="position:absolute;right:0;bottom:0;width:18px;height:18px;border-right:1px solid #4A5364;border-bottom:1px solid #4A5364"></div>
+        <svg aria-hidden="true" viewBox="0 0 600 560" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+          <defs><radialGradient id="axGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FF5B1F" stop-opacity=".22"></stop><stop offset="1" stop-color="#FF5B1F" stop-opacity="0"></stop></radialGradient></defs>
+          <circle cx="496" cy="280" r="130" fill="url(#axGlow)"></circle>
+          <g fill="#5A6373"><circle cx="62" cy="244" r="2"></circle><circle cx="244" cy="174" r="2"></circle><circle cx="398" cy="468" r="2"></circle><circle cx="300" cy="510" r="2"></circle><circle cx="118" cy="454" r="2"></circle><circle cx="356" cy="356" r="2"></circle><circle cx="482" cy="104" r="2"></circle><circle cx="188" cy="62" r="2"></circle><circle cx="34" cy="384" r="2"></circle><circle cx="538" cy="440" r="2"></circle></g>
+          <g fill="none" stroke="#FF5B1F" stroke-width="1.3" stroke-linecap="round" stroke-opacity=".7">
+            <path class="ax-path" pathLength="1" d="M90 150 C 250 150 370 280 482 280" style="animation-delay:.5s"></path>
+            <path class="ax-path" pathLength="1" d="M420 62 C 480 62 450 280 482 280" style="animation-delay:.8s"></path>
+            <path class="ax-path" pathLength="1" d="M160 318 C 290 318 380 280 482 280" style="animation-delay:1.1s"></path>
+            <path class="ax-path" pathLength="1" d="M214 420 C 330 420 390 280 482 280" style="animation-delay:1.4s"></path>
+          </g>
+          <g fill="#FF5B1F">
+            <circle class="ax-sig" cx="90" cy="150" r="4.5" style="animation-delay:.2s"></circle>
+            <circle class="ax-sig" cx="420" cy="62" r="4.5" style="animation-delay:.5s"></circle>
+            <circle class="ax-sig" cx="160" cy="318" r="4.5" style="animation-delay:.8s"></circle>
+            <circle class="ax-sig" cx="214" cy="420" r="4.5" style="animation-delay:1.1s"></circle>
+          </g>
+          <circle class="ax-ring" cx="496" cy="280" r="30" fill="none" stroke="#FF5B1F" stroke-width="1"></circle>
+          <circle cx="496" cy="280" r="17" fill="#0F131A" stroke="#FF5B1F" stroke-width="1.3"></circle>
+          <circle class="ax-late" cx="496" cy="280" r="7" fill="#FF5B1F"></circle>
+        </svg>
+
+        <div style="position:absolute;left:9%;top:8%;display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+          <span style="background:#1A202B;border:1px solid #2C3442;border-radius:14px 14px 14px 4px;padding:9px 14px;font-size:14px;font-weight:400;color:#E6E9EE">«Кого посоветуете?»</span>
+          <span style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#FF7A45">сигнал найден, ответ через 4 сек</span>
+        </div>
+        <div class="ax-late" style="position:absolute;right:0;top:58%;display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;text-align:right">
+          <span style="color:#F4F5F7">интерес подтверждён</span>
+          <span style="color:#8D96A6">передано продавцу</span>
+        </div>
       </div>
-    </div>
-    <div class="d-prod">
-      <a class="d-pc" href="#/solutions/scout">
-        <div class="d-pc-top"><span class="d-num">01</span><span class="ic sm">icon</span></div>
-        <div class="h3">Привлечение клиентов</div>
-        <div class="d-pc-t">Находим тех, кто прямо сейчас ищет ваш продукт или услугу.</div>
-        <span class="d-pc-go">Скаут <b>→</b></span>
+        <p style="margin:0;max-width:44em;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;line-height:1.5;color:#8D96A6">Точка — сообщение в чате, обращение или клиент в базе. Оранжевые — сигналы потребности.</p>
+      </div>
+    </section>
+
+    <nav aria-label="Продукты" style="margin-top:clamp(96px,9vw,128px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:8px clamp(32px,4vw,56px)">
+      <a class="ax-tile" href="#/solutions/scout" style="border-top:1px solid #2C3442;padding:32px 0 40px;display:flex;flex-direction:column;gap:14px;box-sizing:border-box">
+        <svg aria-hidden="true" width="32" height="32" viewBox="0 0 32 32" style="fill:none;stroke:#FF5B1F;stroke-width:1.3"><circle cx="16" cy="16" r="4"></circle><circle cx="16" cy="16" r="9" stroke-opacity=".55"></circle><circle cx="16" cy="16" r="14" stroke-opacity=".25"></circle></svg>
+        <span style="font-size:14px;color:#8D96A6;font-weight:400">Привлечение клиентов</span>
+        <span style="font-size:34px;letter-spacing:-.02em;line-height:1">Скаут</span>
+        <span style="font-size:16px;line-height:1.5;color:#B9C0CB;max-width:22em">Находит тех, кто прямо сейчас ищет ваш продукт или услугу, — и отвечает первым.</span>
       </a>
-      <a class="d-pc dk" href="#/solutions/virtual-sales">
-        <div class="d-pc-top"><span class="d-num">02</span><span class="ic sm">icon</span></div>
-        <div class="h3">Активные продажи и удержание по базе</div>
-        <div class="d-pc-t">Личные диалоги с потенциальной и действующей базой: активация клиентов, продажи, повторные продажи, сохранение клиентов.</div>
-        <span class="d-pc-go">Виртуальный отдел продаж <b>→</b></span>
+      <a class="ax-tile" href="#/solutions/virtual-sales" style="border-top:1px solid #2C3442;padding:32px 0 40px;display:flex;flex-direction:column;gap:14px;box-sizing:border-box">
+        <svg aria-hidden="true" width="32" height="32" viewBox="0 0 32 32" style="fill:#8D96A6;stroke:none"><circle cx="5" cy="6" r="1.6"></circle><circle cx="5" cy="16" r="1.6"></circle><circle cx="5" cy="26" r="1.6"></circle><circle cx="12" cy="6" r="1.6"></circle><circle cx="12" cy="16" r="1.6"></circle><circle cx="12" cy="26" r="1.6"></circle><circle cx="27" cy="16" r="3.2" fill="#FF5B1F"></circle><path d="M12 6 L27 16 M12 16 L27 16 M12 26 L27 16" style="fill:none;stroke:#FF5B1F;stroke-width:1.1;stroke-opacity:.7"></path></svg>
+        <span style="font-size:14px;color:#8D96A6;font-weight:400">Продажи и удержание по базе</span>
+        <span style="font-size:34px;letter-spacing:-.02em;line-height:1">Виртуальный отдел продаж</span>
+        <span style="font-size:16px;line-height:1.5;color:#B9C0CB;max-width:24em">Личные диалоги со всей базой: активация, продажи, повторные продажи, удержание.</span>
+        <span style="align-self:flex-start;margin-top:4px;font-size:13px;font-weight:400;color:#E6E9EE;border:1px solid #3A4250;border-radius:999px;padding:6px 12px">В реестре российского ПО</span>
       </a>
-      <a class="d-pc" href="#/solutions/zhdun">
-        <div class="d-pc-top"><span class="d-num">03</span><span class="ic sm">icon</span></div>
-        <div class="h3">Обработка входящих обращений</div>
-        <div class="d-pc-t">Отвечаем вашим клиентам на каждый запрос за секунды, 24/7: онбординг, консультации по продуктам и услугам, сервисные и технические вопросы.</div>
-        <span class="d-pc-go">Ждун <b>→</b></span>
+      <a class="ax-tile" href="#/solutions/zhdun" style="border-top:1px solid #2C3442;padding:32px 0 40px;display:flex;flex-direction:column;gap:14px;box-sizing:border-box">
+        <svg aria-hidden="true" width="32" height="32" viewBox="0 0 32 32" style="fill:none;stroke:#8D96A6;stroke-width:1.3"><circle cx="16" cy="16" r="13"></circle><path d="M16 8 L16 16 L22 19" style="stroke:#FF5B1F"></path></svg>
+        <span style="font-size:14px;color:#8D96A6;font-weight:400">Входящие обращения</span>
+        <span style="font-size:34px;letter-spacing:-.02em;line-height:1">Ждун</span>
+        <span style="font-size:16px;line-height:1.5;color:#B9C0CB;max-width:22em">Отвечает на каждый запрос за секунды, круглосуточно: консультации, онбординг, сервис.</span>
       </a>
-    </div>
-  </section>
+    </nav>
+    <div style="height:24px"></div>
+  </div>
+</div>
+<div style="font-family:'Geologica','Segoe UI',Arial,sans-serif;font-weight:300;color:#0F131A;-webkit-font-smoothing:antialiased">
 
-  <!-- [02] ГЛАВНАЯ МЫСЛЬ + 5/95 -->
-  <section class="sec d-idea2">
-    <span class="lbl">[02] Главная мысль · 5% и 95%</span>
-    <div class="d-center">
-      <span class="kicker">Наш подход</span>
-      <p class="d-quote">Самый ценный момент в продажах — когда потребность <span>только появилась</span></p>
-      <p class="lead">Мы работаем с обеими частями аудитории: отвечаем первыми тем, кто готов купить сейчас, и постоянно прогреваем тех, кто купит позже, — пока они не станут готовы к покупке.</p>
-    </div>
-    <div class="p95" id="p95" data-step="0">
-      <div class="p95-viz">
-        <svg id="p95svg" viewBox="0 0 500 520"></svg>
-        <div class="p95-cap">Каждая фигура — 1% вашей аудитории</div>
-      </div>
-      <div class="p95-txt">
-        <div class="p95-count"><span id="p95n">01</span> / 03</div>
-        <div class="p95-big" id="p95big">≈5%</div>
-        <div class="p95-t" id="p95t"></div>
-        <p class="p95-d" id="p95d"></p>
-        <div class="p95-leg"><span><i class="c"></i>ещё не готовы</span><span><i class="w"></i>прогреваются</span><span><i class="r"></i>готовы купить</span></div>
-      </div>
-    </div>
-    <div class="p95-steps" id="p95steps">
-      <button data-s="0"><b>01</b>Готовы купить сейчас<em></em></button>
-      <button data-s="1"><b>02</b>Прогреваем остальных<em></em></button>
-      <button data-s="2"><b>03</b>Становятся готовыми<em></em></button>
-    </div>
-  </section>
+  <section style="background:#F3F4F6;padding:clamp(96px,10vw,152px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5.5vw,80px);box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(48px,6vw,80px)">
+      <h2 style="margin:0;max-width:17em;font-size:clamp(34px,3.8vw,54px);line-height:1.06;font-weight:300;letter-spacing:-.03em;text-wrap:balance">Самый ценный момент в продажах — когда потребность только появилась</h2>
 
-  <!-- [03] ПРОБЛЕМАТИКА -->
-  <section class="sec d-warmbg">
-    <span class="lbl">[03] Проблематика</span>
-    <span class="kicker">Проблематика</span>
-    <h2 class="d-h2" style="max-width:820px">Продавать по-старому становится дороже и сложнее</h2>
-    <div class="d-stats2">
-      <div><span class="tag">Реклама</span><b>+35–45%</b><p>в год растёт стоимость клика в конкурентных нишах</p></div>
-      <div><span class="tag">Рассылки</span><b>&lt;1%</b><p>реакции на массовые коммерческие рассылки</p></div>
-      <div><span class="tag">Звонки</span><b>40%+</b><p>нежелательных вызовов в мобильном трафике</p></div>
-      <div><span class="tag">Защита от спама</span><b>71%</b><p>горожан защищаются от спама и неизвестных номеров</p></div>
-    </div>
-    <div class="d-concl"><span class="ic sm">icon</span>Компании платят за привычные каналы всё больше — и получают всё меньше.</div>
-  </section>
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(40px,7vw,112px);align-items:center">
+        <div style="flex:0 1 420px;min-width:0;display:flex;flex-direction:column;gap:16px">
+          <div role="img" id="axDots" aria-label="Сто кругов — сто процентов аудитории. Пять готовы купить, девяносто пять ещё не готовы." style="display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:clamp(8px,1.2vw,16px);width:100%">
+          </div>
+          <span style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#5B6372">Каждый круг — 1% вашей аудитории</span>
+        </div>
 
-  <!-- [04] КАК МЫ МЕНЯЕМ ЛОГИКУ ПРОДАЖ -->
-  <section class="sec">
-    <span class="lbl">[04] Как мы меняем логику продаж</span>
-    <span class="kicker">Решение</span>
-    <div class="d-split">
-      <h2 class="d-h2">Как мы меняем логику продаж</h2>
-      <p class="lead">АИТЕХ — это готовые продукты, которые выявляют потребность клиента здесь и сейчас: в вашем продукте или услуге — или в продукте конкурента. Мы приводим к вам готового клиента или забираем его у конкурента.</p>
-    </div>
-    <div class="d-cmp">
-      <div class="d-cmp-row old">
-        <div class="d-cmp-l">Как продают сейчас</div>
-        <div class="d-cmp-n">Есть продукт</div><i>→</i><div class="d-cmp-n">Бюджет — в рекламу и звонки</div><i>→</i><div class="d-cmp-n">Поиск, кому продать</div>
-      </div>
-      <div class="d-cmp-row new">
-        <div class="d-cmp-l">Как продаёт АИТЕХ</div>
-        <div class="d-cmp-n"><span class="d-n">1</span><span class="bubble">«Кого посоветуете?»</span><small>потребность в вашем продукте или у конкурента</small></div><i>→</i>
-        <div class="d-cmp-n"><span class="d-n">2</span>Виртуальный сотрудник видит сигнал и сразу начинает диалог</div><i>→</i>
-        <div class="d-cmp-n"><span class="d-n">3</span><b>Готовый клиент приходит к вам</b> — в том числе от конкурента</div>
-      </div>
-    </div>
-    <div class="d-banner">
-      <p>Вам не нужно искать клиентов и активно продавать — это делают наши продукты.</p>
-      <a class="btn" href="#/solutions">Как это решают продукты АИТЕХ →</a>
-    </div>
-  </section>
-
-  <!-- [05] ДЛЯ КОГО -->
-  <section class="sec d-warmbg">
-    <span class="lbl">[05] Для кого · главный переход</span>
-    <span class="kicker">Для кого</span>
-    <h2 class="d-h2">Решения под масштаб вашего бизнеса</h2>
-    <div class="d-seg">
-      <a class="d-sc dk" href="#/solutions/virtual-sales">
-        <div class="d-sc-ill"><span>Схема: компания и тысячи клиентов в базе — с каждым свой диалог</span></div>
-        <div class="small">Крупный бизнес и корпорации</div>
-        <div class="d-sc-t">Виртуальный отдел продаж</div>
-        <p>ИИ-агенты самостоятельно инициируют личные диалоги с потенциальной и действующей базой в мессенджерах, выявляют потребность и передают клиента продавцу. Активация, продажи, повторные продажи и сохранение клиентов — в масштабе всей базы.</p>
-        <div><span class="chip">Телеком</span><span class="chip">Маркетплейсы</span><span class="chip">Финансы и банкинг</span><span class="chip">Страхование</span><span class="chip">Девелоперы</span></div>
-        <span class="btn">Виртуальный отдел продаж →</span>
-      </a>
-      <div class="d-sc">
-        <div class="d-sc-ill"><span>Схема: чаты → Скаут → Ждун → заявка</span></div>
-        <div class="small">Малый и средний бизнес</div>
-        <div class="d-sc-t">Скаут и Ждун</div>
-        <p>Скаут находит клиентов, которые прямо сейчас ищут ваши товары или услуги, и постоянно подогревает тех, кто купит позже. Ждун мгновенно отвечает на каждое обращение и доводит его до сделки.</p>
-        <div><span class="chip">Медицина</span><span class="chip">Салоны</span><span class="chip">Ремонт и строительство</span><span class="chip">Селлеры маркетплейсов</span><span class="chip">Частные специалисты</span><span class="chip">Бренды и блогеры</span><span class="chip">B2B-услуги</span></div>
-        <div class="btns"><a class="btn dark" href="#/solutions/scout">Скаут →</a><a class="btn dark" href="#/solutions/zhdun">Ждун →</a></div>
+        <div style="flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:20px">
+          <span style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:13px;color:#5B6372" id="axCounter">01 / 03</span>
+          <span id="axBig" class="ax-big">≈5%</span>
+          <span style="font-size:clamp(24px,2.2vw,30px);line-height:1.2;font-weight:400;letter-spacing:-.015em;max-width:18em" id="axTitle">Готовы купить сейчас</span>
+          <p style="margin:0;max-width:30em;font-size:18px;line-height:1.55;color:#4A5262" id="axText">Потребность уже появилась. Мы видим этот сигнал и отвечаем первыми — раньше конкурентов и точнее рекламы.</p>
+          <div style="display:flex;gap:22px;flex-wrap:wrap;font-size:14px;color:#4A5262;font-weight:400;padding-top:4px">
+            <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;border-radius:50%;border:1.5px solid #AEB5C1;box-sizing:border-box"></span>ещё не готовы</span>
+            <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;border-radius:50%;background:#FFD2BD;border:1.5px solid #FF9E73;box-sizing:border-box"></span>прогреваются</span>
+            <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;border-radius:50%;background:#FF5B1F"></span>готовы купить</span>
+          </div>
+          <div role="group" aria-label="Этапы" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100px,100%),1fr));gap:10px;padding-top:12px">
+            <button class="ax-step on" type="button" data-s="0" aria-pressed="true"><span class="ax-mono ax-stn">01</span><span>Видят сигнал сейчас</span></button><button class="ax-step" type="button" data-s="1" aria-pressed="false"><span class="ax-mono ax-stn">02</span><span>Прогреваем остальных</span></button><button class="ax-step" type="button" data-s="2" aria-pressed="false"><span class="ax-mono ax-stn">03</span><span>Становятся готовыми</span></button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- [06] СЦЕНАРИИ -->
-  <section class="sec">
-    <span class="lbl">[06] Сценарии · интерактив</span>
-    <span class="kicker">Сценарии</span>
-    <div class="d-split">
-      <h2 class="d-h2">Как это выглядит в работе</h2>
-      <p class="lead">Выберите продукт и сценарий: что произошло, что сделал виртуальный сотрудник и что получил бизнес.</p>
+  <section style="background:#FFFFFF;padding:clamp(96px,10vw,152px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5.5vw,80px);box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(48px,5vw,72px)">
+      <h2 style="margin:0;max-width:15em;font-size:clamp(34px,3.8vw,54px);line-height:1.06;font-weight:300;letter-spacing:-.03em;text-wrap:balance">Продавать <span style="white-space:nowrap">по-старому</span> становится дороже и сложнее</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:clamp(24px,2.6vw,32px)">
+        <div style="border-top:1px solid #0F131A;padding-top:20px;display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:15px;font-weight:400;color:#5B6372">Реклама</span>
+          <span style="font-size:clamp(44px,4.2vw,64px);line-height:.95;font-weight:200;letter-spacing:-.05em;white-space:nowrap">+35–45%</span>
+          <span style="font-size:16px;line-height:1.5;color:#4A5262">в год растёт стоимость клика в конкурентных нишах</span>
+        </div>
+        <div style="border-top:1px solid #0F131A;padding-top:20px;display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:15px;font-weight:400;color:#5B6372">Рассылки</span>
+          <span style="font-size:clamp(44px,4.2vw,64px);line-height:.95;font-weight:200;letter-spacing:-.05em;white-space:nowrap">&lt;1%</span>
+          <span style="font-size:16px;line-height:1.5;color:#4A5262">реакции на массовые коммерческие рассылки</span>
+        </div>
+        <div style="border-top:1px solid #0F131A;padding-top:20px;display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:15px;font-weight:400;color:#5B6372">Звонки</span>
+          <span style="font-size:clamp(44px,4.2vw,64px);line-height:.95;font-weight:200;letter-spacing:-.05em;white-space:nowrap">40%+</span>
+          <span style="font-size:16px;line-height:1.5;color:#4A5262">нежелательных вызовов в мобильном трафике</span>
+        </div>
+        <div style="border-top:1px solid #0F131A;padding-top:20px;display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:15px;font-weight:400;color:#5B6372">Защита от спама</span>
+          <span style="font-size:clamp(44px,4.2vw,64px);line-height:.95;font-weight:200;letter-spacing:-.05em;white-space:nowrap">71%</span>
+          <span style="font-size:16px;line-height:1.5;color:#4A5262">горожан защищаются от спама и неизвестных номеров</span>
+        </div>
+      </div>
+      <p style="margin:0;padding-top:clamp(24px,3vw,40px);max-width:24em;font-size:clamp(22px,2.2vw,30px);line-height:1.3;letter-spacing:-.015em">Компании платят за привычные каналы всё больше — и получают всё меньше.</p>
     </div>
-    <div class="tabs" id="ucTabs"></div>
-    <div class="uc"><div class="uc-list" id="ucList"></div><div class="scene d-scene" id="ucScene"></div></div>
-    <a class="link" href="#/use-cases" style="margin-top:24px">Все сценарии использования →</a>
   </section>
 
-  <!-- [07] КЕЙСЫ -->
-  <section class="sec d-orange" id="cases">
-    <span class="lbl">[07] Результаты реальных кейсов</span>
-    <span class="kicker">Кейсы</span>
-    <div class="d-split">
-      <h2 class="d-h2">Результаты реальных кейсов</h2>
-      <p class="lead">Виртуальный отдел продаж в телеком-компании (B2B): три сценария, фактические результаты.</p>
+</div>
+<div style="font-family:'Geologica','Segoe UI',Arial,sans-serif;font-weight:300;color:#0F131A;-webkit-font-smoothing:antialiased">
+
+  <section style="background:#F3F4F6;padding:clamp(96px,10vw,152px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5.5vw,80px);box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(48px,5vw,72px)">
+      <div style="display:flex;flex-wrap:wrap;gap:24px 72px;align-items:flex-end">
+        <h2 style="flex:1 1 460px;margin:0;font-size:clamp(34px,3.8vw,54px);line-height:1.06;font-weight:300;letter-spacing:-.03em">Как мы меняем логику продаж</h2>
+        <p style="flex:1 1 400px;margin:0;max-width:30em;font-size:18px;line-height:1.55;color:#4A5262">Наши продукты видят потребность клиента здесь и сейчас — в вашем продукте или у конкурента — и приводят к вам готового клиента.</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:clamp(40px,4vw,56px)">
+        <div style="display:flex;flex-wrap:wrap;gap:16px 40px">
+          <span style="flex:0 0 200px;font-size:15px;font-weight:400;color:#5B6372;padding-top:28px">Как продают сейчас</span>
+          <div style="flex:1 1 640px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:28px 0">
+            <div style="position:relative;padding:32px 24px 0 0">
+              <span aria-hidden="true" style="position:absolute;left:0;right:0;top:7px;border-top:1.5px dashed #AEB5C1"></span>
+              <span aria-hidden="true" style="position:absolute;left:0;top:0;width:16px;height:16px;border-radius:50%;background:#F3F4F6;border:1.5px solid #AEB5C1;box-sizing:border-box"></span>
+              <span style="font-size:18px;line-height:1.4;color:#5B6372">Есть продукт</span>
+            </div>
+            <div style="position:relative;padding:32px 24px 0 0">
+              <span aria-hidden="true" style="position:absolute;left:0;right:0;top:7px;border-top:1.5px dashed #AEB5C1"></span>
+              <span aria-hidden="true" style="position:absolute;left:0;top:0;width:16px;height:16px;border-radius:50%;background:#F3F4F6;border:1.5px solid #AEB5C1;box-sizing:border-box"></span>
+              <span style="font-size:18px;line-height:1.4;color:#5B6372">Бюджет — в рекламу и звонки</span>
+            </div>
+            <div style="position:relative;padding:32px 24px 0 0">
+              <span aria-hidden="true" style="position:absolute;left:0;width:60%;top:7px;border-top:1.5px dashed #AEB5C1"></span>
+              <span aria-hidden="true" style="position:absolute;left:0;top:0;width:16px;height:16px;border-radius:50%;background:#F3F4F6;border:1.5px solid #AEB5C1;box-sizing:border-box"></span>
+              <span style="font-size:18px;line-height:1.4;color:#5B6372">Поиск, кому продать</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:16px 40px">
+          <span style="flex:0 0 200px;font-size:15px;font-weight:500;color:#0F131A;padding-top:28px">Как продаёт АИТЕХ</span>
+          <div style="flex:1 1 640px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:28px 0">
+            <div style="position:relative;padding:32px 24px 0 0;display:flex;flex-direction:column;gap:10px;align-items:flex-start">
+              <span aria-hidden="true" style="position:absolute;left:0;right:0;top:7px;border-top:2px solid #FF5B1F"></span>
+              <span aria-hidden="true" style="position:absolute;left:0;top:0;width:16px;height:16px;border-radius:50%;background:#FF5B1F"></span>
+              <span style="background:#FFFFFF;border:1px solid #DADDE3;border-radius:14px 14px 14px 4px;padding:9px 14px;font-size:16px;font-weight:400">«Кого посоветуете?»</span>
+              <span style="font-size:15px;line-height:1.45;color:#5B6372;max-width:16em">потребность в вашем продукте или у конкурента</span>
+            </div>
+            <div style="position:relative;padding:32px 24px 0 0">
+              <span aria-hidden="true" style="position:absolute;left:0;right:0;top:7px;border-top:2px solid #FF5B1F"></span>
+              <span aria-hidden="true" style="position:absolute;left:0;top:0;width:16px;height:16px;border-radius:50%;background:#FF5B1F"></span>
+              <span style="font-size:18px;line-height:1.4;max-width:14em;display:block">Виртуальный сотрудник видит сигнал и сразу начинает диалог</span>
+            </div>
+            <div style="position:relative;padding:32px 0 0 0">
+              <span aria-hidden="true" style="position:absolute;left:-6px;top:-6px;width:28px;height:28px;border-radius:50%;background:#FF5B1F;box-shadow:0 0 0 6px rgba(255,91,31,.16)"></span>
+              <span style="font-size:18px;line-height:1.4;font-weight:500;max-width:14em;display:block">Готовый клиент приходит к вам — в том числе от конкурента</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px 48px;background:#0F131A;color:#F4F5F7;border-radius:28px;padding:clamp(32px,4vw,52px) clamp(28px,4vw,56px)">
+        <p style="flex:1 1 520px;margin:0;max-width:22em;font-size:clamp(24px,2.4vw,32px);line-height:1.25;letter-spacing:-.02em">Вам не нужно искать клиентов и активно продавать — это делают наши продукты.</p>
+        <a href="#/solutions" style="display:inline-flex;align-items:center;height:54px;padding:0 30px;border-radius:999px;background:#F4F5F7;color:#0F131A;font-size:16px;font-weight:500;white-space:nowrap">Как это решают продукты</a>
+      </div>
     </div>
-    <div class="d-cases">
-      <a href="#/solutions/virtual-sales~cases"><small>Действующая база · кросс- и апсейл</small><b>≈800</b><span>продаж и <strong>26 млн+ ₽</strong> накопительной выручки за ~12 месяцев</span><em>Воронка →</em></a>
-      <a href="#/solutions/virtual-sales~cases"><small>Потенциальная база · микробизнес</small><b>≈2 200</b><span>согласий и <strong>≈215</strong> продаж из 94,5 тыс. коммуникаций</span><em>Воронка →</em></a>
-      <a href="#/solutions/virtual-sales~cases"><small>Предиктивное сохранение</small><b>65%</b><span>клиентов с подтверждённым риском оттока <strong>сохранены</strong></span><em>Воронка →</em></a>
-    </div>
-    <div class="btns"><a class="btn dark" href="#/solutions/virtual-sales~cases">Смотреть воронки кейсов →</a></div>
   </section>
 
-  <!-- [08] КАК УСТРОЕНА РАБОТА -->
-  <section class="sec d-warmbg">
-    <span class="lbl">[08] Как устроена работа · блок под вопросом</span>
-    <span class="kicker">Принцип работы</span>
-    <div class="d-split">
-      <h2 class="d-h2">Как устроена работа виртуальных сотрудников</h2>
-      <p class="lead">Вопросы в чатах, входящие обращения, клиенты, которые давно не покупали, — всё это сигналы. Принцип одинаков для всех продуктов, при этом каждый продукт подключается отдельно.</p>
-    </div>
-    <div class="row c5 d-pipe" id="pipeline"></div>
-    <div class="d-hand">
-      <div class="d-hand-t">Продавец подключается, когда интерес клиента уже подтверждён</div>
-      <div class="d-hand-g">
-        <div><small>Берёт на себя система</small>Поиск контактов · первый контакт · рутинная переписка · отказы</div>
-        <div class="on"><small>Остаётся вашей команде</small>Переговоры · доверие · нестандартные задачи · закрытие сделки</div>
+  <section style="background:#FFFFFF;padding:clamp(96px,10vw,152px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5.5vw,80px);box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(40px,4.5vw,64px)">
+      <h2 style="margin:0;max-width:15em;font-size:clamp(34px,3.8vw,54px);line-height:1.06;font-weight:300;letter-spacing:-.03em">Решения под масштаб вашего бизнеса</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(520px,100%),1fr));gap:24px">
+
+        <div style="background:#0F131A;color:#F4F5F7;border-radius:28px;padding:clamp(28px,3.2vw,44px);display:flex;flex-direction:column;gap:16px">
+          <div style="height:240px;display:flex;flex-direction:column;justify-content:center;gap:12px;margin-bottom:16px">
+            <svg aria-hidden="true" viewBox="0 0 520 220" preserveAspectRatio="xMidYMid meet" style="width:100%;height:196px;display:block">
+              <g fill="#3A4250"><circle cx="20" cy="30" r="2.4"></circle><circle cx="36" cy="30" r="2.4"></circle><circle cx="52" cy="30" r="2.4"></circle><circle cx="68" cy="30" r="2.4"></circle><circle cx="84" cy="30" r="2.4"></circle><circle cx="20" cy="50" r="2.4"></circle><circle cx="36" cy="50" r="2.4"></circle><circle cx="52" cy="50" r="2.4"></circle><circle cx="68" cy="50" r="2.4"></circle><circle cx="84" cy="50" r="2.4"></circle><circle cx="20" cy="70" r="2.4"></circle><circle cx="36" cy="70" r="2.4"></circle><circle cx="52" cy="70" r="2.4"></circle><circle cx="68" cy="70" r="2.4"></circle><circle cx="84" cy="70" r="2.4"></circle><circle cx="20" cy="90" r="2.4"></circle><circle cx="36" cy="90" r="2.4"></circle><circle cx="52" cy="90" r="2.4"></circle><circle cx="68" cy="90" r="2.4"></circle><circle cx="84" cy="90" r="2.4"></circle><circle cx="20" cy="110" r="2.4"></circle><circle cx="36" cy="110" r="2.4"></circle><circle cx="52" cy="110" r="2.4"></circle><circle cx="68" cy="110" r="2.4"></circle><circle cx="84" cy="110" r="2.4"></circle><circle cx="20" cy="130" r="2.4"></circle><circle cx="36" cy="130" r="2.4"></circle><circle cx="52" cy="130" r="2.4"></circle><circle cx="68" cy="130" r="2.4"></circle><circle cx="84" cy="130" r="2.4"></circle><circle cx="20" cy="150" r="2.4"></circle><circle cx="36" cy="150" r="2.4"></circle><circle cx="52" cy="150" r="2.4"></circle><circle cx="68" cy="150" r="2.4"></circle><circle cx="84" cy="150" r="2.4"></circle><circle cx="20" cy="170" r="2.4"></circle><circle cx="36" cy="170" r="2.4"></circle><circle cx="52" cy="170" r="2.4"></circle><circle cx="68" cy="170" r="2.4"></circle><circle cx="84" cy="170" r="2.4"></circle><circle cx="20" cy="190" r="2.4"></circle><circle cx="36" cy="190" r="2.4"></circle><circle cx="52" cy="190" r="2.4"></circle><circle cx="68" cy="190" r="2.4"></circle><circle cx="84" cy="190" r="2.4"></circle></g>
+              <g fill="none" stroke="#3A4250" stroke-width="1"><path d="M92 30 C 150 30 160 26 220 26"></path><path d="M92 70 C 150 70 160 62 220 62"></path><path d="M92 110 C 150 110 160 98 220 98"></path><path d="M92 130 C 150 130 160 134 220 134"></path><path d="M92 170 C 150 170 160 170 220 170"></path><path d="M92 190 C 150 190 160 206 220 206"></path></g>
+              <g fill="none" stroke="#FF5B1F" stroke-width="1.3"><path d="M92 50 C 150 50 160 44 220 44"></path><path d="M92 150 C 150 150 160 152 220 152"></path></g>
+              <g fill="#1C222C"><rect x="224" y="18" width="124" height="16" rx="8"></rect><rect x="224" y="54" width="104" height="16" rx="8"></rect><rect x="224" y="90" width="132" height="16" rx="8"></rect><rect x="224" y="126" width="96" height="16" rx="8"></rect><rect x="224" y="162" width="116" height="16" rx="8"></rect><rect x="224" y="198" width="108" height="16" rx="8"></rect></g>
+              <g fill="none" stroke="#FF5B1F" stroke-width="1.3"><rect x="224" y="36" width="140" height="16" rx="8"></rect><rect x="224" y="144" width="128" height="16" rx="8"></rect></g>
+              <g fill="none" stroke="#FF5B1F" stroke-width="1.5"><path d="M368 44 C 420 44 420 110 462 110"></path><path d="M356 152 C 420 152 420 110 462 110"></path></g>
+              <circle cx="478" cy="110" r="16" fill="#0F131A" stroke="#FF5B1F" stroke-width="1.5"></circle><circle cx="478" cy="110" r="6" fill="#FF5B1F"></circle>
+            </svg>
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#8D96A6">
+              <span>клиентская база</span><span style="text-align:center">параллельные диалоги</span><span style="text-align:right">продавец</span>
+            </div>
+          </div>
+          <span style="font-size:15px;font-weight:400;color:#8D96A6">Крупный бизнес и корпорации</span>
+          <span style="font-size:clamp(30px,2.8vw,40px);line-height:1.05;letter-spacing:-.025em">Виртуальный отдел продаж</span>
+          <p style="margin:0;max-width:30em;font-size:17px;line-height:1.55;color:#B9C0CB">ИИ-агенты сами начинают личные диалоги со всей базой в мессенджерах, выявляют потребность и передают клиента продавцу.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;padding-top:4px">
+            <span style="font-size:14px;font-weight:400;border:1px solid #3A4250;border-radius:999px;padding:7px 14px;color:#D5D9DF">Телеком</span>
+            <span style="font-size:14px;font-weight:400;border:1px solid #3A4250;border-radius:999px;padding:7px 14px;color:#D5D9DF">Маркетплейсы</span>
+            <span style="font-size:14px;font-weight:400;border:1px solid #3A4250;border-radius:999px;padding:7px 14px;color:#D5D9DF">Финансы и банкинг</span>
+            <span style="font-size:14px;font-weight:400;border:1px solid #3A4250;border-radius:999px;padding:7px 14px;color:#D5D9DF">Страхование</span>
+            <span style="font-size:14px;font-weight:400;border:1px solid #3A4250;border-radius:999px;padding:7px 14px;color:#D5D9DF">Девелоперы</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;padding-top:16px;margin-top:auto">
+            <a href="#/solutions/virtual-sales" style="display:inline-flex;align-items:center;min-height:52px;padding:12px 28px;box-sizing:border-box;border-radius:999px;background:#F4F5F7;color:#0F131A;font-size:16px;line-height:1.25;font-weight:500">О виртуальном отделе продаж</a>
+          </div>
+        </div>
+
+        <div style="background:#F3F4F6;border-radius:28px;padding:clamp(28px,3.2vw,44px);display:flex;flex-direction:column;gap:16px">
+          <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:start;margin-bottom:16px;height:240px;align-content:center">
+            <div style="position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding-right:8px">
+              <span aria-hidden="true" style="position:absolute;left:52px;right:0;top:25px;border-top:1.5px solid #AEB5C1"></span>
+              <span aria-hidden="true" style="position:relative;width:52px;height:52px;border-radius:16px;background:#FFFFFF;border:1px solid #DADDE3;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:#5B6372;stroke-width:1.4"><path d="M4 5 H20 V15 H10 L6 19 V15 H4 Z"></path></svg></span>
+              <span style="font-size:15px;line-height:1.35;font-weight:400">Каналы и группы MAX</span>
+            </div>
+            <div style="position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding-right:8px">
+              <span aria-hidden="true" style="position:absolute;left:52px;right:0;top:25px;border-top:2px solid #FF5B1F"></span>
+              <span aria-hidden="true" style="position:relative;width:52px;height:52px;border-radius:50%;background:#0F131A;display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 26 26" style="fill:none;stroke:#FF5B1F;stroke-width:1.3"><circle cx="13" cy="13" r="3"></circle><circle cx="13" cy="13" r="7.5" stroke-opacity=".55"></circle><circle cx="13" cy="13" r="11.5" stroke-opacity=".25"></circle></svg></span>
+              <span style="font-size:15px;line-height:1.35;font-weight:500">Скаут находит запрос</span>
+            </div>
+            <div style="position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding-right:8px">
+              <span aria-hidden="true" style="position:absolute;left:52px;right:0;top:25px;border-top:2px solid #FF5B1F"></span>
+              <span aria-hidden="true" style="position:relative;width:52px;height:52px;border-radius:50%;background:#0F131A;display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 26 26" style="fill:none;stroke:#AEB5C1;stroke-width:1.3"><circle cx="13" cy="13" r="10"></circle><path d="M13 7 L13 13 L17.5 15.5" style="stroke:#FF5B1F"></path></svg></span>
+              <span style="font-size:15px;line-height:1.35;font-weight:500">Ждун ведёт диалог</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:12px">
+              <span aria-hidden="true" style="width:52px;height:52px;border-radius:50%;background:#FF5B1F;box-shadow:0 0 0 6px rgba(255,91,31,.16)"></span>
+              <span style="font-size:15px;line-height:1.35;font-weight:500">Заявка у менеджера</span>
+            </div>
+          </div>
+          <span style="font-size:15px;font-weight:400;color:#5B6372">Малый и средний бизнес</span>
+          <span style="font-size:clamp(30px,2.8vw,40px);line-height:1.05;letter-spacing:-.025em">Скаут и Ждун</span>
+          <p style="margin:0;max-width:30em;font-size:17px;line-height:1.55;color:#4A5262">Скаут находит в каналах и группах MAX тех, кто прямо сейчас ищет ваши товары или услуги, и прогревает тех, кто купит позже. Ждун отвечает на каждое обращение и доводит до сделки.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;padding-top:4px">
+            <span style="font-size:14px;font-weight:400;border:1px solid #C9CED6;border-radius:999px;padding:7px 14px;color:#2F3643">Медицина</span>
+            <span style="font-size:14px;font-weight:400;border:1px solid #C9CED6;border-radius:999px;padding:7px 14px;color:#2F3643">Салоны</span>
+            <span style="font-size:14px;font-weight:400;border:1px solid #C9CED6;border-radius:999px;padding:7px 14px;color:#2F3643">Ремонт и строительство</span>
+            <span style="font-size:14px;font-weight:400;border:1px solid #C9CED6;border-radius:999px;padding:7px 14px;color:#2F3643">Селлеры маркетплейсов</span>
+            <span style="font-size:14px;font-weight:400;border:1px solid #C9CED6;border-radius:999px;padding:7px 14px;color:#2F3643">Частные специалисты</span>
+            <span style="font-size:14px;font-weight:400;border:1px solid #C9CED6;border-radius:999px;padding:7px 14px;color:#2F3643">Бренды и блогеры</span>
+            <span style="font-size:14px;font-weight:400;border:1px solid #C9CED6;border-radius:999px;padding:7px 14px;color:#2F3643">B2B-услуги</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;padding-top:16px;margin-top:auto">
+            <a href="#/solutions/scout" style="display:inline-flex;align-items:center;height:52px;padding:0 28px;border-radius:999px;background:#0F131A;color:#F4F5F7;font-size:16px;font-weight:500">Скаут</a>
+            <a href="#/solutions/zhdun" style="display:inline-flex;align-items:center;height:52px;padding:0 28px;border-radius:999px;background:#0F131A;color:#F4F5F7;font-size:16px;font-weight:500">Ждун</a>
+          </div>
+        </div>
+
       </div>
     </div>
-    <p class="small" style="margin-top:16px">Работа с открытыми источниками ведётся строго в рамках законодательства РФ. <a class="link" style="margin:0 0 0 8px" href="#/technologies">Как устроены технологии →</a></p>
-    <div class="warn"><b>Блок под вопросом.</b> Бронислава смущает, что блок подаёт продукты как экосистему, хотя их покупают по отдельности. Оставлен до просмотра командой; добавлена фраза «каждый продукт подключается отдельно».</div>
   </section>
 
-  <!-- [09] ОТЧЁТ -->
-  <section class="sec rb">
-    <span class="lbl">[09] Результат · главный блок страницы</span>
+</div>
+<div style="font-family:'Geologica','Segoe UI',Arial,sans-serif;font-weight:300;color:#0F131A;-webkit-font-smoothing:antialiased">
 
-
-    <div class="rb-head">
-      <div>
-        <span class="rb-eyebrow">Главный результат</span>
-        <h2 class="rb-h2">Еженедельный отчёт, который экономит время менеджера</h2>
-      </div>
-      <p class="rb-lead">Ради этого нас выбирают. Менеджеру не нужно собирать данные, созваниваться и готовить отчёты вручную: каждую неделю он получает готовый результат и может сразу показать его руководству.</p>
-    </div>
-
-    <div class="rb-stage">
-      <div class="rb-ann rb-left">
-        <button class="rb-a" data-k="1"><span class="rb-n">01</span><span><b>Воронка</b><i>Сколько диалогов открыто, просмотрено, отвечено и сколько завершились успехом.</i></span></button>
-        <button class="rb-a" data-k="2"><span class="rb-n">02</span><span><b>Динамика по дням</b><i>Как меняются показатели день ко дню — видно, где просел результат.</i></span></button>
-        <button class="rb-a" data-k="3"><span class="rb-n">03</span><span><b>Аналитика ответов</b><i>Кто согласился, где есть потенциал, кто не целевой и почему отказывают.</i></span></button>
+  <section style="background:#F3F4F6;padding:clamp(96px,10vw,152px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5.5vw,80px);box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(36px,4vw,56px)">
+      <div style="display:flex;flex-wrap:wrap;gap:24px 72px;align-items:flex-end">
+        <h2 style="flex:1 1 460px;margin:0;font-size:clamp(34px,3.8vw,54px);line-height:1.06;font-weight:300;letter-spacing:-.03em">Как это выглядит в работе</h2>
+        <p style="flex:1 1 400px;margin:0;max-width:30em;font-size:18px;line-height:1.55;color:#4A5262">Выберите продукт и ситуацию: что произошло, что сделал виртуальный сотрудник и что получил бизнес.</p>
       </div>
 
-      <div class="rb-report" id="rbReport">
-        <div class="rb-bar"><span class="rb-dot"></span><span class="rb-dot"></span><span class="rb-dot"></span><span class="rb-url">Личный кабинет · Сводка проекта</span></div>
-        <div class="rb2">
-          <aside class="rb2-nav">
-            <div class="rb2-proj"><b>Проект клиента</b><small>Виртуальный отдел продаж</small></div>
-            <span class="on">Воронка</span><span>Статистика</span><span>Аналитика ответов</span><span>Аналитика сообщений</span><span>Диалоги</span>
-          </aside>
-          <div class="rb2-main">
-            <div class="rb2-h"><b>Сводка за неделю</b><span class="rb2-sel">Все дни, итого ▾</span></div>
+      <div id="axTabs" role="group" aria-label="Продукт" style="display:flex;flex-wrap:wrap;gap:10px"></div>
 
-            <div class="rb-zone" data-k="1">
-              <span class="rb-mk">01</span>
-              <div class="rb2-fun">
-                <div class="big1"><small>Открыто диалогов</small><b>1 240</b><small>сообщение доставлено</small></div>
-                <div><small><i style="background:#4f7cff"></i>Просмотрено</small><b>586</b><em>47% от открытых</em></div>
-                <div><small><i style="background:#141414"></i>Отвечено</small><b>112</b><em>19% от просмотревших</em></div>
-                <div><small><i style="background:#ff5a1f"></i>Успех</small><b>14</b><em>12,5% от ответивших</em></div>
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+        <div id="axList" role="group" aria-label="Ситуация" style="flex:0 1 320px;min-width:0;display:flex;flex-direction:column;gap:8px"></div>
+
+        <article style="flex:1 1 560px;min-width:0;background:#FFFFFF;border-radius:28px;padding:clamp(28px,3.4vw,48px);display:flex;flex-direction:column;gap:28px;box-sizing:border-box">
+          <h3 style="margin:0;font-size:clamp(26px,2.4vw,34px);line-height:1.1;font-weight:300;letter-spacing:-.02em" id="axScT"></h3>
+          <div style="display:flex;flex-direction:column;gap:0">
+            <div style="display:flex;flex-wrap:wrap;gap:8px 24px;padding:18px 0;border-top:1px solid #E4E7EB">
+              <span style="flex:0 0 112px;font-size:14px;font-weight:400;color:#5B6372;padding-top:8px">Сигнал</span>
+              <div style="flex:1 1 320px;min-width:0">
+                <div id="axScSig"></div>
               </div>
             </div>
-
-            <div class="rb-zone" data-k="2">
-              <span class="rb-mk">02</span>
-              <div class="rb2-days">
-                <div class="rb2-mini"><small>Просмотрено по дням</small><div class="bars b1"><i style="height:70%"></i><i style="height:92%"></i><i style="height:88%"></i><i style="height:64%"></i><i style="height:40%"></i><i style="height:30%"></i></div></div>
-                <div class="rb2-mini"><small>Отвечено по дням</small><div class="bars b2"><i style="height:18%"></i><i style="height:38%"></i><i style="height:52%"></i><i style="height:50%"></i><i style="height:96%"></i><i style="height:44%"></i></div></div>
-                <div class="rb2-mini"><small>Успех по дням</small><div class="bars b3"><i style="height:26%"></i><i style="height:0%"></i><i style="height:14%"></i><i style="height:26%"></i><i style="height:100%"></i><i style="height:40%"></i></div></div>
-              </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px 24px;padding:18px 0;border-top:1px solid #E4E7EB">
+              <span style="flex:0 0 112px;font-size:14px;font-weight:400;color:#5B6372;padding-top:3px">Действие</span>
+              <p style="flex:1 1 320px;min-width:0;margin:0;font-size:17px;line-height:1.55;color:#2F3643" id="axScAct"></p>
             </div>
-
-            <div class="rb-zone" data-k="3">
-              <span class="rb-mk">03</span>
-              <div class="rb2-ans">
-                <small>Аналитика ответов · 112 ответов</small>
-                <div class="stack"><i style="width:12.5%;background:#1a8a4a"></i><i style="width:25%;background:#ff9a5c"></i><i style="width:36%;background:#cfcac3"></i><i style="width:26.5%;background:#3a3a3a"></i></div>
-                <div class="lg"><span><i style="background:#1a8a4a"></i>Успех 12,5%</span><span><i style="background:#ff9a5c"></i>Есть потенциал 25%</span><span><i style="background:#cfcac3"></i>Не целевые 36%</span><span><i style="background:#3a3a3a"></i>Отказ 26,5%</span></div>
-              </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px 24px;padding:18px 0;border-top:1px solid #E4E7EB">
+              <span style="flex:0 0 112px;font-size:14px;font-weight:400;color:#5B6372;padding-top:6px">Результат</span>
+              <p style="flex:1 1 320px;min-width:0;margin:0;font-size:clamp(20px,1.8vw,24px);line-height:1.3;font-weight:400;letter-spacing:-.01em" id="axScRes"></p>
             </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px 24px;padding:18px 0 0;border-top:1px solid #E4E7EB">
+              <span style="flex:0 0 112px;font-size:14px;font-weight:400;color:#5B6372;padding-top:6px">В отчёте</span>
+              <div style="flex:1 1 320px;min-width:0;display:flex;flex-wrap:wrap;gap:8px" id="axScRep"></div>
+            </div>
+          </div>
+          <a id="axScCta" href="#/solutions/scout" style="align-self:flex-start;display:inline-flex;align-items:center;height:52px;padding:0 28px;border-radius:999px;background:#0F131A;color:#F4F5F7;font-size:16px;font-weight:500">Как работает Скаут</a>
+        </article>
+      </div>
+      <a href="#/use-cases" class="ax-ln" style="align-self:flex-start;font-size:16px;font-weight:400">Все сценарии использования</a>
+    </div>
+  </section>
 
-            <div class="rb2-row2">
-              <div class="rb-zone" data-k="4">
-                <span class="rb-mk">04</span>
-                <div class="rb2-off">
-                  <small>Что сработало: акцент в первом сообщении</small>
-                  <div class="r h"><span>Акцент</span><span>Ответили</span><span>Успех</span></div>
-                  <div class="r top"><span>Оплата только за результат</span><span>21%</span><span>4,1%</span></div>
-                  <div class="r"><span>Старт без вложений</span><span>15%</span><span>2,8%</span></div>
-                  <div class="r"><span>Бесплатная оценка спроса</span><span>11%</span><span>0%</span></div>
+  <section style="background:#0F131A;color:#F4F5F7;padding:clamp(96px,10vw,152px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5.5vw,80px);box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(48px,5vw,72px)">
+      <div style="display:flex;flex-wrap:wrap;gap:24px 72px;align-items:flex-end">
+        <h2 style="flex:1 1 460px;margin:0;font-size:clamp(34px,3.8vw,54px);line-height:1.06;font-weight:300;letter-spacing:-.03em">Результаты реальных кейсов</h2>
+        <p style="flex:1 1 400px;margin:0;max-width:30em;font-size:18px;line-height:1.55;color:#B9C0CB">Виртуальный отдел продаж в телеком-компании, B2B. Три сценария, фактические результаты.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:16px clamp(32px,4vw,56px)">
+
+        <div style="border-top:1px solid #3A4250;padding:32px 0 8px;display:flex;flex-direction:column;gap:12px">
+          <span style="font-size:15px;font-weight:400;color:#8D96A6">Действующая база: кросс- и апсейл</span>
+          <span style="font-size:clamp(72px,7vw,112px);line-height:.92;font-weight:200;letter-spacing:-.055em;white-space:nowrap;padding-top:12px">≈800</span>
+          <span style="font-size:20px;font-weight:400">продаж</span>
+          <span style="font-size:16px;line-height:1.5;color:#B9C0CB;max-width:20em">и 26 млн+ ₽ накопительной выручки за ~12 месяцев</span>
+          <dl style="margin:20px 0 0;display:flex;flex-direction:column;font-size:14px">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto 56px;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid #262D39"><dt style="color:#8D96A6">Коммуникации</dt><dd style="margin:0;text-align:right">150 тыс.+</dd><dd style="margin:0;text-align:right;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#8D96A6"></dd></div>
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto 56px;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid #262D39"><dt style="color:#8D96A6">Ответы</dt><dd style="margin:0;text-align:right">18 тыс.+</dd><dd style="margin:0;text-align:right;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#8D96A6">12%</dd></div>
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto 56px;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid #262D39"><dt style="color:#8D96A6">Согласия</dt><dd style="margin:0;text-align:right">≈4 000</dd><dd style="margin:0;text-align:right;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#8D96A6">22%</dd></div>
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto 56px;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid #262D39"><dt style="display:flex;align-items:center;gap:8px;font-weight:500"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#FF5B1F"></span>Продажи</dt><dd style="margin:0;text-align:right;font-weight:500">≈800</dd><dd style="margin:0;text-align:right;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#F4F5F7">20%</dd></div>
+          </dl>
+        </div>
+
+        <div style="border-top:1px solid #3A4250;padding:32px 0 8px;display:flex;flex-direction:column;gap:12px">
+          <span style="font-size:15px;font-weight:400;color:#8D96A6">Потенциальная база: микробизнес</span>
+          <span style="font-size:clamp(72px,7vw,112px);line-height:.92;font-weight:200;letter-spacing:-.055em;white-space:nowrap;padding-top:12px">≈2 200</span>
+          <span style="font-size:20px;font-weight:400">согласий</span>
+          <span style="font-size:16px;line-height:1.5;color:#B9C0CB;max-width:20em">и ≈215 продаж из 94,5 тыс. коммуникаций</span>
+          <dl style="margin:20px 0 0;display:flex;flex-direction:column;font-size:14px">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto 56px;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid #262D39"><dt style="color:#8D96A6">Коммуникации</dt><dd style="margin:0;text-align:right">94,5 тыс.</dd><dd style="margin:0;text-align:right;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#8D96A6"></dd></div>
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto 56px;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid #262D39"><dt style="color:#8D96A6">Ответы</dt><dd style="margin:0;text-align:right">≈10,9 тыс.</dd><dd style="margin:0;text-align:right;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#8D96A6">11,5%</dd></div>
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto 56px;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid #262D39"><dt style="color:#8D96A6">Согласия</dt><dd style="margin:0;text-align:right">≈2,2 тыс.</dd><dd style="margin:0;text-align:right;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#8D96A6">20%</dd></div>
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto 56px;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid #262D39"><dt style="display:flex;align-items:center;gap:8px;font-weight:500"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#FF5B1F"></span>Продажи</dt><dd style="margin:0;text-align:right;font-weight:500">≈215</dd><dd style="margin:0;text-align:right;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#F4F5F7">10%</dd></div>
+          </dl>
+        </div>
+
+        <div style="border-top:1px solid #3A4250;padding:32px 0 8px;display:flex;flex-direction:column;gap:12px">
+          <span style="font-size:15px;font-weight:400;color:#8D96A6">Предиктивное сохранение</span>
+          <span style="font-size:clamp(72px,7vw,112px);line-height:.92;font-weight:200;letter-spacing:-.055em;white-space:nowrap;padding-top:12px">65%</span>
+          <span style="font-size:20px;font-weight:400">клиентов сохранены</span>
+          <span style="font-size:16px;line-height:1.5;color:#B9C0CB;max-width:20em">из тех, у кого в диалоге подтвердился риск оттока</span>
+          <dl style="margin:20px 0 0;display:flex;flex-direction:column;font-size:14px">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto 56px;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid #262D39"><dt style="color:#8D96A6">Коммуникации</dt><dd style="margin:0;text-align:right">23 тыс.</dd><dd style="margin:0;text-align:right;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#8D96A6"></dd></div>
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto 56px;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid #262D39"><dt style="color:#8D96A6">Ответы</dt><dd style="margin:0;text-align:right">3 450</dd><dd style="margin:0;text-align:right;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#8D96A6">15%</dd></div>
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto 56px;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid #262D39"><dt style="color:#8D96A6">Риск подтверждён</dt><dd style="margin:0;text-align:right">1 380</dd><dd style="margin:0;text-align:right;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#8D96A6">40%</dd></div>
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto 56px;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid #262D39"><dt style="display:flex;align-items:center;gap:8px;font-weight:500"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#FF5B1F"></span>Сохранены</dt><dd style="margin:0;text-align:right;font-weight:500">897</dd><dd style="margin:0;text-align:right;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#F4F5F7">65%</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center;justify-content:space-between">
+        <span style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:#8D96A6">Процент — конверсия из предыдущего этапа</span>
+        <a href="#/solutions/virtual-sales~cases" style="display:inline-flex;align-items:center;height:54px;padding:0 30px;border-radius:999px;background:#F4F5F7;color:#0F131A;font-size:16px;font-weight:500">Смотреть воронки кейсов</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+<div style="font-family:'Geologica','Segoe UI',Arial,sans-serif;font-weight:300;color:#0F131A;-webkit-font-smoothing:antialiased">
+
+  <section style="background:#FFFFFF;padding:clamp(96px,10vw,152px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5.5vw,80px);box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(48px,5vw,72px)">
+      <div style="display:flex;flex-wrap:wrap;gap:24px 72px;align-items:flex-end">
+        <h2 style="flex:1 1 460px;margin:0;font-size:clamp(34px,3.8vw,54px);line-height:1.06;font-weight:300;letter-spacing:-.03em;max-width:12em">Как устроена работа виртуальных сотрудников</h2>
+        <p style="flex:1 1 400px;margin:0;max-width:30em;font-size:18px;line-height:1.55;color:#4A5262">Вопрос в чате, входящее обращение, клиент, который давно не покупал, — всё это сигналы. Принцип один для всех продуктов, а подключается каждый отдельно.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(196px,100%),1fr));gap:40px 16px">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div aria-hidden="true" style="position:relative;height:160px;border-radius:20px;background-color:#F3F4F6;background-image:radial-gradient(circle,#AEB5C1 1.3px,transparent 1.8px);background-size:10px 10px">
+            <span style="position:absolute;left:22%;top:24%;width:8px;height:8px;border-radius:50%;background:#FF5B1F"></span><span style="position:absolute;left:61%;top:40%;width:8px;height:8px;border-radius:50%;background:#FF5B1F"></span><span style="position:absolute;left:38%;top:72%;width:8px;height:8px;border-radius:50%;background:#FF5B1F"></span><span style="position:absolute;left:80%;top:62%;width:8px;height:8px;border-radius:50%;background:#FF5B1F"></span>
+          </div>
+          <span class="ax-mono" style="font-size:12px;color:#5B6372">01</span>
+          <span style="font-size:22px;font-weight:400;letter-spacing:-.01em">Сигнал</span>
+          <span style="font-size:15px;line-height:1.5;color:#4A5262">запрос в чате, обращение или событие в клиентской базе</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div aria-hidden="true" style="position:relative;height:160px;border-radius:20px;background-color:#F3F4F6;background-image:radial-gradient(circle,#C3C8D1 1.3px,transparent 1.8px);background-size:20px 20px">
+            <span style="position:absolute;left:30%;top:34%;width:8px;height:8px;border-radius:50%;background:#FF5B1F"></span><span style="position:absolute;left:58%;top:62%;width:8px;height:8px;border-radius:50%;background:#FF5B1F"></span><span style="position:absolute;left:74%;top:28%;width:8px;height:8px;border-radius:50%;background:#FF5B1F"></span>
+          </div>
+          <span class="ax-mono" style="font-size:12px;color:#5B6372">02</span>
+          <span style="font-size:22px;font-weight:400;letter-spacing:-.01em">Фильтр</span>
+          <span style="font-size:15px;line-height:1.5;color:#4A5262">ИИ отсекает шум и оценивает, насколько сигнал важен</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div aria-hidden="true" style="position:relative;height:160px;border-radius:20px;background-color:#F3F4F6;background-image:radial-gradient(circle,#D5D9DF 1.3px,transparent 1.8px);background-size:34px 34px">
+            <span style="position:absolute;left:40%;top:40%;width:10px;height:10px;border-radius:50%;background:#FF5B1F;box-shadow:0 0 0 6px rgba(255,91,31,.14)"></span><span style="position:absolute;left:66%;top:60%;width:8px;height:8px;border-radius:50%;background:#FF5B1F"></span>
+          </div>
+          <span class="ax-mono" style="font-size:12px;color:#5B6372">03</span>
+          <span style="font-size:22px;font-weight:400;letter-spacing:-.01em">Контекст</span>
+          <span style="font-size:15px;line-height:1.5;color:#4A5262">понимает задачу и мотивы человека</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div aria-hidden="true" style="position:relative;height:160px;border-radius:20px;background:#F3F4F6;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 18%;box-sizing:border-box">
+            <span style="align-self:flex-start;width:70%;height:14px;border-radius:7px 7px 7px 2px;background:#DADDE3"></span>
+            <span style="align-self:flex-end;width:60%;height:14px;border-radius:7px 7px 2px 7px;background:#FF5B1F"></span>
+            <span style="align-self:flex-start;width:48%;height:14px;border-radius:7px 7px 7px 2px;background:#DADDE3"></span>
+          </div>
+          <span class="ax-mono" style="font-size:12px;color:#5B6372">04</span>
+          <span style="font-size:22px;font-weight:400;letter-spacing:-.01em">Диалог</span>
+          <span style="font-size:15px;line-height:1.5;color:#4A5262">ведёт личную переписку по вашему заданию</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div aria-hidden="true" style="position:relative;height:160px;border-radius:20px;background:#0F131A;display:flex;align-items:center;justify-content:center">
+            <span style="width:22px;height:22px;border-radius:50%;background:#FF5B1F;box-shadow:0 0 0 10px rgba(255,91,31,.18),0 0 0 22px rgba(255,91,31,.07)"></span>
+          </div>
+          <span class="ax-mono" style="font-size:12px;color:#5B6372">05</span>
+          <span style="font-size:22px;font-weight:500;letter-spacing:-.01em">Передача</span>
+          <span style="font-size:15px;line-height:1.5;color:#4A5262">продавец получает клиента с подтверждённым интересом и весь контекст разговора</span>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <p style="margin:0;max-width:22em;font-size:clamp(24px,2.4vw,32px);line-height:1.25;letter-spacing:-.02em">Продавец подключается, когда интерес клиента уже подтверждён</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:16px">
+          <div style="border:1px solid #DADDE3;border-radius:24px;padding:28px 32px;display:flex;flex-direction:column;gap:14px">
+            <span style="font-size:15px;font-weight:400;color:#5B6372">Берёт на себя система</span>
+            <div style="display:flex;flex-wrap:wrap;gap:8px 28px;font-size:20px;line-height:1.4"><span>Поиск контактов</span><span>Первый контакт</span><span>Рутинная переписка</span><span>Отказы</span></div>
+          </div>
+          <div style="background:#0F131A;color:#F4F5F7;border-radius:24px;padding:28px 32px;display:flex;flex-direction:column;gap:14px">
+            <span style="font-size:15px;font-weight:400;color:#8D96A6">Остаётся вашей команде</span>
+            <div style="display:flex;flex-wrap:wrap;gap:8px 28px;font-size:20px;line-height:1.4"><span>Переговоры</span><span>Доверие</span><span>Нестандартные задачи</span><span>Закрытие сделки</span></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;font-size:15px;color:#5B6372">
+          <span>Работа с открытыми источниками ведётся строго в рамках законодательства РФ.</span>
+          <a href="#/technologies" class="ax-ln" style="color:#0F131A;font-weight:400">Как устроены технологии</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#0F131A;color:#F4F5F7;padding:clamp(96px,10vw,152px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5.5vw,80px);box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(48px,5vw,72px)">
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <h2 style="margin:0;max-width:14em;font-size:clamp(38px,4.6vw,66px);line-height:1.02;font-weight:300;letter-spacing:-.035em;text-wrap:balance">Еженедельный отчёт, который экономит время менеджера</h2>
+        <p style="margin:0;max-width:34em;font-size:18px;line-height:1.55;color:#B9C0CB">Ради этого нас выбирают. Менеджер не собирает данные и не готовит отчёты вручную: каждую неделю он получает готовый результат и может сразу показать его руководству.</p>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center">
+        <div style="flex:1 1 190px;min-width:0;display:flex;flex-direction:column;gap:12px;order:1">
+          <button class="ax-call" type="button" data-k="1" aria-pressed="false"><span class="ax-mono ax-cn">01</span><span class="ax-ct"><span class="ax-ctt">Воронка</span><span class="ax-ctd">Сколько диалогов открыто, просмотрено, отвечено и сколько завершились успехом.</span></span></button><button class="ax-call" type="button" data-k="2" aria-pressed="false"><span class="ax-mono ax-cn">02</span><span class="ax-ct"><span class="ax-ctt">Динамика по дням</span><span class="ax-ctd">Как меняются показатели день ко дню — видно, где просел результат.</span></span></button><button class="ax-call" type="button" data-k="3" aria-pressed="false"><span class="ax-mono ax-cn">03</span><span class="ax-ct"><span class="ax-ctt">Аналитика ответов</span><span class="ax-ctd">Кто согласился, где есть потенциал, кто не целевой и почему отказывают.</span></span></button>
+        </div>
+
+        <div style="flex:1 1 660px;min-width:0;order:2;position:relative;background:#FFFFFF;color:#0F131A;border-radius:20px;box-shadow:0 40px 90px rgba(0,0,0,.45);overflow:hidden">
+          <div style="display:flex;flex-wrap:wrap;row-gap:4px;align-items:center;gap:6px;padding:11px 16px;background:#F6F7F8;border-bottom:1px solid #E4E7EB">
+            <span style="width:9px;height:9px;border-radius:50%;background:#DADDE3"></span><span style="width:9px;height:9px;border-radius:50%;background:#DADDE3"></span><span style="width:9px;height:9px;border-radius:50%;background:#DADDE3"></span>
+            <span style="margin-left:10px;font-size:12px;color:#5B6372;font-weight:400">Личный кабинет — сводка проекта</span>
+            <span class="ax-mono" style="margin-left:auto;font-size:11px;color:#5B6372">условные данные, структура реального отчёта</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap">
+            <aside class="ax-aside" style="flex:0 0 128px;border-right:1px solid #E4E7EB;padding:16px 12px;display:flex;flex-direction:column;gap:2px;font-size:12px;font-weight:400;color:#5B6372;box-sizing:border-box">
+              <span style="display:flex;flex-direction:column;gap:2px;margin-bottom:14px"><b style="font-weight:500;color:#0F131A;font-size:13px">Проект клиента</b><span style="font-size:11px">Виртуальный отдел продаж</span></span>
+              <span style="padding:6px 8px;border-radius:8px;background:#F3F4F6;color:#0F131A;font-weight:500">Воронка</span>
+              <span style="padding:6px 8px">Статистика</span>
+              <span style="padding:6px 8px">Аналитика ответов</span>
+              <span style="padding:6px 8px">Аналитика сообщений</span>
+              <span style="padding:6px 8px">Диалоги</span>
+            </aside>
+            <div style="flex:1 1 380px;min-width:0;padding:16px 18px 18px;display:flex;flex-direction:column;gap:12px;font-weight:400">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><b style="font-size:16px;font-weight:500">Сводка за неделю</b><span style="font-size:11px;border:1px solid #DADDE3;border-radius:8px;padding:4px 8px;color:#4A5262">Все дни, итого</span></div>
+
+              <div class="ax-zone" data-k="1"><span aria-hidden="true" class="ax-mk">01</span>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(110px,100%),1fr));gap:8px">
+                  <div style="border:1px solid #E4E7EB;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:#5B6372">Открыто диалогов</span><span style="font-size:24px;font-weight:500;letter-spacing:-.02em">1 240</span><span style="font-size:10.5px;color:#5B6372">сообщение доставлено</span></div>
+                  <div style="border:1px solid #E4E7EB;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:#5B6372">Просмотрено</span><span style="font-size:24px;font-weight:500;letter-spacing:-.02em">586</span><span style="font-size:10.5px;color:#5B6372">47% от открытых</span></div>
+                  <div style="border:1px solid #E4E7EB;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:#5B6372">Отвечено</span><span style="font-size:24px;font-weight:500;letter-spacing:-.02em">112</span><span style="font-size:10.5px;color:#5B6372">19% от просмотров</span></div>
+                  <div style="border:1px solid #E4E7EB;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:#5B6372;display:flex;align-items:center;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:#E84A10"></span>Успех</span><span style="font-size:24px;font-weight:500;letter-spacing:-.02em">14</span><span style="font-size:10.5px;color:#5B6372">12,5% от ответов</span></div>
                 </div>
               </div>
-              <div class="rb-zone" data-k="5">
-                <span class="rb-mk">05</span>
-                <div class="rb2-dlg">
-                  <small>Диалоги</small>
-                  <div><span>Диалог №1042</span><em class="ok">Успех</em></div>
-                  <div><span>Диалог №987</span><em class="pt">Есть потенциал</em></div>
-                  <div><span>Диалог №913</span><em class="no">Отказ</em></div>
+
+              <div class="ax-zone" data-k="2"><span aria-hidden="true" class="ax-mk">02</span>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(84px,100%),1fr));gap:8px">
+                  <div style="border:1px solid #E4E7EB;border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;gap:6px"><span style="font-size:10.5px;color:#5B6372">Просмотрено по дням</span><div style="display:flex;align-items:flex-end;gap:4px;height:46px;border-bottom:1px solid #E4E7EB"><span style="flex:1;max-width:14px;height:70%;background:#8D96A6;border-radius:3px 3px 0 0"></span><span style="flex:1;max-width:14px;height:92%;background:#8D96A6;border-radius:3px 3px 0 0"></span><span style="flex:1;max-width:14px;height:88%;background:#8D96A6;border-radius:3px 3px 0 0"></span><span style="flex:1;max-width:14px;height:64%;background:#8D96A6;border-radius:3px 3px 0 0"></span><span style="flex:1;max-width:14px;height:40%;background:#8D96A6;border-radius:3px 3px 0 0"></span><span style="flex:1;max-width:14px;height:30%;background:#8D96A6;border-radius:3px 3px 0 0"></span></div></div>
+                  <div style="border:1px solid #E4E7EB;border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;gap:6px"><span style="font-size:10.5px;color:#5B6372">Отвечено по дням</span><div style="display:flex;align-items:flex-end;gap:4px;height:46px;border-bottom:1px solid #E4E7EB"><span style="flex:1;max-width:14px;height:18%;background:#2F3643;border-radius:3px 3px 0 0"></span><span style="flex:1;max-width:14px;height:38%;background:#2F3643;border-radius:3px 3px 0 0"></span><span style="flex:1;max-width:14px;height:52%;background:#2F3643;border-radius:3px 3px 0 0"></span><span style="flex:1;max-width:14px;height:50%;background:#2F3643;border-radius:3px 3px 0 0"></span><span style="flex:1;max-width:14px;height:96%;background:#2F3643;border-radius:3px 3px 0 0"></span><span style="flex:1;max-width:14px;height:44%;background:#2F3643;border-radius:3px 3px 0 0"></span></div></div>
+                  <div style="border:1px solid #E4E7EB;border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;gap:6px"><span style="font-size:10.5px;color:#5B6372">Успех по дням</span><div style="display:flex;align-items:flex-end;gap:4px;height:46px;border-bottom:1px solid #E4E7EB"><span style="flex:1;max-width:14px;height:26%;background:#E84A10;border-radius:3px 3px 0 0"></span><span style="flex:1;max-width:14px;height:0;background:#E84A10;border-radius:3px 3px 0 0"></span><span style="flex:1;max-width:14px;height:14%;background:#E84A10;border-radius:3px 3px 0 0"></span><span style="flex:1;max-width:14px;height:26%;background:#E84A10;border-radius:3px 3px 0 0"></span><span style="flex:1;max-width:14px;height:100%;background:#E84A10;border-radius:3px 3px 0 0"></span><span style="flex:1;max-width:14px;height:40%;background:#E84A10;border-radius:3px 3px 0 0"></span></div></div>
+                </div>
+              </div>
+
+              <div class="ax-zone" data-k="3"><span aria-hidden="true" class="ax-mk">03</span>
+                <div style="border:1px solid #E4E7EB;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px">
+                  <span style="font-size:11px;color:#5B6372">Аналитика ответов: 112 ответов</span>
+                  <div style="display:flex;gap:2px;height:24px">
+                    <span style="flex:0 0 12.5%;background:#E84A10;border-radius:4px;color:#0F131A;font-size:10.5px;display:flex;align-items:center;padding-left:6px;box-sizing:border-box">12,5%</span>
+                    <span style="flex:0 0 25%;background:#FFAD87;border-radius:4px;color:#0F131A;font-size:10.5px;display:flex;align-items:center;padding-left:6px;box-sizing:border-box">25%</span>
+                    <span style="flex:0 0 36%;background:#D5D9DF;border-radius:4px;color:#0F131A;font-size:10.5px;display:flex;align-items:center;padding-left:6px;box-sizing:border-box">36%</span>
+                    <span style="flex:1 1 0;background:#4B5566;border-radius:4px;color:#FFFFFF;font-size:10.5px;display:flex;align-items:center;padding-left:6px;box-sizing:border-box">26,5%</span>
+                  </div>
+                  <div style="display:flex;flex-wrap:wrap;gap:6px 14px;font-size:10.5px;color:#4A5262">
+                    <span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:#E84A10"></span>Успех</span>
+                    <span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:#FFAD87"></span>Есть потенциал</span>
+                    <span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:#D5D9DF"></span>Не целевые</span>
+                    <span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:#4B5566"></span>Отказ</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));gap:8px">
+                <div class="ax-zone" data-k="4"><span aria-hidden="true" class="ax-mk">04</span>
+                  <div style="border:1px solid #E4E7EB;border-radius:12px;padding:10px 12px;font-size:11.5px;height:100%;box-sizing:border-box">
+                    <span style="display:block;font-size:11px;color:#5B6372;margin-bottom:6px">Что сработало: акцент в первом сообщении</span>
+                    <div style="display:grid;grid-template-columns:minmax(0,1fr) 54px 40px;gap:6px;padding:4px 0;color:#5B6372;font-size:10px"><span>Акцент</span><span style="text-align:right">Ответили</span><span style="text-align:right">Успех</span></div>
+                    <div style="display:grid;grid-template-columns:minmax(0,1fr) 54px 40px;gap:6px;padding:5px 0;border-top:1px solid #EEF0F2;font-weight:500"><span>Оплата только за результат</span><span style="text-align:right">21%</span><span style="text-align:right">4,1%</span></div>
+                    <div style="display:grid;grid-template-columns:minmax(0,1fr) 54px 40px;gap:6px;padding:5px 0;border-top:1px solid #EEF0F2"><span>Старт без вложений</span><span style="text-align:right">15%</span><span style="text-align:right">2,8%</span></div>
+                    <div style="display:grid;grid-template-columns:minmax(0,1fr) 54px 40px;gap:6px;padding:5px 0;border-top:1px solid #EEF0F2"><span>Бесплатная оценка спроса</span><span style="text-align:right">11%</span><span style="text-align:right">0%</span></div>
+                  </div>
+                </div>
+                <div class="ax-zone" data-k="5"><span aria-hidden="true" class="ax-mk">05</span>
+                  <div style="border:1px solid #E4E7EB;border-radius:12px;padding:10px 12px;font-size:11.5px;height:100%;box-sizing:border-box">
+                    <span style="display:block;font-size:11px;color:#5B6372;margin-bottom:6px">Диалоги</span>
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-top:1px solid #EEF0F2"><span>Диалог № 1042</span><span style="font-size:10px;border-radius:999px;padding:2px 8px;background:#FFE3D6;color:#9A2E06">Успех</span></div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-top:1px solid #EEF0F2"><span>Диалог № 987</span><span style="font-size:10px;border-radius:999px;padding:2px 8px;background:#FFF1EA;color:#9A2E06">Есть потенциал</span></div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-top:1px solid #EEF0F2"><span>Диалог № 913</span><span style="font-size:10px;border-radius:999px;padding:2px 8px;background:#EEF0F2;color:#4A5262">Отказ</span></div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="rb-demo">Условные данные · структура реального отчёта</div>
+
+        <div style="flex:1 1 190px;min-width:0;display:flex;flex-direction:column;gap:12px;order:3">
+          <button class="ax-call" type="button" data-k="4" aria-pressed="false"><span class="ax-mono ax-cn">04</span><span class="ax-ct"><span class="ax-ctt">Что сработало</span><span class="ax-ctd">Какие формулировки дают больше ответов и успехов — по ним корректируем работу.</span></span></button><button class="ax-call" type="button" data-k="5" aria-pressed="false"><span class="ax-mono ax-cn">05</span><span class="ax-ct"><span class="ax-ctt">Диалоги</span><span class="ax-ctd">Каждый разговор доступен целиком: можно открыть и проверить.</span></span></button>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;padding-top:16px;border-top:1px solid #262D39;font-size:14px;color:#D5D9DF;font-weight:400">
+            <span style="display:flex;align-items:center;gap:10px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" style="fill:none;stroke:#8D96A6;stroke-width:1.3"><rect x="2" y="3" width="14" height="11" rx="2"></rect><path d="M6 16 H12"></path></svg>В личном кабинете, всегда актуален</span>
+            <span style="display:flex;align-items:center;gap:10px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" style="fill:none;stroke:#8D96A6;stroke-width:1.3"><path d="M4 2 H11 L14 5 V16 H4 Z"></path><path d="M7 9 L11 13 M11 9 L7 13"></path></svg>Выгрузка в Excel</span>
+            <span style="display:flex;align-items:center;gap:10px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" style="fill:none;stroke:#8D96A6;stroke-width:1.3"><path d="M3 14 L7 9 L10 12 L15 5"></path><path d="M11 5 H15 V9"></path></svg>Можно сразу показать руководству</span>
+          </div>
+        </div>
       </div>
 
-      <div class="rb-ann rb-right">
-        <button class="rb-a" data-k="4"><span class="rb-n">04</span><span><b>Что сработало</b><i>Какие формулировки и предложения дают больше ответов и успехов — по ним корректируем работу.</i></span></button>
-        <button class="rb-a" data-k="5"><span class="rb-n">05</span><span><b>Диалоги</b><i>Каждый разговор доступен целиком: можно открыть и проверить.</i></span></button>
-        <div class="rb-deliv">
-          <div><span class="ic sm">ic</span>В личном кабинете, всегда актуален</div>
-          <div><span class="ic sm">ic</span>Выгрузка в Excel</div>
-          <div><span class="ic sm">ic</span>Можно сразу показать руководству</div>
+      <div style="display:flex;flex-direction:column;gap:28px;padding-top:clamp(24px,4vw,56px)">
+        <h3 style="margin:0;max-width:20em;font-size:clamp(28px,2.8vw,40px);line-height:1.12;font-weight:300;letter-spacing:-.025em">Менеджер занимается приоритетными задачами — а работа при этом не останавливается</h3>
+        <div style="border:1px solid #262D39;border-radius:24px;padding:20px 24px;display:flex;flex-direction:column;gap:0;overflow-x:auto">
+          <div style="display:grid;grid-template-columns:200px repeat(7,minmax(64px,1fr));gap:6px;align-items:center;padding:4px 0 10px;min-width:720px">
+            <span></span><span class="ax-mono" style="font-size:12px;color:#8D96A6;text-align:center">пн</span><span class="ax-mono" style="font-size:12px;color:#8D96A6;text-align:center">вт</span><span class="ax-mono" style="font-size:12px;color:#8D96A6;text-align:center">ср</span><span class="ax-mono" style="font-size:12px;color:#8D96A6;text-align:center">чт</span><span class="ax-mono" style="font-size:12px;color:#8D96A6;text-align:center">пт</span><span class="ax-mono" style="font-size:12px;color:#8D96A6;text-align:center">сб</span><span class="ax-mono" style="font-size:12px;color:#8D96A6;text-align:center">вс</span>
+          </div>
+          <div style="display:grid;grid-template-columns:200px repeat(7,minmax(64px,1fr));gap:6px;align-items:center;padding:10px 0;border-top:1px solid #1C222C;min-width:720px">
+            <span style="font-size:15px;font-weight:400;color:#D5D9DF">Менеджер</span>
+            <span style="grid-column:2 / 7;height:40px;border-radius:10px;background:#232A35;color:#E6E9EE;font-size:13.5px;font-weight:400;display:flex;align-items:center;padding:0 14px">Свои приоритетные задачи</span>
+          </div>
+          <div style="display:grid;grid-template-columns:200px repeat(7,minmax(64px,1fr));gap:6px;align-items:center;padding:10px 0;border-top:1px solid #1C222C;min-width:720px">
+            <span style="font-size:15px;font-weight:400;color:#D5D9DF">Виртуальные сотрудники</span>
+            <span style="grid-column:2 / 9;height:40px;border-radius:10px;background:#FF5B1F;color:#0F131A;font-size:13.5px;font-weight:500;display:flex;align-items:center;padding:0 14px">Диалоги, обработка, исправление проблем — параллельно и без пауз</span>
+          </div>
+          <div style="display:grid;grid-template-columns:200px repeat(7,minmax(64px,1fr));gap:6px;align-items:center;padding:10px 0 4px;border-top:1px solid #1C222C;min-width:720px">
+            <span style="font-size:15px;font-weight:400;color:#D5D9DF">Руководитель</span>
+            <span style="grid-column:8 / 9;height:40px;border-radius:10px;background:#F4F5F7;color:#0F131A;font-size:13.5px;font-weight:500;display:flex;align-items:center;justify-content:center">Отчёт</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:clamp(20px,2.4vw,32px);padding-top:8px">
+          <div style="border-top:1px solid #3A4250;padding-top:18px;display:flex;flex-direction:column;gap:8px"><span style="font-size:18px;font-weight:400">Время на главное</span><span style="font-size:15px;line-height:1.5;color:#AEB5C1">Не нужно собирать данные, созваниваться и готовить отчёты.</span></div>
+          <div style="border-top:1px solid #3A4250;padding-top:18px;display:flex;flex-direction:column;gap:8px"><span style="font-size:18px;font-weight:400">Работа не стопорится</span><span style="font-size:15px;line-height:1.5;color:#AEB5C1">Диалоги идут, проблемы находят и исправляют, пока менеджер занят другим.</span></div>
+          <div style="border-top:1px solid #3A4250;padding-top:18px;display:flex;flex-direction:column;gap:8px"><span style="font-size:18px;font-weight:400">Руководитель в курсе</span><span style="font-size:15px;line-height:1.5;color:#AEB5C1">Отчёт приходит регулярно — его можно показать без доработки.</span></div>
+          <div style="border-top:1px solid #3A4250;padding-top:18px;display:flex;flex-direction:column;gap:8px"><span style="font-size:18px;font-weight:400">Результат под контролем</span><span style="font-size:15px;line-height:1.5;color:#AEB5C1">Видно, что сделано, где была проблема и как её решили.</span></div>
+        </div>
+      </div>
+
+      <p style="margin:0;padding-top:clamp(24px,4vw,56px);max-width:18em;font-size:clamp(30px,3.4vw,48px);line-height:1.1;letter-spacing:-.03em">Центр управления продажами, построенный на реальных диалогах с клиентами</p>
+    </div>
+  </section>
+
+</div>
+<div style="font-family:'Geologica','Segoe UI',Arial,sans-serif;font-weight:300;color:#0F131A;-webkit-font-smoothing:antialiased">
+
+  <section style="background:#F3F4F6;padding:clamp(96px,10vw,152px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5.5vw,80px);box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(48px,5vw,72px)">
+      <h2 style="margin:0;font-size:clamp(34px,3.8vw,54px);line-height:1.06;font-weight:300;letter-spacing:-.03em">Как начать работу</h2>
+
+      <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:40px 0">
+        <li style="position:relative;padding:40px 28px 0 0;display:flex;flex-direction:column;gap:10px">
+          <span aria-hidden="true" style="position:absolute;left:0;right:0;top:7px;border-top:2px solid #0F131A"></span>
+          <span aria-hidden="true" style="position:absolute;left:0;top:0;width:16px;height:16px;border-radius:50%;background:#0F131A"></span>
+          <span class="ax-mono" style="font-size:12px;color:#5B6372">01</span>
+          <span style="font-size:22px;line-height:1.25;font-weight:400;letter-spacing:-.01em">Вы пишете нам</span>
+          <span style="font-size:15px;line-height:1.5;color:#4A5262">по телефону, на почту или в мессенджер</span>
+        </li>
+        <li style="position:relative;padding:40px 28px 0 0;display:flex;flex-direction:column;gap:10px">
+          <span aria-hidden="true" style="position:absolute;left:0;right:0;top:7px;border-top:2px solid #0F131A"></span>
+          <span aria-hidden="true" style="position:absolute;left:0;top:0;width:16px;height:16px;border-radius:50%;background:#0F131A"></span>
+          <span class="ax-mono" style="font-size:12px;color:#5B6372">02</span>
+          <span style="font-size:22px;line-height:1.25;font-weight:400;letter-spacing:-.01em">Отвечает виртуальный сотрудник</span>
+          <span style="font-size:15px;line-height:1.5;color:#4A5262">сразу и в любое время: уточняет задачу и аудиторию</span>
+        </li>
+        <li style="position:relative;padding:40px 28px 0 0;display:flex;flex-direction:column;gap:10px">
+          <span aria-hidden="true" style="position:absolute;left:0;right:0;top:7px;border-top:2px solid #FF5B1F"></span>
+          <span aria-hidden="true" style="position:absolute;left:0;top:0;width:16px;height:16px;border-radius:50%;background:#0F131A"></span>
+          <span class="ax-mono" style="font-size:12px;color:#5B6372">03</span>
+          <span style="font-size:22px;line-height:1.25;font-weight:400;letter-spacing:-.01em">Определяем продукт и гипотезы</span>
+          <span style="font-size:15px;line-height:1.5;color:#4A5262">сценарии, аудиторию и материалы для обучения ИИ-агентов</span>
+        </li>
+        <li style="position:relative;padding:40px 0 0 0;display:flex;flex-direction:column;gap:10px">
+          <span aria-hidden="true" style="position:absolute;left:-6px;top:-6px;width:28px;height:28px;border-radius:50%;background:#FF5B1F;box-shadow:0 0 0 6px rgba(255,91,31,.16)"></span>
+          <span class="ax-mono" style="font-size:12px;color:#5B6372">04</span>
+          <span style="font-size:22px;line-height:1.25;font-weight:500;letter-spacing:-.01em">Пилот</span>
+          <span style="font-size:15px;line-height:1.5;color:#4A5262">подготовка, работа с базой и фактическая воронка</span>
+        </li>
+      </ol>
+
+      <div style="background:#FFFFFF;border-radius:28px;padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:18px">
+        <span style="font-size:15px;font-weight:400;color:#5B6372">Пилот по неделям</span>
+        <div style="display:flex;flex-wrap:wrap;gap:12px 2px;min-height:64px">
+          <div style="flex:2 1 0;min-width:120px;background:#E4E7EB;border-radius:12px 4px 4px 12px;padding:12px 16px;display:flex;flex-direction:column;justify-content:center;gap:2px;box-sizing:border-box">
+            <span style="font-size:16px;font-weight:500">≈2 недели</span><span style="font-size:13px;color:#4A5262">подготовка: сценарии, инфраструктура, обучение агентов</span>
+          </div>
+          <div style="flex:4 1 0;min-width:160px;background:#FF5B1F;color:#0F131A;border-radius:4px 12px 12px 4px;padding:12px 16px;display:flex;flex-direction:column;justify-content:center;gap:2px;box-sizing:border-box">
+            <span style="font-size:16px;font-weight:500">≈4 недели</span><span style="font-size:13px">работа с базой и контроль качества диалогов</span>
+          </div>
+          <div style="flex:1 0 140px;display:flex;align-items:center;padding-left:16px">
+            <span style="font-size:15px;font-weight:400;max-width:9em;line-height:1.3">Итог: фактическая воронка и аналитика</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:16px">
+        <div style="background:#FFFFFF;border-radius:28px;padding:clamp(28px,3.2vw,44px);display:flex;flex-direction:column;gap:14px">
+          <svg aria-hidden="true" width="40" height="40" viewBox="0 0 40 40" style="fill:none;stroke:#0F131A;stroke-width:1.3"><path d="M6 8 H34 V26 H18 L11 32 V26 H6 Z"></path><circle cx="14" cy="17" r="1.6" style="fill:#FF5B1F;stroke:none"></circle><circle cx="20" cy="17" r="1.6" style="fill:#FF5B1F;stroke:none"></circle><circle cx="26" cy="17" r="1.6" style="fill:#FF5B1F;stroke:none"></circle></svg>
+          <span style="font-size:clamp(24px,2.2vw,30px);line-height:1.2;letter-spacing:-.02em;max-width:15em">Первый разговор с нами — уже демонстрация продукта</span>
+          <p style="margin:0;font-size:16px;line-height:1.55;color:#4A5262;max-width:28em">На ваше обращение ответит виртуальный сотрудник — так вы сразу видите, как он общается с клиентами.</p>
+          <div style="margin-top:auto;padding-top:20px;display:flex;flex-direction:column"><a href="tel:+79154267807" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 16px;padding:14px 0;border-top:1px solid #DADDE3;color:#0F131A"><span style="font-size:14px;color:#5B6372;font-weight:400">Позвонить</span><span style="font-size:20px;font-weight:400;white-space:nowrap">+7 (915) 426-78-07</span></a><a href="mailto:contact@aixtex.ru" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 16px;padding:14px 0;border-top:1px solid #DADDE3;border-bottom:1px solid #DADDE3;color:#0F131A"><span style="font-size:14px;color:#5B6372;font-weight:400">Написать</span><span style="font-size:20px;font-weight:400">contact@aixtex.ru</span></a></div>
+        </div>
+        <div style="background:#0F131A;color:#F4F5F7;border-radius:28px;padding:clamp(28px,3.2vw,44px);display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:14px;font-weight:400;color:#8D96A6">Реальный запущенный сценарий, телеком B2B</span>
+          <span style="font-size:clamp(24px,2.2vw,30px);line-height:1.2;letter-spacing:-.02em">Попробуйте ИИ-агента прямо сейчас</span>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:8px 0 6px">
+            <span style="align-self:flex-start;max-width:80%;background:#1C222C;border-radius:16px 16px 16px 4px;padding:10px 14px;font-size:14.5px;line-height:1.45;font-weight:400">Сколько стоит облачная телефония для офиса на 20 человек?</span>
+            <span style="align-self:flex-end;max-width:80%;background:#F4F5F7;color:#0F131A;border-radius:16px 16px 4px 16px;padding:10px 14px;font-size:14.5px;line-height:1.45;font-weight:400">ИИ-агент уточняет задачу и предлагает подходящий тариф</span>
+          </div>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:#AEB5C1">Напишите агенту в свободной форме про «Облачную телефонию» и оцените, как он ведёт диалог.</p>
+          <a href="https://consultant.aixtex.ru/web-chat/cf37ae3d-51f4-43f2-aa81-f4ee4f84fe1f" target="_blank" rel="noopener" style="align-self:flex-start;margin-top:6px;display:inline-flex;align-items:center;height:52px;padding:0 28px;border-radius:999px;background:#F4F5F7;color:#0F131A;font-size:16px;font-weight:500">Открыть ИИ-агента</a>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="rb-mgr">
-      <span class="rb-eyebrow">Преимущество для менеджера</span>
-      <h3 class="rb-h3">Менеджер занимается приоритетными задачами — а работа при этом не останавливается</h3>
-      <div class="rb-lanes">
-        <div class="rb-lane rb-hd"><div class="rb-ln"></div><div class="rb-track"><span>пн</span><span>вт</span><span>ср</span><span>чт</span><span>пт</span><span>сб</span><span>вс</span></div></div>
-        <div class="rb-lane"><div class="rb-ln">Менеджер</div><div class="rb-track"><div class="rb-seg m" style="grid-column:1/6">Свои приоритетные задачи</div></div></div>
-        <div class="rb-lane"><div class="rb-ln">Виртуальные сотрудники</div><div class="rb-track"><div class="rb-seg a" style="grid-column:1/8">Диалоги, обработка, исправление проблем — параллельно и без пауз</div></div></div>
-        <div class="rb-lane"><div class="rb-ln">Руководитель</div><div class="rb-track"><div class="rb-seg r" style="grid-column:7/8">Отчёт ↗</div></div></div>
+  <section style="background:#FFFFFF;padding:clamp(96px,10vw,152px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5.5vw,80px);box-sizing:border-box;display:flex;flex-wrap:wrap;gap:40px 72px;align-items:flex-start">
+      <div style="flex:1 1 320px;display:flex;flex-direction:column;gap:16px">
+        <h2 style="margin:0;max-width:9em;font-size:clamp(34px,3.8vw,54px);line-height:1.06;font-weight:300;letter-spacing:-.03em">Ответы на частые вопросы</h2>
+        <span style="font-size:16px;color:#5B6372">О продуктах, технологии и начале работы.</span>
+        <a href="#/faq" class="ax-ln" style="align-self:flex-start;font-size:16px;font-weight:400;margin-top:8px">Все вопросы</a>
       </div>
-      <div class="rb-ben">
-        <div><span class="rb-bi">01</span><b>Время на приоритетные задачи</b><p>Менеджер занимается своими задачами, а не сбором данных, созвонами и подготовкой отчётов.</p></div>
-        <div><span class="rb-bi">02</span><b>Работа не стопорится</b><p>Виртуальные сотрудники работают параллельно: диалоги идут, проблемы находят и исправляют, даже когда менеджер занят другим.</p></div>
-        <div><span class="rb-bi">03</span><b>Руководитель всегда в курсе</b><p>Отчёты приходят регулярно — их можно сразу показать руководству, без доработки и лишних созвонов.</p></div>
-        <div><span class="rb-bi">04</span><b>Результат под контролем</b><p>Видно, что сделано, где возникла проблема и как её решили, — без погружения в процесс.</p></div>
+      <div style="flex:2 1 560px;min-width:0;border-top:1px solid #DADDE3">
+        <details class="ax-q" open style="border-bottom:1px solid #DADDE3;padding:22px 0">
+          <summary style="display:flex;justify-content:space-between;align-items:center;gap:24px;font-size:20px;font-weight:400;line-height:1.35">Что такое «виртуальные сотрудники»?<svg class="ax-plus" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" style="flex:0 0 20px;fill:none;stroke:#0F131A;stroke-width:1.4"><path d="M10 3 V17 M3 10 H17"></path></svg></summary>
+          <p style="margin:14px 0 0;max-width:38em;font-size:16px;line-height:1.6;color:#4A5262">Это рабочий персонал на базе искусственного интеллекта. ИИ-агенты работают вместе в мультиагентной системе и самостоятельно решают сложные задачи.</p>
+        </details>
+        <details class="ax-q" style="border-bottom:1px solid #DADDE3;padding:22px 0">
+          <summary style="display:flex;justify-content:space-between;align-items:center;gap:24px;font-size:20px;font-weight:400;line-height:1.35">Чем ИИ-агент отличается от чат-бота и обычной автоматизации?<svg class="ax-plus" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" style="flex:0 0 20px;fill:none;stroke:#0F131A;stroke-width:1.4"><path d="M10 3 V17 M3 10 H17"></path></svg></summary>
+          <p style="margin:14px 0 0;max-width:38em;font-size:16px;line-height:1.6;color:#4A5262">Чат-боты и RPA действуют по жёстким сценариям и ждут запроса. ИИ-агент сам начинает диалог, подстраивается под собеседника, ведёт нелинейные переговоры и учится на реальных разговорах.</p>
+        </details>
+        <details class="ax-q" style="border-bottom:1px solid #DADDE3;padding:22px 0">
+          <summary style="display:flex;justify-content:space-between;align-items:center;gap:24px;font-size:20px;font-weight:400;line-height:1.35">Какой продукт подходит моему бизнесу?<svg class="ax-plus" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" style="flex:0 0 20px;fill:none;stroke:#0F131A;stroke-width:1.4"><path d="M10 3 V17 M3 10 H17"></path></svg></summary>
+          <p style="margin:14px 0 0;max-width:38em;font-size:16px;line-height:1.6;color:#4A5262">Крупным компаниям — Виртуальный отдел продаж для работы с клиентской базой. Малому и среднему бизнесу — Скаут для поиска клиентов и Ждун для обработки обращений.</p>
+        </details>
+        <details class="ax-q" style="border-bottom:1px solid #DADDE3;padding:22px 0">
+          <summary style="display:flex;justify-content:space-between;align-items:center;gap:24px;font-size:20px;font-weight:400;line-height:1.35">Как быстро можно запустить работу?<svg class="ax-plus" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" style="flex:0 0 20px;fill:none;stroke:#0F131A;stroke-width:1.4"><path d="M10 3 V17 M3 10 H17"></path></svg></summary>
+          <p style="margin:14px 0 0;max-width:38em;font-size:16px;line-height:1.6;color:#4A5262">Подготовка к запуску занимает около 2 недель, пилот — около 4 недель. По итогам вы получаете фактическую воронку и аналитику результатов.</p>
+        </details>
+        <details class="ax-q" style="border-bottom:1px solid #DADDE3;padding:22px 0">
+          <summary style="display:flex;justify-content:space-between;align-items:center;gap:24px;font-size:20px;font-weight:400;line-height:1.35">Сколько это стоит?<svg class="ax-plus" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" style="flex:0 0 20px;fill:none;stroke:#0F131A;stroke-width:1.4"><path d="M10 3 V17 M3 10 H17"></path></svg></summary>
+          <p style="margin:14px 0 0;max-width:38em;font-size:16px;line-height:1.6;color:#4A5262">Стоимость рассчитывается индивидуально под задачу. Напишите нам — виртуальный сотрудник уточнит детали и назовёт условия.</p>
+        </details>
       </div>
     </div>
-
-    <p class="rb-final">Центр управления продажами, построенный на реальных диалогах с клиентами</p>
-
   </section>
 
-  <!-- [10] КАК НАЧАТЬ -->
-  <section class="sec">
-    <span class="lbl">[10] Как начать</span>
-    <span class="kicker">Старт</span>
-    <h2 class="d-h2">Как начать работу</h2>
-    <div class="d-flow4">
-      <div class="d-f"><span class="d-fn">01</span><span class="ic sm">icon</span><div class="h3">Вы пишете нам</div><p><a class="link" style="margin:0;font-weight:500" href="tel:+79154267807">по телефону</a>, <a class="link" style="margin:0;font-weight:500" href="mailto:contact@aixtex.ru">на почту</a> или в мессенджер</p></div>
-      <i class="d-fa">→</i>
-      <div class="d-f"><span class="d-fn">02</span><span class="ic sm">icon</span><div class="h3">Отвечает виртуальный сотрудник</div><p>сразу и в любое время: уточняет задачу и аудиторию</p></div>
-      <i class="d-fa">→</i>
-      <div class="d-f"><span class="d-fn">03</span><span class="ic sm">icon</span><div class="h3">Определяем продукт и гипотезы</div><p>сценарии, аудиторию и материалы для обучения ИИ-агентов</p></div>
-      <i class="d-fa">→</i>
-      <div class="d-f hot"><span class="d-fn">04</span><span class="ic sm">icon</span><div class="h3">Пилот</div><p>≈2 недели подготовки, ≈4 недели работы, затем фактическая воронка и аналитика</p></div>
-    </div>
-    <div class="d-start">
-      <div class="d-start-a"><div class="h3" style="margin:0 0 6px">Первый разговор с нами — уже демонстрация продукта</div><div>На ваше обращение ответит виртуальный сотрудник: так вы сразу видите, как он общается с клиентами.</div></div>
-      <div class="d-start-b"><small>Реальный запущенный сценарий · Telecom B2B</small><div class="h3" style="margin:6px 0">Попробуйте ИИ-агента прямо сейчас</div><div>Напишите агенту в свободной форме по продукту «Облачная телефония» и оцените, как он ведёт диалог.</div><a class="btn" href="https://consultant.aixtex.ru/web-chat/cf37ae3d-51f4-43f2-aa81-f4ee4f84fe1f" target="_blank" rel="noopener">Открыть ИИ-агента ↗</a></div>
+  <section style="background:#F3F4F6;padding:clamp(64px,7vw,96px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5.5vw,80px);box-sizing:border-box;display:flex;flex-wrap:wrap;gap:32px 72px;align-items:center">
+      <div style="flex:1 1 320px;display:flex;flex-direction:column;gap:8px">
+        <span style="font-size:clamp(28px,2.8vw,38px);line-height:1.1;letter-spacing:-.025em">Как связаться с нами</span>
+        <span style="font-size:16px;color:#5B6372">Первым ответит виртуальный сотрудник.</span>
+      </div>
+      <div style="flex:2 1 560px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:24px">
+        <a href="tel:+79154267807" style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #0F131A;padding-top:16px"><span style="font-size:14px;color:#5B6372;font-weight:400">Телефон</span><span style="font-size:20px;font-weight:400;white-space:nowrap">+7 (915) 426-78-07</span></a>
+        <a href="mailto:contact@aixtex.ru" style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #0F131A;padding-top:16px"><span style="font-size:14px;color:#5B6372;font-weight:400">Почта</span><span style="font-size:20px;font-weight:400">contact@aixtex.ru</span></a>
+        <div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid #0F131A;padding-top:16px"><span style="font-size:14px;color:#5B6372;font-weight:400">Мессенджеры</span><span style="align-self:flex-start;font-size:14px;font-weight:400;border:1px dashed #AEB5C1;border-radius:999px;padding:6px 12px;color:#4A5262;white-space:nowrap">[ссылки на мессенджеры]</span></div>
+      </div>
     </div>
   </section>
 
-  <!-- [11] ВОПРОСЫ -->
-  <section class="sec d-warmbg">
-    <span class="lbl">[11] Вопросы · аккордеон</span>
-    <div class="split">
-      <div><span class="kicker">Вопросы</span><h2 class="d-h2">Ответы на частые вопросы</h2><p class="muted">О продуктах, технологии и начале работы.</p><a class="link" href="#/faq">Все вопросы →</a></div>
-      <div class="faq d-faq" data-ids="g1,g2,g5,w4,w2"></div>
+  <footer class="ax-foot" style="background:#0F131A;color:#AEB5C1;padding:clamp(56px,6vw,80px) 0 32px;font-size:14px;font-weight:400">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5.5vw,80px);box-sizing:border-box;display:flex;flex-direction:column;gap:48px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:32px">
+        <div style="display:flex;flex-direction:column;gap:10px;line-height:1.55">
+          <span style="font-size:24px;letter-spacing:.06em;color:#F4F5F7;line-height:1"><span style="font-weight:600">АИ</span><span style="font-weight:300">ТЕХ</span></span>
+          <span>ООО «Агентство интеллектуальных технологий»</span>
+          <span>ИНН 9707049984, ОГРН 1257700352667, ОКВЭД 62.01</span>
+          <span>127051, г. Москва, пер. 2-й Колобовский, д. 12, кв. 12а</span>
+        </div>
+        <nav aria-label="Решения" style="display:flex;flex-direction:column;gap:10px"><span style="color:#F4F5F7;font-weight:500">Решения</span><a href="#/solutions/scout">Скаут</a><a href="#/solutions/virtual-sales">Виртуальный отдел продаж</a><a href="#/solutions/zhdun">Ждун</a><a href="#/solutions">Все решения</a></nav>
+        <nav aria-label="Компания" style="display:flex;flex-direction:column;gap:10px"><span style="color:#F4F5F7;font-weight:500">Компания</span><a href="#/use-cases">Сценарии</a><a href="#/about">О компании</a><a href="#/technologies">Технологии</a><a href="#/faq">Вопросы</a><a href="#/contacts">Контакты</a></nav>
+        <nav aria-label="Документы" style="display:flex;flex-direction:column;gap:10px"><span style="color:#F4F5F7;font-weight:500">Документы</span><a href="#/documents/privacy">Политика обработки персональных данных</a><a href="#/documents/pricing">Политика ценообразования</a><a href="#/documents/spam">Политика в отношении спама</a><a href="#/documents/license">Лицензия</a><a href="#/documents/patents">Патенты и свидетельства</a><a href="#/ai_sales">ПО «Виртуальный отдел продаж»</a><a href="#/ai_scout">ПО «СКАУТ»</a></nav>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 40px;border-top:1px solid #262D39;padding-top:20px;font-size:12.5px;color:#8D96A6;line-height:1.5">
+        <span style="max-width:52em">ООО «АИТЕХ» не проводит набор сотрудников и не рассылает предложения о работе, в том числе через мессенджеры. Официальная информация публикуется только на этом сайте.</span>
+        <span style="display:flex;gap:20px;flex-wrap:wrap"><a href="tel:+79154267807">+7 (915) 426-78-07</a><a href="mailto:contact@aixtex.ru">contact@aixtex.ru</a></span>
+      </div>
     </div>
-  </section>
+  </footer>
 
-  <div class="contact-strip"></div>
+</div>
 </div>
 
 <!-- ============================== РЕШЕНИЯ ============================== -->
@@ -1141,7 +1636,7 @@ body.clean .note,body.clean .warn,body.clean .lbl,body.clean .seo,body.clean .rb
     <span class="lbl">[R2] Путь клиента</span>
     <h2 class="h2">Где работает каждый продукт</h2>
     <div class="flow new" style="margin-top:24px">
-      <a class="node" href="#/solutions/scout"><div class="small">Клиент ищет решение</div><div class="h3" style="margin-top:6px">Скаут</div><div class="small">находит запрос в чате, отвечает первым и подогревает тех, кто купит позже</div></a><div class="arr">→</div>
+      <a class="node" href="#/solutions/scout"><div class="small">Клиент ищет решение</div><div class="h3" style="margin-top:6px">Скаут</div><div class="small">находит запрос в каналах и группах MAX, отвечает первым и подогревает тех, кто купит позже</div></a><div class="arr">→</div>
       <a class="node" href="#/solutions/zhdun"><div class="small">Клиент обращается к вам</div><div class="h3" style="margin-top:6px">Ждун</div><div class="small">отвечает сразу, консультирует и доводит до нужного этапа</div></a><div class="arr">→</div>
       <a class="node" href="#/solutions/virtual-sales"><div class="small">Клиент в вашей базе — потенциальной или действующей</div><div class="h3" style="margin-top:6px">Виртуальный отдел продаж</div><div class="small">начинает диалог, выявляет потребность, удерживает</div></a>
     </div>
@@ -1156,8 +1651,8 @@ body.clean .note,body.clean .warn,body.clean .lbl,body.clean .seo,body.clean .rb
       <tbody>
         <tr><td>Задача</td><td>Привлечение новых клиентов</td><td>Продажи и удержание по потенциальной и действующей базе</td><td>Обработка входящих обращений</td></tr>
         <tr><td>Для кого</td><td>Малый и средний бизнес</td><td>Крупный бизнес и корпорации</td><td>Малый и средний бизнес</td></tr>
-        <tr><td>Где работает</td><td>Открытые тематические чаты и сообщества</td><td>Мессенджеры: персональные исходящие диалоги</td><td>Входящие каналы компании</td></tr>
-        <tr><td>Что делает</td><td>Находит запросы, отвечает в чате, пишет человеку или приглашает в вашу группу</td><td>Самостоятельно инициирует диалог, выявляет потребность и передаёт клиента продавцу; отрабатывает сохранение при риске оттока</td><td>Отвечает 24/7, уточняет задачу, называет условия, передаёт менеджеру</td></tr>
+        <tr><td>Где работает</td><td>Каналы и группы мессенджера MAX</td><td>Мессенджеры: персональные исходящие диалоги</td><td>Входящие каналы компании</td></tr>
+        <tr><td>Что делает</td><td>Находит площадки, отбирает уместные посты и сообщения, комментирует голосом персоны кампании, собирает авторов в лиды</td><td>Самостоятельно инициирует диалог, выявляет потребность и передаёт клиента продавцу; отрабатывает сохранение при риске оттока</td><td>Отвечает 24/7, уточняет задачу, называет условия, передаёт менеджеру</td></tr>
         <tr><td>Что получает бизнес</td><td>Тёплых клиентов, которые сами обозначили запрос</td><td>Продавцы работают только с подтверждённым интересом; повторные продажи и снижение оттока</td><td>Ни одного потерянного обращения и готовые заявки</td></tr>
         <tr><td></td><td><a class="link" href="#/solutions/scout">О Скауте →</a></td><td><a class="link" href="#/solutions/virtual-sales">О виртуальном отделе продаж →</a></td><td><a class="link" href="#/solutions/zhdun">О Ждуне →</a></td></tr>
       </tbody>
@@ -1193,17 +1688,20 @@ body.clean .note,body.clean .warn,body.clean .lbl,body.clean .seo,body.clean .rb
 </div>
 
 <!-- ============================== СКАУТ ============================== -->
-<div class="view" data-route="/solutions/scout" data-sec="solutions" data-title="Скаут — поиск клиентов в чатах и сообществах | АИТЕХ">
+<div class="view" data-route="/solutions/scout" data-sec="solutions" data-title="Скаут — поиск клиентов в каналах и группах MAX | АИТЕХ">
   <section class="sec">
     <span class="lbl">[S1] Первый экран</span>
-    <div class="seo">URL: /solutions/scout · Title: Скаут — поиск клиентов в чатах и сообществах | АИТЕХ<br>Ключи: поиск клиентов в чатах, лидогенерация в мессенджерах, перехват лидов, мониторинг чатов, горячие запросы</div>
+    <div class="seo">URL: /solutions/scout · Title: Скаут — поиск клиентов в каналах и группах MAX | АИТЕХ<br>Ключи: поиск клиентов в MAX, ИИ-комментирование, лидогенерация в мессенджерах, перехват лидов, мониторинг каналов и групп, горячие запросы</div>
     <div class="crumbs"><a href="#/">Главная</a> / <a href="#/solutions">Решения</a> / Скаут</div>
     <div class="hero">
       <div>
         <div class="eyebrow">Перехватчик лидов</div>
-        <h1 class="h1 s">Скаут — поиск клиентов в тематических чатах и сообществах</h1>
+        <h1 class="h1 s">Скаут — поиск клиентов в каналах и группах MAX</h1>
         <p class="lead"><b>Ловите клиентов в тот момент, когда они сами пишут «мне нужно».</b></p>
         <p class="lead">Каждый день в тематических чатах пишут: «посоветуйте поставщика», «ищу, кто сделает SEO», «нужен бухгалтер». У человека уже есть запрос. Но пока вы листаете чаты вручную, он получает несколько ответов и выбирает того, кто ответил первым. Скаут следит за чатами вместо вас.</p>
+        <p class="lead">Скаут работает в каналах и группах мессенджера MAX: находит площадки по теме, вступает в них от имени аккаунтов MAX, следит за новыми постами и сообщениями, отбирает уместные и публикует комментарии голосом заданной персоны. Тем, кто написал аккаунту в личные сообщения, отвечает модуль «Ждун».</p>
+        <div><span class="chip p">Мессенджер MAX</span><span class="chip">On-premise или SaaS</span><span class="chip">Языковая модель GigaChat</span></div>
+        <a class="link" href="#/ai_scout">Программное обеспечение «СКАУТ» →</a>
       </div>
       <div class="ph anim" style="height:380px;flex-direction:column;gap:10px;padding:24px;align-items:flex-start;justify-content:flex-start">
         <span class="bubble">«Посоветуйте поставщика упаковки»</span>
@@ -1219,33 +1717,52 @@ body.clean .note,body.clean .warn,body.clean .lbl,body.clean .seo,body.clean .rb
     <span class="lbl">[S2] Как работает</span>
     <h2 class="h2">Как работает Скаут</h2>
     <div class="sw">
-      <div class="sw-col"><div class="sw-n">01</div><div class="sw-t">Охват: чаты и сообщества</div>
+      <div class="sw-col"><div class="sw-n">01</div><div class="sw-t">Площадки: каналы и группы MAX</div>
         <div class="sw-chat"><div class="m">«Кто знает хороший шиномонтаж рядом?»</div><div class="m hit">«<mark>Ищу бухгалтера</mark> для ИП, посоветуйте»</div><div class="m">«Во сколько завтра собрание?»</div></div>
-        <div class="sw-s">люди сами пишут, что им нужно</div></div>
+        <div class="sw-s">поиск по теме и названию, добавление в кампании</div></div>
       <div class="sw-arr">→</div>
       <div class="sw-col"><div class="sw-n">02</div><div class="sw-t">Радар находит запрос</div>
         <div class="sw-radar"><span></span><span></span><span></span><i></i></div>
-        <div class="sw-s">по смыслу, а не только по ключевым словам</div></div>
+        <div class="sw-s">языковая модель отбирает уместное и оценивает уверенность</div></div>
       <div class="sw-arr">→</div>
-      <div class="sw-col"><div class="sw-n">03</div><div class="sw-t">Скаут вступает в разговор</div>
-        <div class="sw-opts"><div><span>1</span>Активный комментарий</div><div><span>2</span>Активное сообщение</div><div><span>3</span>Приглашение в вашу группу</div></div>
-        <div class="sw-s">текст — под контекст запроса</div></div>
+      <div class="sw-col"><div class="sw-n">03</div><div class="sw-t">Скаут комментирует голосом персоны</div>
+        <div class="sw-opts"><div><span>1</span>Комментарий под постом канала</div><div><span>2</span>Сообщение в группе</div><div><span>3</span>Ответ на реплику под комментарием</div></div>
+        <div class="sw-s">режимы площадки: «Черновик», «Авто», «Только сбор»</div></div>
       <div class="sw-arr">→</div>
       <div class="sw-col"><div class="sw-n">04</div><div class="sw-t">Тёплый клиент — у вас</div>
-        <div class="sw-res"><b>Клиент в работе</b><span>вместе с контекстом запроса</span></div>
+        <div class="sw-res"><b>Авторы — в лидах</b><span>с контекстом обсуждения; в личке отвечает Ждун</span></div>
         <div class="sw-s">раньше конкурентов</div></div>
     </div>
     <div class="row c2" style="margin-top:20px">
-      <div class="card"><div class="ic">icon</div><div class="h3">Вы задаёте чаты</div><div>Указываете чаты и что в них ловить: ключевые слова в сообщениях, новых участников или и то и другое.</div></div>
-      <div class="card"><div class="ic">icon</div><div class="h3">Скаут самостоятельно находит чаты</div><div>Ищет сообщества, где общается ваша целевая аудитория, и вступает в них.</div></div>
+      <div class="card"><div class="ic">icon</div><div class="h3">Вы задаёте площадки</div><div>Указываете каналы и группы MAX и что в них ловить: ключевые слова и темы в постах и сообщениях.</div></div>
+      <div class="card"><div class="ic">icon</div><div class="h3">Скаут сам находит площадки</div><div>Ищет каналы и группы MAX по теме и названию и вступает в них по очереди — с настраиваемым суточным лимитом и паузами.</div></div>
     </div>
     <div class="h3" style="margin-top:36px">Из чего состоит Скаут</div>
     <div class="sc-parts">
-      <div><span class="sc-pn">Охват</span><p>Непрерывно наращивает аудиторию: находит новые чаты городов, ЖК, бизнес-сообществ и вступает в них.</p></div>
-      <div><span class="sc-pn">Радар</span><p>Читает открытые группы и выделяет нужные сообщения — понимает смысл, а не только ключевые слова.</p></div>
-      <div class="hot"><span class="sc-pn">Скаут</span><p>Отрабатывает найденное: комментирует, задаёт вопросы, подсказывает решение и называет ваш продукт, когда он к месту.</p></div>
-      <a href="#/solutions/zhdun"><span class="sc-pn">Агент для личных сообщений <em>опция</em></span><p>Отвечает тем, кто написал в личку, по вашему заданию. Это наш продукт Ждун →</p></a>
+      <div><span class="sc-pn">Охват</span><p>Находит каналы и группы MAX по теме и названию, добавляет их в кампании и вступает в них по очереди.</p></div>
+      <div><span class="sc-pn">Радар</span><p>Следит за новыми постами и сообщениями и отбирает уместные: языковая модель оценивает, насколько сообщение подходит.</p></div>
+      <div class="hot"><span class="sc-pn">Скаут</span><p>Пишет комментарии голосом персоны кампании под постами каналов и в группах и отвечает на реплики под своими комментариями.</p></div>
+      <a href="#/solutions/zhdun"><span class="sc-pn">Ждун <em>модуль</em></span><p>Отвечает в личных сообщениях тем, кто написал аккаунту: черновиками для оператора или автоматически, спорные случаи передаёт человеку. Подробнее о Ждуне →</p></a>
     </div>
+    <div class="warn"><b>Сверить с командой продукта.</b> В описании ПО для реестра Скаут работает в каналах и группах MAX: комментирует посты и сообщения, отвечает на реплики, а в личных сообщениях отвечает только тем, кто написал сам. «Активные сообщения» и «приглашение в вашу группу» (блок «Как Скаут работает с аудиторией») в этом описании не упомянуты — подтвердить, оставляем ли их на сайте.</div>
+  </section>
+
+
+  <section class="sec">
+    <span class="lbl">[S2c] Режимы и контроль · по описанию ПО</span>
+    <h2 class="h2">Вы решаете, сколько свободы у Скаута</h2>
+    <p class="lead">Для каждой площадки задаётся режим работы, а персона кампании — голос, которым Скаут пишет комментарии.</p>
+    <div class="row c3" style="margin-top:24px">
+      <div class="card"><div class="small">Режим площадки</div><div class="h3">«Черновик»</div><div class="small">Скаут готовит комментарий, оператор проверяет и публикует.</div></div>
+      <div class="card accent"><div class="small">Режим площадки</div><div class="h3">«Авто»</div><div class="small">Уместные комментарии публикуются автоматически.</div></div>
+      <div class="card"><div class="small">Режим площадки</div><div class="h3">«Только сбор»</div><div class="small">Скаут ничего не публикует: собирает сообщения и аудиторию.</div></div>
+    </div>
+    <div class="row c3" style="margin-top:16px">
+      <div class="card soft"><b>Лента событий</b><div class="small">что Скаут нашёл, написал и опубликовал</div></div>
+      <div class="card soft"><b>«Пропуски» с причинами</b><div class="small">почему сообщение не подошло или комментарий не опубликован</div></div>
+      <div class="card soft"><b>Отчёты в CSV, HTML, XLSX</b><div class="small">выгрузка для команды и руководства</div></div>
+    </div>
+    <div class="note"><b>Уточнить формулировки.</b> В описании ПО режимы названы без расшифровки — описания карточек предложены по смыслу, подтвердить у команды продукта.</div>
   </section>
 
   <section class="sec holo-s">
@@ -2442,16 +2959,18 @@ requestAnimationFrame(frame);
     </div>
   </section>
   <section class="sec gray">
-    <span class="lbl">[S6] Законность и антиспам</span>
-    <h2 class="h2">Работаем законно и без спама</h2>
+    <span class="lbl">[S6] Законность, честность и антиспам</span>
+    <h2 class="h2">Работаем законно, честно и без спама</h2>
     <p class="lead">Скаут отвечает людям, которые сами обозначили потребность. Это ответ на запрос, а не рассылка.</p>
-    <div class="row c3" style="margin-top:24px">
+    <div class="row c4" style="margin-top:24px">
       <div class="card"><div class="ic sm">icon</div><div class="h3">Только открытые источники</div><div class="small">Публичные чаты и сообщества. Без купленных баз и контактов неизвестного происхождения.</div></div>
       <div class="card"><div class="ic sm">icon</div><div class="h3">Только по делу</div><div class="small">Пишем тем, кто сам обозначил запрос. Никаких рассылок «всем подряд».</div></div>
       <div class="card"><div class="ic sm">icon</div><div class="h3">Персональные сообщения</div><div class="small">Каждый ответ составляется под контекст конкретного человека, без шаблонов.</div></div>
-      <div class="card"><div class="ic sm">icon</div><div class="h3">Честно о себе</div><div class="small">Получатель понимает, какая компания ему пишет и почему.</div></div>
+      <div class="card accent"><div class="ic sm">icon</div><div class="h3">Честно об ИИ</div><div class="small">Модель никогда не утверждает, что она живой человек. На прямой вопрос «вы бот?» аккаунт с заданным признанием отвечает, что ему помогает ИИ; без признания аккаунт замолкает, а переписка в личных сообщениях передаётся человеку.</div></div>
       <div class="card"><div class="ic sm">icon</div><div class="h3">Отказ — значит отказ</div><div class="small">Если человек не хочет общаться, ему больше не пишут — ни сейчас, ни в следующих кампаниях.</div></div>
-      <div class="card"><div class="ic sm">icon</div><div class="h3">Естественный темп</div><div class="small">Задержки, лимиты на аккаунт и соблюдение правил мессенджеров и сообществ.</div></div>
+      <div class="card"><div class="ic sm">icon</div><div class="h3">Лимиты и защита от блокировок</div><div class="small">Суточные лимиты, паузы, прогрев новых аккаунтов и активные часы.</div></div>
+      <div class="card"><div class="ic sm">icon</div><div class="h3">Запретные темы</div><div class="small">Общий запрет на темы политики, войны и религии.</div></div>
+      <div class="card"><div class="ic sm">icon</div><div class="h3">Спорные случаи — человеку</div><div class="small">Если ситуация неоднозначная, переписка передаётся оператору.</div></div>
     </div>
     <p class="small" style="margin-top:18px">Работа с открытыми источниками ведётся строго в рамках законодательства РФ.</p>
     <a class="link" href="#/documents/spam">Политика в отношении спама →</a>
@@ -2468,6 +2987,7 @@ requestAnimationFrame(frame);
         <div><b>04</b><span><strong>Промахи конкурентов и удержание</strong>сбои у конкурентов и недовольные клиенты — ваши и чужие</span></div>
         <div><b>05</b><span><strong>Что сработало в подогреве</strong>какие заходы получили ответ и как быстро</span></div>
         <div><b>06</b><span><strong>Рыночные сигналы и следующие шаги</strong>разведка рынка в реальном времени и предложения</span></div>
+        <div><b>07</b><span><strong>Лента событий и выгрузки</strong>события, «Пропуски» с причинами, отчёты в CSV, HTML и XLSX</span></div>
       </div>
       <div class="sr-doc">
         <div class="sr-top"><b>СКАУТ</b><span>Итоги 20 дней в открытых чатах</span></div>
@@ -2491,6 +3011,15 @@ requestAnimationFrame(frame);
     </div>
   </section>
   <section class="sec">
+    <span class="lbl">[S7b] Технология и документы · обязательно для реестра</span>
+    <h2 class="h2">Технология и документы</h2>
+    <div class="row c3" style="margin-top:24px">
+      <div class="card"><div class="small">Языковые модели</div><b>GigaChat (ПАО Сбербанк)</b><div class="small" style="margin-top:6px">Подключение через провайдеров. Соединение защищено проверкой корневого сертификата НУЦ Минцифры России.</div></div>
+      <div class="card"><div class="small">Поставка</div><b>On-premise или SaaS</b><div class="small" style="margin-top:6px">Установка в вашей инфраструктуре или работа через браузер.</div></div>
+      <a class="card accent" href="#/ai_scout"><div class="small">Программное обеспечение</div><b>ПО «СКАУТ»: функционал, требования, руководство по установке</b><span class="link">Открыть раздел →</span></a>
+    </div>
+  </section>
+  <section class="sec">
     <span class="lbl">[S8] Вопросы</span>
     <div class="split"><div><h2 class="h2">Вопросы о Скауте</h2><a class="link" href="#/faq">Все вопросы →</a></div><div class="faq" data-group="scout"></div></div>
   </section>
@@ -2506,7 +3035,7 @@ requestAnimationFrame(frame);
     <div class="crumbs"><a href="#/">Главная</a> / <a href="#/solutions">Решения</a> / Виртуальный отдел продаж</div>
     <div class="hero">
       <div>
-        <span class="badge">Включён в Реестр российского ПО</span>
+        <a class="badge" href="#/ai_sales">Включён в Реестр российского ПО · запись № 32900</a>
         <h1 class="h1 s">Виртуальный отдел продаж для работы с клиентской базой</h1>
         <p class="lead">ИИ-агенты самостоятельно инициируют персональные исходящие диалоги с потенциальной и действующей базой в мессенджерах, выявляют потребность и передают клиента продавцу.</p>
         <p class="lead"><b>Продавец подключается, когда интерес клиента уже подтверждён.</b></p>
@@ -2657,6 +3186,11 @@ requestAnimationFrame(frame);
     <h2 class="h2">Сценарии использования</h2>
     <div class="row c3 ucgrid" data-product="Виртуальный отдел продаж" style="margin-top:24px"></div>
   </section>
+  <section class="sec gray">
+    <span class="lbl">[V11] Программное обеспечение · обязательно для реестра</span>
+    <div class="split"><div><h2 class="h2">Программное обеспечение и документы</h2><p class="lead">Назначение, функционал, требования к рабочему месту и руководство по установке и эксплуатации.</p></div>
+    <a class="card accent" href="#/ai_sales"><div class="small">Реестр российского ПО · запись № 32900 от 31.03.2026</div><div class="h3" style="margin-top:6px">ПО «Виртуальный отдел продаж»</div><span class="link">Открыть раздел →</span></a></div>
+  </section>
   <section class="sec">
     <span class="lbl">[V12] Вопросы</span>
     <div class="split"><div><h2 class="h2">Вопросы о виртуальном отделе продаж</h2><a class="link" href="#/faq">Все вопросы →</a></div><div class="faq" data-group="vop"></div></div>
@@ -2676,6 +3210,7 @@ requestAnimationFrame(frame);
         <div class="eyebrow">Виртуальный сотрудник для входящих обращений</div>
         <h1 class="h1 s">Ждун — обработка входящих обращений 24/7</h1>
         <p class="lead">Ждун всегда на связи. Он отвечает на каждый входящий запрос по заложенному заданию: онбордит клиентов, консультирует, решает сервисные и технические вопросы и доводит клиента до нужного вам этапа — даже ночью и в выходные.</p>
+        <p class="small" style="max-width:640px">Ждун работает и как модуль ПО «СКАУТ»: отвечает в личных сообщениях тем, кто написал аккаунту, — черновиками для оператора или автоматически, а спорные случаи передаёт человеку.</p>
       </div>
       <div class="ph anim" style="height:320px"><span class="kind">▶ Анимация: шкала 00–24, обращения приходят в любое время и сразу получают ответ</span></div>
     </div>
@@ -2834,7 +3369,7 @@ requestAnimationFrame(frame);
     <div class="row c4" style="margin-top:24px">
       <div class="card"><div class="small">Реестр</div><b>Виртуальный отдел продаж включён в Реестр российского ПО</b><div class="small" style="margin-top:6px">Запись № 32900 от 31.03.2026</div></div>
       <div class="card"><div class="small">Поставка</div><b>Интернет-сервис или размещение в вашей инфраструктуре</b></div>
-      <div class="card"><div class="small">Стек</div><b>Python, JavaScript, TypeScript, PostgreSQL 15</b></div>
+      <div class="card"><div class="small">Стек</div><b>Python, JavaScript, TypeScript, PostgreSQL 15, TimescaleDB</b></div>
       <div class="card"><div class="small">Права</div><b>Исключительные права у ООО «АИТЕХ»</b></div>
     </div>
   </section>
@@ -2859,9 +3394,19 @@ requestAnimationFrame(frame);
       <div class="card soft"><b>Языки программирования</b><div class="small">Python, JavaScript, TypeScript</div></div>
       <div class="card soft"><b>Бэкенд</b><div class="small">уточнить</div></div>
       <div class="card soft"><b>Фронтенд</b><div class="small">уточнить</div></div>
-      <div class="card soft"><b>Базы данных</b><div class="small">PostgreSQL 15</div></div>
-      <div class="card soft"><b>Инфраструктура</b><div class="small">уточнить</div></div>
+      <div class="card soft"><b>Базы данных</b><div class="small">PostgreSQL 15; в Скауте — с расширением TimescaleDB</div></div>
+      <div class="card soft"><b>Инфраструктура</b><div class="small">Скаут on-premise: Debian GNU/Linux 13, Docker Engine и Docker Compose; остальное уточнить</div></div>
+      <div class="card soft"><b>Языковые модели</b><div class="small">Скаут: GigaChat (ПАО Сбербанк), проверка корневого сертификата НУЦ Минцифры России</div></div>
       <div class="card soft"><b>Интеграции</b><div class="small">уточнить</div></div>
+    </div>
+  </section>
+  <section class="sec gray">
+    <span class="lbl">[T5] Программное обеспечение · обязательно для реестра</span>
+    <h2 class="h2">Программное обеспечение и документация</h2>
+    <p class="lead">По каждому продукту — назначение, функционал, эксплуатационные характеристики, руководство по установке и эксплуатации и информация о стоимости.</p>
+    <div class="row c2" style="margin-top:24px">
+      <a class="card accent" href="#/ai_sales"><div class="small">Реестр российского ПО · запись № 32900 от 31.03.2026</div><div class="h3" style="margin-top:6px">ПО «Виртуальный отдел продаж»</div><div class="small">Адрес /ai_sales сохраняется как на текущем сайте</div><span class="link">Открыть раздел →</span></a>
+      <a class="card accent" href="#/ai_scout"><div class="small">ИИ-комментирование в каналах и группах MAX</div><div class="h3" style="margin-top:6px">ПО «СКАУТ»</div><div class="small">Новый раздел по аналогии с /ai_sales</div><span class="link">Открыть раздел →</span></a>
     </div>
   </section>
   <section class="sec tight">
@@ -2869,6 +3414,128 @@ requestAnimationFrame(frame);
     <h2 class="h2">Работа с данными</h2>
     <p class="lead">Работа с открытыми источниками ведётся строго в рамках законодательства РФ. Обработка персональных данных — в соответствии с политикой компании.</p>
     <a class="link" href="#/documents/privacy">Политика обработки персональных данных →</a>&nbsp;&nbsp;&nbsp;<a class="link" href="#/documents">Все документы →</a>
+  </section>
+  <div class="contact-strip"></div>
+</div>
+
+<!-- ============================== ПО «ВИРТУАЛЬНЫЙ ОТДЕЛ ПРОДАЖ» (реестр) ============================== -->
+<div class="view" data-route="/ai_sales" data-sec="technologies" data-title="Программное обеспечение «Виртуальный отдел продаж» — АИТЕХ">
+  <section class="sec">
+    <span class="lbl">[PV1] Программное обеспечение · обязательно для реестра</span>
+    <div class="seo">URL: /ai_sales — адрес сохраняется как на текущем сайте: на него ссылается запись в Реестре российского ПО<br>Title: Программное обеспечение «Виртуальный отдел продаж» | АИТЕХ</div>
+    <div class="crumbs"><a href="#/">Главная</a> / <a href="#/technologies">Технологии</a> / ПО «Виртуальный отдел продаж»</div>
+    <span class="badge">Реестр российского ПО · запись № 32900 от 31.03.2026</span>
+    <h1 class="h1 s">Программное обеспечение «Виртуальный отдел продаж»</h1>
+    <div class="row c4" style="margin-top:24px">
+      <div class="card soft"><div class="small">Реестр российского ПО</div><b>Запись № 32900 от 31.03.2026</b><div class="small" style="margin-top:6px">ссылка на запись в реестре — как на текущей странице</div></div>
+      <div class="card soft"><div class="small">Правообладатель</div><b>ООО «АИТЕХ» — исключительные права</b></div>
+      <div class="card soft"><div class="small">Распространение</div><b>По лицензионному договору</b></div>
+      <div class="card soft"><div class="small">Поставка</div><b>Интернет-сервис или размещение в инфраструктуре заказчика</b></div>
+    </div>
+    <div class="note"><b>Тексты.</b> Все формулировки раздела переносятся с текущей страницы aixtex.ru/ai_sales без изменений. Структура ниже повторяет её и совпадает с разделом «СКАУТ».</div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[PV2] Назначение и область применения</span>
+    <h2 class="h2">Назначение и область применения</h2>
+    <div class="ph" style="height:120px;margin-top:16px"><span class="kind">Текст с текущей страницы: интеллектуальные инструменты для автоматизации рутинной работы, взаимодействия с клиентами и повышения эффективности</span></div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[PV3] Функциональные возможности</span>
+    <h2 class="h2">Функциональные возможности</h2>
+    <p class="lead">Функционал программного обеспечения заключается в следующем:</p>
+    <div class="ph" style="height:160px;margin-top:16px"><span class="kind">Перечень функций — перенести с текущей страницы</span></div>
+    <div class="row c2" style="margin-top:24px">
+      <div class="card"><div class="h3" style="margin-top:0">Эксплуатационные характеристики</div><div class="ph" style="height:120px;margin-top:10px"><span class="kind">Требования к рабочему месту</span></div></div>
+      <div class="card"><div class="h3" style="margin-top:0">Описание функциональной части программного обеспечения</div><div class="ph" style="height:120px;margin-top:10px"><span class="kind">Языки программирования, СУБД</span></div></div>
+    </div>
+    <div class="warn"><b>Дополнить.</b> На текущей странице подзаголовки «Эксплуатационные характеристики» и «Описание функциональной части» стоят без текста. Заполнить по образцу раздела «СКАУТ»: ОС, процессор, память, интернет, браузеры; языки программирования и СУБД (в прототипе на странице «Технологии»: Python, JavaScript, TypeScript, PostgreSQL 15).</div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[PV4] Руководство и стоимость</span>
+    <div class="row c2">
+      <div class="card"><div class="h3" style="margin-top:0">Руководство по установке и эксплуатации</div><a class="link" href="#/documents/vop-manual">Руководство по установке и эксплуатации ПО (открыть документ)</a></div>
+      <div class="card"><div class="h3" style="margin-top:0">Информация о стоимости</div><div>Стоимость — конфиденциальная коммерческая информация и не публикуется. Узнать условия: <a class="link" href="mailto:contact@aixtex.ru" style="margin-top:0">contact@aixtex.ru</a></div></div>
+    </div>
+    <div class="warn"><b>Руководство.</b> Сейчас PDF лежит на stage.aixtex.ru. Для реестра файл должен открываться на домене aixtex.ru.</div>
+    <a class="link" href="#/solutions/virtual-sales" style="margin-top:24px">Страница продукта «Виртуальный отдел продаж» →</a>
+  </section>
+  <div class="contact-strip"></div>
+</div>
+
+<!-- ============================== ПО «СКАУТ» (реестр) ============================== -->
+<div class="view" data-route="/ai_scout" data-sec="technologies" data-title="Программное обеспечение «СКАУТ» — АИТЕХ">
+  <section class="sec">
+    <span class="lbl">[PS1] Программное обеспечение · обязательно для реестра · по ТЗ «Размещение информации и документов для ПО «СКАУТ»</span>
+    <div class="seo">URL: /ai_scout — по аналогии с /ai_sales<br>Title: Программное обеспечение «СКАУТ» — ИИ-комментирование в каналах и группах MAX | АИТЕХ</div>
+    <div class="crumbs"><a href="#/">Главная</a> / <a href="#/technologies">Технологии</a> / ПО «СКАУТ»</div>
+    <h1 class="h1 s">СКАУТ</h1>
+    <p class="lead">Программное обеспечение «Скаут» — решение для ИИ-комментирования в каналах и группах мессенджера MAX.</p>
+    <div style="margin-top:14px"><span class="chip">On-premise</span><span class="chip">SaaS</span><span class="chip">GigaChat</span><span class="chip">Python, TypeScript</span><span class="chip">PostgreSQL 15 + TimescaleDB</span></div>
+    <div class="warn"><b>Уточнить перед публикацией.</b> По аналогии с ВОП: указать номер записи в реестре (когда появится), правообладателя и формат распространения — в ТЗ этих пунктов нет.</div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[PS2] Назначение и область применения</span>
+    <h2 class="h2">Назначение и область применения</h2>
+    <p class="lead" style="max-width:900px">Программное обеспечение «Скаут» — решение для ИИ-комментирования в каналах и группах мессенджера MAX. «Скаут» помогает найти площадки по теме, вступает в них от имени аккаунтов MAX, следит за новыми постами и сообщениями, отбирает уместные и публикует комментарии, написанные языковой моделью голосом заданной персоны. Модуль «Ждун» ведёт переписку с людьми, которые написали аккаунту в личные сообщения.</p>
+  </section>
+  <section class="sec">
+    <span class="lbl">[PS3] Функционал</span>
+    <h2 class="h2">Функционал программного обеспечения</h2>
+    <p class="lead">Функционал программного обеспечения заключается в следующем:</p>
+    <div class="row c3" style="margin-top:20px">
+      <div class="card"><div class="h3" style="margin-top:0">Поиск площадок</div><div class="small">Поиск каналов и групп MAX по теме и названию и добавление их в кампании.</div></div>
+      <div class="card"><div class="h3" style="margin-top:0">Вступление по очереди</div><div class="small">Вступление аккаунтов в каналы и группы по очереди, с настраиваемым суточным лимитом и паузами.</div></div>
+      <div class="card"><div class="h3" style="margin-top:0">Мониторинг и отбор</div><div class="small">Мониторинг постов и сообщений, отбор уместных языковой моделью с оценкой уверенности.</div></div>
+      <div class="card"><div class="h3" style="margin-top:0">Генерация и публикация комментариев</div><div class="small">Генерация комментариев голосом персоны кампании и их публикация — под постами каналов и в группах. Режимы площадки: «Черновик», «Авто», «Только сбор».</div></div>
+      <div class="card"><div class="h3" style="margin-top:0">Ответы на реплики</div><div class="small">Ответы на реплики под нашими комментариями.</div></div>
+      <div class="card accent"><div class="h3" style="margin-top:0">«Ждун» — личные сообщения</div><div class="small">Ответы в личных сообщениях голосом персоны кампании через подключённую языковую модель: черновиками для оператора или автоматически, с передачей переписки человеку в спорных случаях. Модель никогда не утверждает, что она живой человек. На прямой вопрос «вы бот?» аккаунт с заданным признанием отвечает, что ему помогает ИИ; без признания в ветке аккаунт замолкает, а переписка в личных сообщениях передаётся человеку.</div></div>
+      <div class="card"><div class="h3" style="margin-top:0">Лимиты и защита от блокировок</div><div class="small">Суточные лимиты, паузы, прогрев новых аккаунтов, активные часы, общий запрет тем политики, войны и религии.</div></div>
+      <div class="card"><div class="h3" style="margin-top:0">Сбор аудитории</div><div class="small">Сбор аудитории — авторов комментариев — и передача их в лиды.</div></div>
+      <div class="card"><div class="h3" style="margin-top:0">Лента событий и отчёты</div><div class="small">Лента событий, «Пропуски» с причинами, отчёты (CSV, HTML, XLSX).</div></div>
+    </div>
+    <div class="card soft" style="margin-top:16px"><div class="h3" style="margin-top:0">Подключение языковых моделей</div><div class="small">Подключение языковых моделей через провайдеров: поддерживается GigaChat (ПАО Сбербанк), соединение защищено проверкой корневого сертификата НУЦ Минцифры России. Ключ авторизации GigaChat API можно получить в личном кабинете GigaChat API.</div></div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[PS4] Эксплуатационные характеристики</span>
+    <h2 class="h2">Эксплуатационные характеристики</h2>
+    <p class="lead">Для установки и эксплуатации программного обеспечения «СКАУТ» необходимо, чтобы рабочее место соответствовало следующим требованиям:</p>
+    <div class="row c2" style="margin-top:20px">
+      <div class="card">
+        <div class="h3" style="margin-top:0">Для on-premise</div>
+        <table class="tbl" style="margin-top:8px">
+          <tr><td>ОС</td><td>Debian GNU/Linux 13 (trixie) x86-64 с Docker Engine и Docker Compose v5.7.1</td></tr>
+          <tr><td>Процессор</td><td>2 vCPU x86-64</td></tr>
+          <tr><td>Тактовая частота процессора</td><td>от 2 ГГц</td></tr>
+          <tr><td>Рекомендуемая оперативная память</td><td>4 Гб</td></tr>
+          <tr><td>Подключение к интернету</td><td>обязательное</td></tr>
+          <tr><td>Интернет-браузеры</td><td>актуальные версии Яндекс Браузера, Google Chrome, Mozilla Firefox, Microsoft Edge, Safari</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <div class="h3" style="margin-top:0">Для SaaS</div>
+        <table class="tbl" style="margin-top:8px">
+          <tr><td>Подключение к интернету</td><td>обязательное</td></tr>
+          <tr><td>Интернет-браузеры</td><td>актуальные версии Яндекс Браузера, Google Chrome, Mozilla Firefox, Microsoft Edge, Safari</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[PS5] Описание функциональной части</span>
+    <h2 class="h2">Описание функциональной части программного обеспечения</h2>
+    <div class="row c2" style="margin-top:20px">
+      <div class="card soft"><div class="small">Язык программирования</div><b>Python, TypeScript</b></div>
+      <div class="card soft"><div class="small">СУБД</div><b>PostgreSQL 15 с расширением TimescaleDB</b></div>
+    </div>
+  </section>
+  <section class="sec">
+    <span class="lbl">[PS6] Руководство и стоимость</span>
+    <div class="row c2">
+      <div class="card accent"><div class="h3" style="margin-top:0">Руководство по установке и эксплуатации ПО</div><a class="link" href="#/documents/scout-manual">Руководство по установке и эксплуатации ПО (открыть документ)</a></div>
+      <div class="card"><div class="h3" style="margin-top:0">Информация о стоимости</div><div>Информация о стоимости содержится в <a class="link" href="#/documents/pricing" style="margin-top:0">Политике ценообразования ООО «АИТЕХ»</a>. Для получения информации обратитесь по адресу <a class="link" href="mailto:contact@aixtex.ru" style="margin-top:0">contact@aixtex.ru</a></div></div>
+    </div>
+    <div class="warn"><b>Обязательно по ТЗ.</b> Ссылка на руководство должна быть активной. Документ загружается напрямую на сайт, не через облачное хранилище: при открытии сохраняется домен aixtex.ru (например, aixtex.ru/docs/scout-manual.pdf). Исходный файл сейчас на Яндекс Диске — ссылка в ТЗ.</div>
+    <a class="link" href="#/solutions/scout" style="margin-top:24px">Страница продукта «Скаут» →</a>
   </section>
   <div class="contact-strip"></div>
 </div>
@@ -2958,9 +3625,9 @@ requestAnimationFrame(frame);
     <div class="tree">
       <div class="col"><b>Главная</b><a href="#/">/</a></div>
       <div class="col"><b>Решения</b><a href="#/solutions">/solutions</a><a href="#/solutions/scout">/solutions/scout</a><a href="#/solutions/virtual-sales">/solutions/virtual-sales</a><a href="#/solutions/zhdun">/solutions/zhdun</a></div>
-      <div class="col"><b>Информация</b><a href="#/use-cases">/use-cases</a><a href="#/about">/about</a><a href="#/technologies">/technologies</a><a href="#/faq">/faq</a></div>
+      <div class="col"><b>Информация</b><a href="#/use-cases">/use-cases</a><a href="#/about">/about</a><a href="#/technologies">/technologies</a><a href="#/ai_sales">/ai_sales</a><a href="#/ai_scout">/ai_scout</a><a href="#/faq">/faq</a></div>
       <div class="col"><b>Связь</b><a href="#/contacts">/contacts</a></div>
-      <div class="col"><b>Документы</b><a href="#/documents">/documents</a><a href="#/documents/privacy">/documents/privacy</a><a href="#/documents/pricing">/documents/pricing</a><a href="#/documents/spam">/documents/spam</a><a href="#/documents/license">/documents/license</a><a href="#/documents/patents">/documents/patents</a><a href="#/404">/404</a></div>
+      <div class="col"><b>Документы</b><a href="#/documents">/documents</a><a href="#/documents/privacy">/documents/privacy</a><a href="#/documents/pricing">/documents/pricing</a><a href="#/documents/spam">/documents/spam</a><a href="#/documents/license">/documents/license</a><a href="#/documents/patents">/documents/patents</a><a href="#/documents/vop-manual">/documents/vop-manual</a><a href="#/documents/scout-manual">/documents/scout-manual</a><a href="#/404">/404</a></div>
     </div>
 
     <div class="sub">
@@ -3007,10 +3674,12 @@ requestAnimationFrame(frame);
         <tr><td>ВОП</td><td>Вкладки кейсов; «Открыть ИИ-агента»</td><td>Переключение воронки на месте; демо-чат в новой вкладке</td></tr>
         <tr><td>О компании</td><td>Карточки «Реестр» и «Документы»</td><td><code>/technologies</code>, <code>/documents</code></td></tr>
         <tr><td>Технологии</td><td>Политика ПД, все документы</td><td><code>/documents/privacy</code>, <code>/documents</code></td></tr>
+        <tr><td>Технологии, ВОП, Скаут, подвал</td><td>Разделы «ПО «Виртуальный отдел продаж»» и «ПО «СКАУТ»»</td><td><code>/ai_sales</code>, <code>/ai_scout</code>; из них — руководство по установке (PDF на домене aixtex.ru)</td></tr>
         <tr><td>Подвал</td><td>Все разделы и документы</td><td>Соответствующие страницы</td></tr>
         <tr><td>Внизу почти каждой страницы</td><td>Блок «Как связаться с нами»</td><td>Телефон, почта, мессенджеры</td></tr>
       </table>
     </div>
+    <div class="warn"><b>Реестр российского ПО.</b> Адрес <code>/ai_sales</code> сохраняем как на текущем сайте — на него ссылается запись в реестре. Для Скаута по аналогии — <code>/ai_scout</code>. Руководства по установке загружаются на сам сайт (не через облачное хранилище), при открытии остаётся домен aixtex.ru.</div>
     <div class="note"><b>Для разработки.</b> В прототипе адреса через «#/», на сайте — обычные ЧПУ: <code>/solutions/scout</code> и т. д. Для SEO у каждой страницы свои Title и H1 (серые плашки на страницах).</div>
   </section>
 </div>
@@ -3028,7 +3697,7 @@ requestAnimationFrame(frame);
     </div>
     <div><div class="h">Решения</div><a href="#/solutions/scout">Скаут</a><a href="#/solutions/virtual-sales">Виртуальный отдел продаж</a><a href="#/solutions/zhdun">Ждун</a><a href="#/solutions">Все решения</a></div>
     <div><div class="h">Компания</div><a href="#/use-cases">Сценарии</a><a href="#/about">О компании</a><a href="#/technologies">Технологии</a><a href="#/faq">Вопросы</a><a href="#/contacts">Контакты</a></div>
-    <div><div class="h">Документы</div><a href="#/documents/privacy">Политика обработки персональных данных</a><a href="#/documents/pricing">Политика ценообразования</a><a href="#/documents/spam">Политика в отношении спама</a><a href="#/documents/license">Лицензия</a><a href="#/documents/patents">Патенты и свидетельства</a></div>
+    <div><div class="h">Документы</div><a href="#/documents/privacy">Политика обработки персональных данных</a><a href="#/documents/pricing">Политика ценообразования</a><a href="#/documents/spam">Политика в отношении спама</a><a href="#/documents/license">Лицензия</a><a href="#/documents/patents">Патенты и свидетельства</a><a href="#/ai_sales">ПО «Виртуальный отдел продаж»</a><a href="#/ai_scout">ПО «СКАУТ»</a></div>
   </div>
   <div class="bottom">
     <span>ООО «АИТЕХ» не проводит набор сотрудников и не рассылает предложения о работе, в том числе через мессенджеры. Официальная информация публикуется только на этом сайте.</span>
@@ -3043,7 +3712,7 @@ requestAnimationFrame(frame);
 <script>
 /* ================= ДАННЫЕ ================= */
 const PRODUCTS={
-  "scout":{name:"Скаут",route:"#/solutions/scout",d:"Поиск клиентов в тематических чатах и сообществах и постоянный подогрев аудитории",seg:""},
+  "scout":{name:"Скаут",route:"#/solutions/scout",d:"Поиск клиентов в каналах и группах MAX и постоянный подогрев аудитории",seg:""},
   "virtual-sales":{name:"Виртуальный отдел продаж",route:"#/solutions/virtual-sales",d:"Личные диалоги с потенциальной и действующей базой: активация клиентов, продажи, повторные продажи, сохранение клиентов",seg:"В реестре российского ПО"},
   "zhdun":{name:"Ждун",route:"#/solutions/zhdun",d:"Обработка входящих обращений 24/7: онбординг, консультации, сервисные и технические вопросы",seg:""}
 };
@@ -3082,14 +3751,17 @@ const FAQ=[
   {id:"g5",q:"Какой продукт подходит моему бизнесу?",a:"Крупным компаниям — Виртуальный отдел продаж для работы с клиентской базой. Малому и среднему бизнесу — Скаут для поиска клиентов и Ждун для обработки обращений. Сравнение — на странице «Решения»."}
  ]},
  {g:"scout",name:"Скаут",items:[
-  {id:"s1",q:"Где Скаут ищет клиентов?",a:"В открытых тематических чатах и сообществах: находит сообщения с запросом на ваши товары или услуги и сразу отвечает человеку. Тех, кто купит позже, Скаут постоянно подогревает."},
-  {id:"s2",q:"Можно ли выбрать чаты самостоятельно?",a:"Да. Вы указываете чаты и что в них отслеживать: ключевые слова, новых участников или и то и другое. Или Скаут самостоятельно находит сообщества с вашей аудиторией."},
+  {id:"s1",q:"Где Скаут ищет клиентов?",a:"В каналах и группах мессенджера MAX: находит посты и сообщения с запросом на ваши товары или услуги и отвечает комментарием. Тех, кто купит позже, Скаут постоянно подогревает."},
+  {id:"s9",q:"Как Скаут работает в MAX?",a:"Находит каналы и группы по теме и названию, вступает в них от имени аккаунтов MAX по очереди — с суточным лимитом и паузами, следит за новыми постами и сообщениями, отбирает уместные и публикует комментарии голосом персоны кампании. Режим каждой площадки — «Черновик», «Авто» или «Только сбор»."},
+  {id:"s10",q:"Скаут выдаёт себя за человека?",a:"Нет. Модель никогда не утверждает, что она живой человек. На прямой вопрос «вы бот?» аккаунт с заданным признанием отвечает, что ему помогает ИИ; без признания в ветке аккаунт замолкает, а переписка в личных сообщениях передаётся человеку."},
+  {id:"s11",q:"Какие языковые модели использует Скаут?",a:"Модели подключаются через провайдеров. Поддерживается GigaChat (ПАО Сбербанк); соединение защищено проверкой корневого сертификата НУЦ Минцифры России."},
+  {id:"s2",q:"Можно ли выбрать площадки самостоятельно?",a:"Да. Вы указываете каналы и группы MAX и что в них отслеживать. Или Скаут сам находит площадки по теме и названию и добавляет их в кампании."},
   {id:"s3",q:"Это законно?",a:"Да. Скаут работает только с открытыми источниками — публичными чатами и сообществами, где люди сами пишут о своих задачах. Купленные базы и контакты неизвестного происхождения не используются. Закон о персональных данных защищает частную жизнь людей, и зоной риска считаются массовые холодные рассылки по частным лицам. Скаут так не работает: он отвечает на запрос, который человек опубликовал сам."},
   {id:"s4",q:"Не будет ли это выглядеть как спам?",a:"Нет. Спам — это массовые однотипные сообщения, отправленные без учёта интересов получателя. Скаут пишет только тем, кто сам обозначил запрос, и каждый раз составляет персональный ответ под контекст сообщения. Темп общения естественный: задержки между сообщениями и лимиты на аккаунт."},
   {id:"s6",q:"Откуда Скаут берёт информацию?",a:"Только из открытых источников: публичных тематических чатов и сообществ. Скаут видит то же, что любой участник этих чатов, — сообщения, которые люди публикуют сами."},
   {id:"s7",q:"Что, если человек не хочет получать сообщения?",a:"Достаточно отказаться: после этого Скаут больше не пишет этому человеку — ни в текущей кампании, ни в следующих. Отказ — это ответ, а не повод для новых касаний."},
-  {id:"s8",q:"Не заблокируют ли аккаунты?",a:"Скаут соблюдает правила мессенджеров и сообществ: держит естественный темп, не превышает лимиты на аккаунт и не делает массовых рассылок по группам. Качество и уместность сообщений для нас важнее объёма."},
-  {id:"s5",q:"Что происходит после того, как Скаут нашёл клиента?",a:"Скаут отвечает в чате, пишет человеку или приглашает его в вашу группу. Дальше диалог может продолжить Ждун или Виртуальный отдел продаж."}
+  {id:"s8",q:"Не заблокируют ли аккаунты?",a:"Скаут соблюдает правила мессенджера и сообществ: суточные лимиты, паузы, прогрев новых аккаунтов, активные часы и общий запрет тем политики, войны и религии. Массовых рассылок по группам нет. Качество и уместность сообщений для нас важнее объёма."},
+  {id:"s5",q:"Что происходит после того, как Скаут нашёл клиента?",a:"Скаут отвечает комментарием и собирает авторов комментариев в лиды. Тем, кто написал аккаунту в личные сообщения, отвечает Ждун; дальше диалог продолжает ваш менеджер или Виртуальный отдел продаж."}
  ]},
  {g:"vop",name:"Виртуальный отдел продаж",items:[
   {id:"v1",q:"Чем виртуальный отдел продаж отличается от рассылки?",a:"Рассылка отправляет всем одно сообщение. Виртуальный отдел продаж ведёт персональный диалог: учитывает контекст клиента, отвечает на вопросы и передаёт сделку менеджеру на пике интереса."},
@@ -3118,7 +3790,9 @@ const DOCS={
  pricing:{t:"Политика ценообразования",m:"Документ запрашивается у заказчика",b:"Текст документа — запросить у заказчика"},
  spam:{t:"Политика в отношении спама",m:"Документ запрашивается у заказчика",b:"Текст — запросить у заказчика. Если документа нет, структуру можно собрать по образцу Gradly: что считается спамом, принципы работы, запрещённые действия, требования к сообщениям, обработка отказов, ответственность сторон"},
  license:{t:"Лицензия",m:"Документ запрашивается у заказчика",b:"Скан или текст лицензии — запросить у заказчика"},
- patents:{t:"Патенты и свидетельства",m:"Документ запрашивается у заказчика",b:"Перечень и сканы — запросить у заказчика"}
+ patents:{t:"Патенты и свидетельства",m:"Документ запрашивается у заказчика",b:"Перечень и сканы — запросить у заказчика"},
+ "vop-manual":{t:"Руководство по установке и эксплуатации ПО «Виртуальный отдел продаж»",m:"PDF · сейчас лежит на stage.aixtex.ru — перенести на aixtex.ru",b:"Файл открывается прямо на сайте, на домене aixtex.ru (не через облачное хранилище)"},
+ "scout-manual":{t:"Руководство по установке и эксплуатации ПО «СКАУТ»",m:"PDF · загрузить на aixtex.ru",b:"Файл загрузить на сайт напрямую, не через облачное хранилище: при открытии должен остаться домен aixtex.ru. Исходник — по ссылке на Яндекс Диск из ТЗ"}
 };
 
 const CASES={
@@ -3164,7 +3838,6 @@ $$('.other').forEach(el=>{
 });
 
 $$('.cases').forEach(el=>renderCases(el,'current'));
-$('#pipeline').innerHTML=PIPE.map((p,i)=>`<div class="card${i===4?' accent':''}"><div class="ic sm">icon</div><div class="h3">${p[0]}</div><div class="small">${p[1]}</div></div>`).join('');
 
 $$('.report-slot').forEach(el=>el.innerHTML=`<div class="report">
  <div class="top"><span><b style="color:var(--ink)">Отчёт за неделю</b></span><span>10–16 ноября</span></div>
@@ -3179,23 +3852,6 @@ $$('.report-slot').forEach(el=>el.innerHTML=`<div class="report">
  <div class="callout"><b>Где проблема:</b> клиенты отвечают, но реже доходят до встречи. Узкое место — этап согласования времени.</div>
  <div class="callout ok"><b>Что сделать:</b> предлагать два готовых слота сразу в первом сообщении.</div>
 </div><div class="small" style="margin-top:8px">Макет отчёта схематичный, цифры скрыты.</div>`);
-
-/* сценарии: интерактив на главной */
-let cur="Скаут",idx=0;
-function renderUC(){
- $('#ucTabs').innerHTML=Object.keys(UC).map(k=>`<button class="${k===cur?'on':''}" data-k="${k}">${k}</button>`).join('');
- $('#ucList').innerHTML=UC[cur].map((u,i)=>`<button class="${i===idx?'on':''}" data-i="${i}"><span class="ic sm">ic</span>${u.t}</button>`).join('');
- const u=UC[cur][idx];
- $('#ucScene').innerHTML=`<div class="st">${u.t}</div>
-  <div class="sline"><div class="k">Сигнал</div><div>${u.msg?`<span class="bubble">${u.sig}</span>`:u.sig}</div></div>
-  <div class="sline"><div class="k">Действие</div><div>${u.act}</div></div>
-  <div class="sline"><div class="k">Результат</div><div class="res">${u.res}</div></div>
-  <div class="sline"><div class="k">В отчёте</div><div class="small">${u.rep}</div></div>
-  <div style="padding:4px 0 18px"><a class="btn" href="${PRODUCTS[P_BY_NAME[cur]].route}">Как работает «${cur}» →</a></div>`;
-}
-$('#ucTabs').onclick=e=>{const b=e.target.closest('button');if(b){cur=b.dataset.k;idx=0;renderUC()}};
-$('#ucList').onclick=e=>{const b=e.target.closest('button');if(b){idx=+b.dataset.i;renderUC()}};
-renderUC();
 
 /* сценарии: карточки */
 function ucCard(u,prod,showProd){
@@ -3227,54 +3883,78 @@ $$('svg.dots').forEach((svg,n)=>{
   out+=`<line x1="360" y1="20" x2="360" y2="280" stroke="#d9a58c" stroke-dasharray="4 5"/>`;svg.innerHTML=out;
 });
 
-/* блок 02: анимация 5% / 95% */
-(function(){
-  const svg=document.getElementById('p95svg'), box=document.getElementById('p95'); if(!svg) return;
-  const r=rnd(11), cols=10, rows=10, cw=46, ox=27, oy=40;
-  const order=[...Array(100).keys()];
-  const ready0=new Set([12,37,58,74,91]);
-  const pool=order.filter(i=>!ready0.has(i)).sort(()=>r()-.5);
-  const ready2=new Set(pool.slice(0,14));
-  let o=`<g class="src"><text x="250" y="18" text-anchor="middle" font-size="12" fill="#ff8a5c" font-weight="700">сигналы АИТЕХ: напоминания · полезные поводы · личные сообщения</text></g>`;
-  const people=[];
-  order.forEach(i=>{const c=i%cols,rw=Math.floor(i/cols),x=ox+c*cw+cw/2-4,y=oy+rw*cw+cw/2;
-    o+=`<g class="pp" data-i="${i}"><circle cx="${x}" cy="${y-9}" r="6.5"/><path d="M${x-11},${y+13} Q${x-11},${y} ${x},${y} Q${x+11},${y} ${x+11},${y+13} Z"/></g>`;
-    people.push([x,y]);});
-  pool.slice(14,30).forEach((i,k)=>{const [x,y]=people[i];o+=`<circle class="ring" cx="${x}" cy="${y-2}" r="14" style="animation-delay:${(k%8)*.22}s"/>`;});
-  svg.innerHTML=o;
-  const els=[...svg.querySelectorAll('.pp')];
-  const mix=t=>`rgb(${Math.round(58+(170-58)*t)},${Math.round(56+(78-56)*t)},${Math.round(53+(38-53)*t)})`;
-  const heat=order.map(()=>mix(.35+r()*.6));
-  const T=[
-   {n:'01',big:'≈5%',t:'Готовы купить сейчас',d:'У них потребность уже появилась. Мы видим этот сигнал и отвечаем первыми — раньше конкурентов и точнее рекламы.'},
-   {n:'02',big:'≈95%',t:'Купят позже — мы их прогреваем',d:'Виртуальные сотрудники постоянно напоминают о вас: в сообществах, в личных сообщениях, с полезными поводами и сигналами.'},
-   {n:'03',big:'95% → 5%',t:'Прогретые становятся готовыми к покупке',d:'Когда у прогретого клиента появляется потребность, он уже знает о вас — и приходит к вам, а не к конкуренту.'}];
-  const btns=[...document.querySelectorAll('#p95steps button')], txt=document.querySelector('.p95-txt');
-  let step=0,timer;
-  function set(k){
-    step=k; box.dataset.step=k;
-    els.forEach(e=>{const i=+e.dataset.i,c=i%cols,rw=Math.floor(i/cols);
-      e.style.transitionDelay=(k===1?(c*0.07+rw*0.02):(k===2?(r()*0.9):0))+'s';
-      const isR=ready0.has(i)||(k===2&&ready2.has(i));
-      e.classList.toggle('ready',isR); e.classList.toggle('warm',!isR&&k>0);
-      e.style.fill=isR?'#ff5a1f':(k>0?heat[i]:'#3a3835');});
-    btns.forEach((b,i)=>{b.classList.remove('on');void b.offsetWidth;b.classList.toggle('on',i===k)});
-    txt.classList.add('fade');
-    setTimeout(()=>{const d=T[k];p95n.textContent=d.n;p95big.textContent=d.big;p95big.style.fontSize=k===2?'60px':'';p95t.textContent=d.t;p95d.textContent=d.d;txt.classList.remove('fade')},220);
-    clearTimeout(timer); timer=setTimeout(()=>set((step+1)%3),4200);
-  }
-  btns.forEach(b=>b.onclick=()=>set(+b.dataset.s));
-  set(0);
-})();
 
-/* блок 09: подсветка частей отчёта */
-document.querySelectorAll('.rb-a').forEach(a=>{
-  const k=a.dataset.k, zones=()=>document.querySelectorAll('.rb-zone[data-k="'+k+'"]');
-  const on=()=>{document.querySelectorAll('.rb-a').forEach(x=>x.classList.toggle('on',x===a));document.querySelectorAll('.rb-zone').forEach(z=>z.classList.toggle('hl',z.dataset.k===k))};
-  const off=()=>{a.classList.remove('on');zones().forEach(z=>z.classList.remove('hl'))};
-  a.addEventListener('mouseenter',on);a.addEventListener('focus',on);a.addEventListener('click',on);
-  a.addEventListener('mouseleave',off);a.addEventListener('blur',off);
-});
+/* ================= ГЛАВНАЯ: ДИЗАЙН ================= */
+(function(){
+  const home=document.querySelector('.ax-home'); if(!home) return;
+  /* неразрывные пробелы после коротких слов и перед тире — для текстов из данных */
+  const ty=s=>s.replace(/(^|[\s(«])(в|во|и|к|ко|с|со|о|об|у|а|на|до|по|за|от|не|ни|из|для|без|при|про|под|над) /gi,'$1$2 ').replace(/ — /g,' — ');
+
+  /* [02] 5% / 95% */
+  const grid=document.getElementById('axDots');
+  for(let i=0;i<100;i++){const d=document.createElement('span');d.className='ax-dot';grid.appendChild(d)}
+  const dots=[...grid.children];
+  const ready0=[12,37,58,74,91], ready2=[3,8,19,25,31,44,49,53,66,70,79,83,88,96];
+  const T=[
+    {big:'≈5%',title:'Готовы купить сейчас',text:'Потребность уже появилась. Мы видим этот сигнал и отвечаем первыми — раньше конкурентов и точнее рекламы.',label:'Пять готовы купить, девяносто пять ещё не готовы.'},
+    {big:'≈95%',title:'Купят позже — мы их прогреваем',text:'Виртуальные сотрудники напоминают о вас в сообществах и личных сообщениях — с полезными поводами, без давления.',label:'Пять готовы купить, девяносто пять прогреваются.'},
+    {big:'95% → 5%',title:'Прогретые становятся готовыми',text:'Когда потребность появляется, клиент уже знает о вас — и приходит к вам, а не к конкуренту.',label:'Девятнадцать готовы купить, остальные прогреваются.'}];
+  const btns=[...home.querySelectorAll('.ax-step')];
+  const $id=id=>document.getElementById(id);
+  let step=0, manual=false, timer;
+  function setStep(k){
+    step=k;
+    dots.forEach((d,i)=>{
+      const ready=ready0.includes(i)||(k===2&&ready2.includes(i)), c=i%10, r=Math.floor(i/10);
+      d.style.transitionDelay=(k===1?(c*.05+r*.02):(k===2?((i*37)%17)*.04:0)).toFixed(2)+'s';
+      d.classList.toggle('ready',ready); d.classList.toggle('warm',!ready&&k>0);
+    });
+    const t=T[k];
+    $id('axCounter').textContent='0'+(k+1)+' / 03';
+    $id('axBig').textContent=t.big; $id('axBig').classList.toggle('sm',k===2);
+    $id('axTitle').textContent=ty(t.title); $id('axText').textContent=ty(t.text);
+    grid.setAttribute('aria-label','Сто кругов — сто процентов аудитории. '+t.label);
+    btns.forEach((b,i)=>{
+      b.classList.toggle('on',i===k); b.setAttribute('aria-pressed',i===k?'true':'false');
+      const p=b.querySelector('.ax-prog'); if(p) p.remove();
+      if(i===k&&!manual){const e=document.createElement('span');e.className='ax-prog';e.setAttribute('aria-hidden','true');b.appendChild(e)}
+    });
+    clearTimeout(timer);
+    if(!manual) timer=setTimeout(()=>setStep((step+1)%3),4800);
+  }
+  btns.forEach((b,i)=>b.addEventListener('click',()=>{manual=true;setStep(i)}));
+  setStep(0);
+
+  /* [06] сценарии: вкладки продуктов и ситуации */
+  const tabs=$id('axTabs'), list=$id('axList');
+  let prod='Скаут', idx=0;
+  function renderScene(){
+    tabs.innerHTML=Object.keys(UC).map(n=>`<button class="ax-tab${n===prod?' on':''}" type="button" data-p="${n}" aria-pressed="${n===prod}">${n}</button>`).join('');
+    list.innerHTML=UC[prod].map((u,i)=>`<button class="ax-uc${i===idx?' on':''}" type="button" data-i="${i}" aria-pressed="${i===idx}">${ty(u.t)}</button>`).join('');
+    const u=UC[prod][idx];
+    $id('axScT').textContent=ty(u.t);
+    $id('axScSig').innerHTML=u.msg?`<span class="ax-bubble">${ty(u.sig)}</span>`:`<span class="ax-sigtext">${ty(u.sig)}</span>`;
+    $id('axScAct').textContent=ty(u.act);
+    $id('axScRes').textContent=ty(u.res);
+    $id('axScRep').innerHTML=u.rep.split(' · ').map(m=>`<span class="ax-metric">${m}</span>`).join('');
+    const cta=$id('axScCta');
+    cta.textContent='Как работает '+(prod==='Виртуальный отдел продаж'?'виртуальный отдел продаж':prod);
+    cta.href=PRODUCTS[P_BY_NAME[prod]].route;
+  }
+  tabs.addEventListener('click',e=>{const b=e.target.closest('button');if(b){prod=b.dataset.p;idx=0;renderScene()}});
+  list.addEventListener('click',e=>{const b=e.target.closest('button');if(b){idx=+b.dataset.i;renderScene()}});
+  renderScene();
+
+  /* [09] подписи 01–05 подсвечивают части отчёта */
+  const calls=[...home.querySelectorAll('.ax-call')], zones=[...home.querySelectorAll('.ax-zone')];
+  calls.forEach(b=>{
+    const k=b.dataset.k;
+    const on=()=>{calls.forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b?'true':'false')});zones.forEach(z=>z.classList.toggle('hl',z.dataset.k===k))};
+    const off=()=>{b.classList.remove('on');b.setAttribute('aria-pressed','false');zones.forEach(z=>z.classList.remove('hl'))};
+    ['mouseenter','focus','click'].forEach(ev=>b.addEventListener(ev,on));
+    ['mouseleave','blur'].forEach(ev=>b.addEventListener(ev,off));
+  });
+})();
 
 /* ================= МЕНЮ ================= */
 const mega=$('#mega'),solBtn=$('#solBtn');
@@ -3301,6 +3981,7 @@ function route(){
   }
   if(!view)view=$('.view[data-route="/404"]');
   $$('.view').forEach(v=>v.classList.toggle('on',v===view));
+  document.body.classList.toggle('is-home',view.dataset.route==='/');
   if(view.dataset.title)document.title=view.dataset.title;
   const sec=view.dataset.sec||'';
   $$('#nav [data-sec]').forEach(a=>a.classList.toggle('on',a.dataset.sec===sec));
